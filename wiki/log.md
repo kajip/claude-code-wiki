@@ -52,3 +52,7 @@
 - 本文で年が省略された日付は、記事の公開年で補ってよい（取り込みメモに書く）。
 - `published: unknown` のページは、ファイル名の日付に取得日を使う。
 - templates/source-page.md の source_id の一覧に pricing を追加した。
+
+## [2026-10-10] query | Opus 5.5 に渡すプロンプトの注意点と事例
+- wiki に収録されていない記述があったため、人間の承認を得て元の記事を取得し直した。要約ページ（getting-the-most-out-of-opus-5-5）に要点とプロンプトの例を追記した。
+- concepts/claude-opus-5-5 にプロンプトの書き方を追記し、回答を analysis/opus-5-5-prompting として保存した。

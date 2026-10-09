@@ -79,4 +79,4 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 
 ## 分析（analysis）
 
-（なし）
+- [[analysis/opus-5-5-prompting]] — Opus 5.5 に渡すプロンプトの注意点と事例（as of 2026-10-10）
