@@ -9,7 +9,7 @@ Claude Code とその周辺（モデル、API、SDK、プラグイン、MCP、�
 - **一次情報のみ**: 取り込むのは [`sources.md`](sources.md) に載っている公式の URL（GitHub、npm、Anthropic と Claude のブログ・ニュース、ドキュメント、価格ページなど）だけです。第三者の解説記事は取り込みません。
 - **原本は保存しない**: 元の URL を唯一の原本とします。その代わり、要約ページには必ず `url`、`published`（公開日）、`retrieved`（取得日）を書きます。
 - **出典を必ず付ける**: 概念ページに書く事実には、その場で要約ページへのリンクを付けます。
-- **出典の優先順位**: 価格は価格ページ、仕様と提供範囲はドキュメントを正とします。ブログや発表記事の値は、公開時点の値として扱います。
+- **出典の優先順位**: 価格は価格ページ、仕様と提供範囲はドキュメント（Claude Code と Claude Platform）を正とします。ブログや発表記事の値は、公開時点の値として扱います。
 - **消さずに残す**: 記述が変わったら変更履歴に残し、食い違う記述は「未解決・矛盾」に両方の出典を付けて書きます。
 
 ## ディレクトリ構成
@@ -47,7 +47,7 @@ wiki/
 | 頻度 | 情報源 |
 | --- | --- |
 | 毎日 | GitHub Releases、CHANGELOG.md、npm（`@anthropic-ai/claude-code`）、Claude ブログ（Claude Code カテゴリ）、Anthropic News、claude.dev |
-| 週次 | Claude Code ドキュメント、Anthropic Engineering、Anthropic Research、価格ページ |
+| 週次 | Claude Code ドキュメント、Anthropic Engineering、Anthropic Research、価格ページ、Claude Platform ドキュメント（API 側。リリースノートで変更を検知） |
 
 それぞれの URL、取得方法、注意点は [`sources.md`](sources.md) にあります。
 

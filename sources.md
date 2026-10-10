@@ -96,6 +96,20 @@
 - 頻度: 週次。新しいモデルの発表や値下げの記事を取り込んだときは、その都度確認する。
 - 初期観測（2026-10-10）: Opus 5.5 は $4／$20、Sonnet 5.5 は $2／$10（キャッシュヒット $0.10）、Haiku 5.5 は $0.10／$0.50（100K 以下）。fast mode は研究プレビュー。2つの URL の値は一致した。
 
+### 11. platform-docs — Claude Platform ドキュメント（API 側）　✅
+
+- URL: https://platform.claude.com/docs （Claude API、SDK、Console、Managed Agents などのドキュメント）
+- 差分検知（上から優先）:
+  1. `https://platform.claude.com/docs/en/release-notes/overview.md` — Claude Platform のリリースノート。日付の見出し（`### October 9, 2026` の形）が新しい順に並ぶ。前回見た日付より新しい見出しがあれば新規。旧 URL の `/release-notes/api.md` は、ここにリダイレクトされる。
+  2. `https://platform.claude.com/llms.txt` — ページ一覧の増減（`/docs/llms.txt` は、ここにリダイレクトされる）。
+- 取り込みの単位: docs（7）と同じ。ページごとの要約ページは作らず、変更が検知された機能について `concepts/` を更新し、根拠として該当ページの要約ページ（必要な箇所だけ）を作る。リリースノートは、前回からの分を1ページにまとめる（CHANGELOG と同じバッチ方式）。ページの Markdown 版は URL の末尾に `.md` を付けると取れる。
+- 価格のページはこの中にあるが、情報源 10（pricing）として別に扱う。
+- Query で `claude-api` スキルを補足に使い、残す価値がある情報が見つかったときは、スキルが示すこの情報源の URL から取り込む（CLAUDE.md の Query 手順 5）。
+- 追加日: 2026-10-10（人間の指示による）。
+- 頻度: 週次。
+- 初期観測（2026-10-10）: リリースノートの最新の見出しは October 9, 2026。llms.txt のリンクは 762 件。モデル一覧は `/docs/en/about-claude/models/overview.md` から `/docs/en/models/overview.md` に移っている（リダイレクトされる）。
+- `last_seen_release_note`: （未設定。初回 Ingest で設定する）
+
 ---
 
 ## 二次情報

@@ -60,3 +60,7 @@
 ## [2026-10-10] schema | Query で claude-api スキルを補足として使う
 - Query の手順 5 を追加した。claude-api スキルは、wiki 外の補足として枠を分けて使う。wiki には直接書かず、公式の URL から Ingest し直す（URL が sources.md に無ければ人間に諮る）。
 - claude-code-guide エージェントは使わない。
+
+## [2026-10-10] schema | 情報源 11（platform-docs）を追加
+- 人間の指示により、Claude Platform のドキュメント（API 側）を週次の情報源にした。差分検知にはリリースノート（release-notes/overview.md）と llms.txt を使う。
+- 出典の優先順位に platform-docs を加えた（Claude API 側の仕様）。雛形の source_id の一覧と README も更新した。

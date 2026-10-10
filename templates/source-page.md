@@ -1,6 +1,6 @@
 ---
 type: source
-source_id: claude-dev            # sources.md の ID（gh-changelog / claude-blog / anthropic-news / claude-dev / docs / engineering / research / pricing）
+source_id: claude-dev            # sources.md の ID（gh-changelog / claude-blog / anthropic-news / claude-dev / docs / engineering / research / pricing / platform-docs）
 title: （記事タイトル。原文のまま）
 url: https://example.com/...     # 記事ページの URL（一覧ではなく本体）
 published: 2026-10-06            # 情報源が示す日付。読み取れなければ unknown
