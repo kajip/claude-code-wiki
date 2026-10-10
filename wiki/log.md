@@ -56,3 +56,7 @@
 ## [2026-10-10] query | Opus 5.5 に渡すプロンプトの注意点と事例
 - wiki に収録されていない記述があったため、人間の承認を得て元の記事を取得し直した。要約ページ（getting-the-most-out-of-opus-5-5）に要点とプロンプトの例を追記した。
 - concepts/claude-opus-5-5 にプロンプトの書き方を追記し、回答を analysis/opus-5-5-prompting として保存した。
+
+## [2026-10-10] schema | Query で claude-api スキルを補足として使う
+- Query の手順 5 を追加した。claude-api スキルは、wiki 外の補足として枠を分けて使う。wiki には直接書かず、公式の URL から Ingest し直す（URL が sources.md に無ければ人間に諮る）。
+- claude-code-guide エージェントは使わない。
