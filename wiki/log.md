@@ -69,3 +69,9 @@
 - リリースノートの14日分を1ページにまとめた。`last_seen_release_note` を October 9, 2026 に設定した。
 - 解決した点: Opus 5.5 のコンテキストと最大出力（1M と 128k）。Haiku 5.5 の最大出力（128k）も新たに分かった。
 - 更新した concepts: claude-opus-5-5、claude-haiku-5-5、claude-sonnet-5-5、prompt-caching、fast-mode、managed-agents、cyber-safeguards。
+
+## [2026-10-10] schema | 作業のサブエージェント化と CLAUDE.md の圧縮
+- Check／Ingest／Query／Lint を `.claude/agents/` のサブエージェントに分けた（check・query・lint は Haiku で読み取りのみ、ingest は Sonnet）。サブエージェントには CLAUDE.md を読ませない（`omitClaudeMd`）。
+- 共通の規則を `rules/fetching.md` と `rules/writing.md` に移した。CLAUDE.md は方針と作業の振り分けだけにし、120行から48行にした（ドキュメントの推奨は200行未満）。
+- wiki-ingest の書き込み先を `wiki/sources/` と `wiki/concepts/` に限るフックを追加した（テスト付き）。index・log・status はメインのセッションが更新する。
+- `.claude/settings.json` を追加した: WebSearch と claude-code-guide を拒否、情報源のドメインへの WebFetch を許可、規則ファイルの編集と rm・push・merge は確認を求める。

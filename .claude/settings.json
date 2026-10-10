@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:registry.npmjs.org)",
+      "WebFetch(domain:claude.com)",
+      "WebFetch(domain:www.anthropic.com)",
+      "WebFetch(domain:claude.dev)",
+      "WebFetch(domain:code.claude.com)",
+      "WebFetch(domain:platform.claude.com)",
+      "Bash(curl -s *)",
+      "Bash(curl -sS *)",
+      "Bash(curl -sSL *)",
+      "Bash(npm view *)",
+      "Bash(shasum -a 256 *)",
+      "Bash(grep *)",
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git log *)"
+    ],
+    "ask": [
+      "Bash(rm *)",
+      "Bash(git push *)",
+      "Bash(git merge *)",
+      "Edit(/CLAUDE.md)",
+      "Write(/CLAUDE.md)",
+      "Edit(/sources.md)",
+      "Write(/sources.md)",
+      "Edit(/rules/**)",
+      "Write(/rules/**)",
+      "Edit(/.claude/**)",
+      "Write(/.claude/**)"
+    ],
+    "deny": [
+      "WebSearch",
+      "Agent(claude-code-guide)"
+    ]
+  }
+}
