@@ -24,13 +24,9 @@
       "Bash(git push *)",
       "Bash(git merge *)",
       "Edit(/CLAUDE.md)",
-      "Write(/CLAUDE.md)",
       "Edit(/sources.md)",
-      "Write(/sources.md)",
       "Edit(/rules/**)",
-      "Write(/rules/**)",
-      "Edit(/.claude/**)",
-      "Write(/.claude/**)"
+      "Edit(/.claude/**)"
     ],
     "deny": [
       "WebSearch",
