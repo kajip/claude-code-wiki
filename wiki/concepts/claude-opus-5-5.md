@@ -5,6 +5,7 @@ updated: 2026-10-10
 sources:
   - sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09
   - sources/pricing/2026-10-10-pricing
+  - sources/platform-docs/2026-10-10-prompt-caching
   - sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5
   - sources/claude-dev/2026-09-22-getting-the-most-out-of-opus-5-5
   - sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5
@@ -27,7 +28,8 @@ Claude 5.5 ファミリーの最初のモデル。2026-09-22 に発表された�
 - thinking は無効にできない（[[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]]）。API では `thinking: {"type": "disabled"}` が 400 になり、強制の `tool_choice` も 400 になる（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。
 - コンテキストは 1M（既定）、最大出力は 128k（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。
 - Fable と同じ水準の bio とサイバーの安全策を持つ。フラグが付いたメッセージは古いモデルに回されることがある（[[sources/claude-dev/2026-09-22-getting-the-most-out-of-opus-5-5]]）。→ [[concepts/cyber-safeguards]]
-- セッションの途中で effort を変えてもキャッシュが保たれる（Opus 5.5 と Fable 5.1）（[[sources/claude-blog/2026-09-24-opus-5-5-built-for-longer-coding-sessions]]）。ただし Bedrock、Google Cloud、ゲートウェイでは消える（[[sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5]]）。
+- Claude Code では、セッションの途中で effort を変えてもキャッシュが保たれる（Opus 5.5 と Fable 5.1）（[[sources/claude-blog/2026-09-24-opus-5-5-built-for-longer-coding-sessions]]）。ただし Bedrock、Google Cloud、ゲートウェイでは消える（[[sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5]]）。Claude API を直接使う場合は、`output_config.effort` を変えると messages のキャッシュが常に無効になる（per-message effort なら保たれる）（[[sources/platform-docs/2026-10-10-prompt-caching]]）。
+- キャッシュの最小長は 512 トークン（Claude API）（[[sources/platform-docs/2026-10-10-prompt-caching]]）。
 - Pro、Max、Team、席単位の Enterprise で、5時間ごとの利用上限が引き上げられた（[[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]]）。
 
 - プロンプトの書き方: 完了の条件と止まる条件を伝えて、タスクを丸ごと任せる。「think carefully」のような指示は消す。止まる条件は CLAUDE.md に、タスクの一覧はファイルに置く。返答の中で内部の推論を再現させない。デザインの作業では、避けたいパターンを具体的に挙げる（[[sources/claude-dev/2026-09-22-getting-the-most-out-of-opus-5-5]]）。まとめは [[analysis/opus-5-5-prompting]]。

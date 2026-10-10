@@ -76,14 +76,14 @@
 
 - URL: https://www.anthropic.com/engineering
 - 差分検知: 一覧の記事 URL が `wiki/sources/engineering/` に無ければ新規。
-- 初期観測（2026-10-10）: 日付つきの最新は 2026-04-23「An update on recent Claude Code quality reports」。先頭の特集「How we contain Claude across products」は一覧に日付の表示がない（Ingest 時に記事ページで日付を確認する）。更新の間隔は数か月おき。
+- 初期観測（2026-10-10）: 日付つきの最新は 2026-04-23「An update on recent Claude Code quality reports」。先頭の特集「How we contain Claude across products」は一覧に日付の表示がない（記事ページで 2026-05-25 と確認）。一覧は日付順ではなく特集枠が先頭に来る。一覧は 25 件。2026-10-10 に、2026 年の8件を Ingest した（2025 年以前の記事は未 Ingest）。更新の間隔は数か月おき。
 
 ### 9. research — Anthropic Research　✅
 
 - URL: https://www.anthropic.com/research
 - 差分検知: 一覧の記事 URL が `wiki/sources/research/` に無ければ新規。Claude Code との関連が薄い研究は skip する（刊行は多い）。
 - Economic Index: https://www.anthropic.com/economic-index（追加確認）。データはページ読み込み後に表示される動的なダッシュボードで、本文は取得できない。取得できるのは「Last updated」の日付のみ。Economics チームの投稿（例: 2026-09-30「What work can robots do?」、2026-09-24「Project Swap」）は `/research` の一覧から検知する。
-- 初期観測（2026-10-10）: 一覧の最新は 2026-10-08（Claude Science による紫外線の全天マップ、オープンソース向け脆弱性発見サービスの提供開始）。Economic Index の「Last updated」は 2026-06-26。
+- 初期観測（2026-10-10）: 一覧の最新は 2026-10-08（Claude Science による紫外線の全天マップ、オープンソース向け脆弱性発見サービスの提供開始）。Economic Index の「Last updated」は 2026-06-26。一覧の「See more」より先は WebFetch で展開できず、`?page=2` も同じ内容を返す（2026-10-10。09-10〜09-16 の記事は未確認）。
 
 ---
 

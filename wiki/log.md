@@ -75,3 +75,54 @@
 - 共通の規則を `rules/fetching.md` と `rules/writing.md` に移した。CLAUDE.md は方針と作業の振り分けだけにし、120行から48行にした（ドキュメントの推奨は200行未満）。
 - wiki-ingest の書き込み先を `wiki/sources/` と `wiki/concepts/` に限るフックを追加した（テスト付き）。index・log・status はメインのセッションが更新する。
 - `.claude/settings.json` を追加した: WebSearch と claude-code-guide を拒否、情報源のドメインへの WebFetch を許可、規則ファイルの編集と rm・push・merge は確認を求める。
+
+## [2026-10-10] lint | 全体点検（提案のみ、ファイル変更なし）
+- 優先度の高い指摘: effort の未解決を閉じたままにしている、docs の Projects の fingerprint が一致しない（冒頭は既存の要約と合う）、段階を書いた要約 5 件が `recheck: none` のまま、要約に無い記述を持つ概念ページが 5 ページ以上、キャッシュの条件（Claude Code の場合か）が概念ページ間で揃っていない。
+- recheck weekly のページを取り直した: pricing は fingerprint が一致した。ほかの 6 ページも要約と食い違いは無い。壊れたリンクと index 未掲載のページは無い。
+- 取得の失敗は無い。
+
+## [2026-10-10] error | claude.dev のページ内に AI 向けの指示文
+- `https://claude.dev/blog/claude-code-in-the-cloud/` の末尾（「LOAD MORE」の下）に、AI に向けた日本語の指示文があった。wiki-lint はデータとして扱い、従わなかった。要約の内容には影響していない。
+
+## [2026-10-10] schema | 日付の基準を JST に統一
+- 人間の指示により、wiki の日付と日時はすべて JST で書くことにした（`rules/writing.md`、`wiki-check` の報告形式）。時刻の無い日付は情報源の表記のまま使う。
+- CHANGELOG の要約を `gh-changelog/2026-10-10-v2-1-290-to-2-1-296` に改名し、npm の公開日時を JST に換算した。概念ページの変更履歴の日付（2.1.290〜2.1.296）と status.md も JST に改めた。
+- wiki-lint の壊れたリンクの点検で、バッククォート内の書式説明を数えないようにした。
+
+## [2026-10-10] ingest | lint 対応（platform-docs prompt caching、docs Projects、claude-dev 10-06）
+- platform-docs の prompt caching を取り込んだ。Claude API では `output_config.effort` や thinking のパラメータを変えると messages のキャッシュが無効になる（Claude Code の docs とは別の経路）。concepts/effort の矛盾を解決済みとして閉じ、prompt-caching と各モデルのページに Claude API と Claude Code の違いを書き分けた。tools と system への影響はモデルによるため、未確定として残した。
+- docs の claude-projects を、fingerprint が変わったため取り込み直した（30af5d… → 7d4a17…）。既存の値に変更は無かったが、要約を全文に基づいて書き直し、`review: pending` に戻した。concepts/projects に、ブログの拡大予定と docs の現状（Pro と Max のみ）の差を書いた。
+- claude-dev 10-06 を取り込み直し、Projects の GitHub App への依存と、routines が承認の確認無しで動くことを要約に追記した。fingerprint を付けた。
+- 段階の記述がある要約 5 件を `recheck: weekly` にした。concepts/claude-tag の概要（Claude Code ではない）と、analysis/opus-5-5-prompting の出典（概念ページから要約ページへ）を直した。
+
+## [2026-10-10] error | 先の「ページ内の指示文」の報告は誤検知の疑い
+- claude-dev 10-06 を curl で取り直したところ、報告された日本語の指示文は生の HTML に無かった。文面は lint が WebFetch に渡した問いと同じ形で、WebFetch の加工結果を見誤ったものと見られる（推測）。
+
+## [2026-10-10] check | engineering と research（初回）
+- engineering: 一覧の 25 件はすべて未取り込み。特集「How we contain Claude across products」の公開日は 2026-05-25。取り込み対象 21 件、境界 2 件。
+- research: 未取り込みの対象 3 件（10-09 Investigating unintended model actions、10-08 OSS 向け脆弱性発見サービス、09-29 GLM-5.3 とサイバー能力の拡散）、境界 1 件（10-01 Claude-shaped science）。「See more」より先は未確認。
+
+## [2026-10-10] skip | engineering と research の対象外
+- engineering: Designing AI-resistant technical evaluations（採用の選考の話）、Introducing Contextual Retrieval（RAG の手法）。
+- research: The missing map of the sky、What work can robots do?、What do you want from AI?、How Claude is uplifting biomolecular modeling、Measurements for understanding the pace of AI development、Project Swap、Yes, Claude can do Nine Loops、Scenarios for our Economic Future（いずれも Claude Code との関係が薄い）。
+
+## [2026-10-10] ingest | engineering 8件と research 4件（初回）
+- 人間の指示により、engineering は 2026 年の8件、research は4件を取り込んだ。系統ごとに概念ページを分け、並行して取り込んだ。新しいページは `review: pending`。
+- 新しい概念ページ: agent-evals、auto-mode、claude-code-quality-incidents、long-running-agent-harness、oss-scanner、sandboxing、unintended-model-actions。
+- engineering/2026-04-08-scaling-managed-agents: concepts/managed-agents に「設計思想（公開時点）」を追加。記事の関数名が現行 API と一致するかは未確認。
+- research/2026-09-29-glm-5-3-…: `wiki/sources/research/` を新設。concepts/cyber-safeguards に API 側の回避耐性と防御側へのアクセス方針を追加。
+- engineering/2026-01-09-demystifying-evals-for-ai-agents: 新しい概念ページ agent-evals を作った。モデル名と数値は公開時点の値として扱った。
+- engineering/2026-03-25-claude-code-auto-mode: 新しい概念ページ auto-mode を作った。分類器のモデルと数値は公開時点の値で、5.5 世代でも同じかは未確認（docs の auto mode ページは未 Ingest）。
+- engineering/2026-02-05-infrastructure-noise: concepts/agent-evals に、実行環境の資源設定がスコアに与える影響を追記した。
+- engineering/2026-04-23-an-update-on-recent-claude-code-quality-reports: 新しい概念ページ claude-code-quality-incidents を作った。concepts/effort と prompt-caching の変更履歴に、公開時点の値として追記した。
+- research/2026-10-08-launching-opt-in-vuln-finding-service-for-open-source: 新しい概念ページ oss-scanner を作った（3つの資料に出てくるため）。真陽性率が Cyber Mission の発表（90% 超の見込み）と食い違うため、未解決に残した。
+- engineering/2026-05-25-how-we-contain-claude: 新しい概念ページ sandboxing を作った。auto-mode、hooks、cloud-sessions を更新した。docs のサンドボックスのページは未 Ingest のため、現行との照合はしていない。
+- engineering/2026-02-05-building-a-c-compiler-with-parallel-claudes: 新しい概念ページ long-running-agent-harness を作った。subagents と agent-evals に1行ずつ追記した。モデル名と数値は公開時点（Opus 4.6）の値。
+- research/2026-10-09-investigating-unintended-model-actions: 新しい概念ページ unintended-model-actions を作った。cyber-safeguards と oss-scanner を更新した。記事が触れる夏のインシデント（7/30、9/9）は未 Ingest。
+- engineering/2026-03-24-harness-design-long-running-apps: long-running-agent-harness、agent-evals、subagents を更新した。現行モデルでも記事の前提が成り立つかは未確認として残した。
+- research/2026-10-01-claude-shaped-science: subagents と long-running-agent-harness に実践例を1行ずつ追記した（一人称の実践談で、docs では未確認）。
+- 古い記事のモデル名と数値は「公開時点の値」として扱い、概念ページの現状を上書きしていない。
+
+## [2026-10-10] error | engineering の取得で別の記事が返った
+- engineering の auto mode の記事を curl で取ると、1回目は別の記事（research の GLM-5.3）が返った。2回目で正しい記事を取れた（title と canonical で確認）。原因は分からない。
+- 以後の取り込みでは、生 HTML の title と canonical を確かめた。ほかの記事では一致した。

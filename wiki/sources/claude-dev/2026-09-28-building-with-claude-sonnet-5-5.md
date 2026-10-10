@@ -8,7 +8,7 @@ retrieved: 2026-10-10
 version: 2.1.284
 tier: primary
 review: ok
-recheck: none
+recheck: weekly
 fingerprint:
 archive_url:
 ---

@@ -12,6 +12,9 @@ sources:
   - sources/anthropic-news/2026-10-08-2026-usage-policy-update
   - sources/claude-dev/2026-09-22-getting-the-most-out-of-opus-5-5
   - sources/claude-dev/2026-09-28-building-with-claude-sonnet-5-5
+  - sources/research/2026-09-29-glm-5-3-and-the-spread-of-advanced-cyber-capabilities
+  - sources/research/2026-10-08-launching-opt-in-vuln-finding-service-for-open-source
+  - sources/research/2026-10-09-investigating-unintended-model-actions
 ---
 
 # サイバー・安全策と Cyber Verification Program
@@ -28,13 +31,21 @@ Claude 5.5 ファミリーには、サイバーと bio の安全策がある。�
 - Claude Code では `/config` の「Switch models when a message is flagged」で、回されたときの動きを変えられる。`/model` で戻せる（[[sources/claude-dev/2026-09-22-getting-the-most-out-of-opus-5-5]]）。
 - API では拒否が `stop_reason: "refusal"` と `stop_details`（`cyber` など）で返る（[[sources/claude-dev/2026-09-28-building-with-claude-sonnet-5-5]]）。
 - CVP は Defense／Red Team／Specialized の3段階。Project Glasswing を統合した（[[sources/anthropic-news/2026-10-06-expanding-the-cyber-verification-program]]）。
-- オープンソース向けの無料のスキャン（OSS Scanner）が始まった（[[sources/anthropic-news/2026-10-08-introducing-the-anthropic-cyber-mission]]）。
+- オープンソース向けの無料のスキャン（OSS Scanner）が始まった。報告はモデル生成で人のレビューを経ず、参加は GitHub への PR で申し込む（[[sources/anthropic-news/2026-10-08-introducing-the-anthropic-cyber-mission]]、[[sources/research/2026-10-08-launching-opt-in-vuln-finding-service-for-open-source]]、詳細は [[concepts/oss-scanner]]）。
+- 同記事は CVP を、適格なセキュリティ専門家に高度なサイバー能力と制限的な classifier の緩和を提供するものと案内している（[[sources/research/2026-10-08-launching-opt-in-vuln-finding-service-for-open-source]]）。
 - Usage Policy は 11月12日に改定が施行される。Claude Code で Claude が会話を終了できる機能に触れている（[[sources/anthropic-news/2026-10-08-2026-usage-policy-update]]）。
 
 - 拒否の課金: 出力の前に拒否された場合、`bio`、`frontier_llm`、`reasoning_extraction` の3分類は課金される。ほかの分類（`cyber` など）は課金されない（2026-09-24 から）（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。
+- 回避への耐性（Anthropic の試験）: Claude の API には thinking の prefill の手段が無く、重みは非公開で abliteration もできない。欺瞞的なプロンプトは安全策が遮断した。シミュレーションで、GLM-5.3 は同種の手法で 64%／92%／100% 応じたが、安全策付きの Claude は 0%（[[sources/research/2026-09-29-glm-5-3-and-the-spread-of-advanced-cyber-capabilities]]）。
+- 防御側への方針: 防御者は敵対者と同等以上のモデルを使えるべきだとして、Claude のサイバー能力を安全に広げられる範囲でより多くの防御者へ開く作業を進めている。審査済みの防御者は trusted access programs 経由でより高性能なモデルを使える（同上）。
+
+- 夏のサイバー評価インシデント（7月30日・9月9日報告）に続き、評価・社内利用での意図しない行動（injection によるコマンド実行など）が報告され、Anthropic は全社内評価でライブのインターネット接続を止め、web fetch tool のガードレールを強化した。詳細は [[concepts/unintended-model-actions]]（[[sources/research/2026-10-09-investigating-unintended-model-actions]]）。
 
 ## 変更履歴
 
+- 2026-10-09 — 意図しないモデル行動の報告を公開（サイバー評価の夏のインシデントより軽いとの位置づけ）（[[sources/research/2026-10-09-investigating-unintended-model-actions]]）
+- 2026-10-08 — OSS Scanner の詳細（無償、opt-in、モデル生成の報告）を研究記事で公開（[[sources/research/2026-10-08-launching-opt-in-vuln-finding-service-for-open-source]]）
+- 2026-09-29 — 公開のオープンウェイトモデル GLM-5.3（サイバー能力が高く、安全策は容易に回避可能）の分析を公開。政府による高性能モデルの安全性試験も提言（[[sources/research/2026-09-29-glm-5-3-and-the-spread-of-advanced-cyber-capabilities]]）
 - 2026-09-24 — 出力の前の拒否のうち3分類について課金を再開（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）
 - 2026-10-08 — Usage Policy の改定を発表、Cyber Mission を発表（[[sources/anthropic-news/2026-10-08-2026-usage-policy-update]]、[[sources/anthropic-news/2026-10-08-introducing-the-anthropic-cyber-mission]]）
 - 2026-10-06 — CVP を拡大し、Opus 5.5／Sonnet 5.5 を含めた（[[sources/anthropic-news/2026-10-06-expanding-the-cyber-verification-program]]）
@@ -42,3 +53,4 @@ Claude 5.5 ファミリーには、サイバーと bio の安全策がある。�
 ## 未解決・矛盾
 
 - CVP が Claude Code の利用にどう適用されるかは、取り込んだ出典には書かれていない。
+- 研究記事（2026-09-29）が言う「trusted access programs」と「Claude Mythos 5.1」は、CVP の3段階との対応が書かれていない（[[sources/research/2026-09-29-glm-5-3-and-the-spread-of-advanced-cyber-capabilities]]）。

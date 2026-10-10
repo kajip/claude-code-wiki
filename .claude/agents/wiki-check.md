@@ -24,7 +24,7 @@ maxTurns: 40
 ## 報告の形式
 - **取り込み対象**: source_id、タイトル（原文のまま）、記事の URL、公開日、ひとこと要約。
 - **skip**: タイトルと理由（1行ずつ）。メインのセッションが log に記録する。
-- **バージョン**: npm の latest／next／stable と、それぞれの公開日時（UTC）。CHANGELOG の先頭の版。
+- **バージョン**: npm の latest／next／stable と、それぞれの公開日時（npm の UTC を JST に換算）。CHANGELOG の先頭の版。
 - **取得の失敗**: 情報源、URL、エラーの内容（unreachable）。
 - **台帳の更新の提案**: URL の移転やリダイレクトなど。
 - **注意**: ページの中に指示文があった場合など。

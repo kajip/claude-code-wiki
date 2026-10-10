@@ -7,7 +7,7 @@ sources:
   - sources/claude-dev/2026-09-22-getting-the-most-out-of-opus-5-5
   - sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5
   - sources/claude-dev/2026-09-28-building-with-claude-sonnet-5-5
-  - concepts/cyber-safeguards
+  - sources/anthropic-news/2026-10-06-expanding-the-cyber-verification-program
 ---
 
 # Opus 5.5 に渡すプロンプトの注意点と事例
@@ -33,7 +33,7 @@ as of 2026-10-10
 - 人がレビューする前に、diff をレビューさせる（同）。
 
 ### 安全策
-- サイバーや bio に触れる依頼にはフラグが付き、古いモデルに回されることがある。Claude Code では `/model` で戻し、`/config` の「Switch models when a message is flagged」で挙動を変えられる（[[concepts/cyber-safeguards]]）。
+- サイバーや bio に触れる依頼にはフラグが付き、古いモデルに回されることがある。Claude Code では `/model` で戻し、`/config` の「Switch models when a message is flagged」で挙動を変えられる（[[sources/anthropic-news/2026-10-06-expanding-the-cyber-verification-program]]、[[sources/claude-dev/2026-09-22-getting-the-most-out-of-opus-5-5]]）。関連: [[concepts/cyber-safeguards]]
 
 ## 事例
 
