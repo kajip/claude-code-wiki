@@ -64,3 +64,8 @@
 ## [2026-10-10] schema | 情報源 11（platform-docs）を追加
 - 人間の指示により、Claude Platform のドキュメント（API 側）を週次の情報源にした。差分検知にはリリースノート（release-notes/overview.md）と llms.txt を使う。
 - 出典の優先順位に platform-docs を加えた（Claude API 側の仕様）。雛形の source_id の一覧と README も更新した。
+
+## [2026-10-10] ingest | platform-docs の初回 Ingest（リリースノート 09-10〜10-09）
+- リリースノートの14日分を1ページにまとめた。`last_seen_release_note` を October 9, 2026 に設定した。
+- 解決した点: Opus 5.5 のコンテキストと最大出力（1M と 128k）。Haiku 5.5 の最大出力（128k）も新たに分かった。
+- 更新した concepts: claude-opus-5-5、claude-haiku-5-5、claude-sonnet-5-5、prompt-caching、fast-mode、managed-agents、cyber-safeguards。

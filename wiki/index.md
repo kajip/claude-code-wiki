@@ -1,6 +1,6 @@
 # Index
 
-最終更新: 2026-10-10（要約 26・概念 18）
+最終更新: 2026-10-10（要約 27・概念 18）
 
 ## 状態
 
@@ -51,6 +51,9 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 ### research
 （なし）
 
+### platform-docs
+- [[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]] — Claude Platform のリリースノート（09-10〜10-09）。5.5 世代のモデル、Managed Agents、compaction on demand、Sonnet 4.5 の廃止予告（2026-10-09）
+
 ### pricing
 - [[sources/pricing/2026-10-10-pricing]] — Claude API の価格表。キャッシュの倍率、fast mode、Batch（公開日不明。取得 2026-10-10）
 
@@ -60,20 +63,20 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 
 - [[concepts/claude-api-skill]] — claude-api スキル（出典 5）
 - [[concepts/claude-apps-gateway]] — Claude apps gateway（出典 1）
-- [[concepts/claude-haiku-5-5]] — Claude Haiku 5.5（出典 3）
-- [[concepts/claude-opus-5-5]] — Claude Opus 5.5（出典 6）
-- [[concepts/claude-sonnet-5-5]] — Claude Sonnet 5.5（出典 5）
+- [[concepts/claude-haiku-5-5]] — Claude Haiku 5.5（出典 4）
+- [[concepts/claude-opus-5-5]] — Claude Opus 5.5（出典 7）
+- [[concepts/claude-sonnet-5-5]] — Claude Sonnet 5.5（出典 6）
 - [[concepts/claude-tag]] — Claude Tag（Claude in Slack）（出典 3）
 - [[concepts/cloud-sessions]] — cloud sessions（Claude Code in the cloud）（出典 3）
-- [[concepts/cyber-safeguards]] — サイバー・安全策と Cyber Verification Program（出典 8）
+- [[concepts/cyber-safeguards]] — サイバー・安全策と Cyber Verification Program（出典 9）
 - [[concepts/effort]] — effort（思考量の設定）（出典 7）
-- [[concepts/fast-mode]] — fast mode（出典 6）
+- [[concepts/fast-mode]] — fast mode（出典 7）
 - [[concepts/hooks]] — hooks（設定のフック）（出典 3）
-- [[concepts/managed-agents]] — Claude Managed Agents（出典 2）
+- [[concepts/managed-agents]] — Claude Managed Agents（出典 3）
 - [[concepts/mcp]] — MCP（Model Context Protocol）（出典 2）
 - [[concepts/mods]] — mods（Claude Code mods）（出典 3）
 - [[concepts/projects]] — Projects（作り直された Projects）（出典 3）
-- [[concepts/prompt-caching]] — プロンプトキャッシュとセッションの費用（出典 7）
+- [[concepts/prompt-caching]] — プロンプトキャッシュとセッションの費用（出典 8）
 - [[concepts/routines]] — routines（ルーティン）（出典 2）
 - [[concepts/subagents]] — サブエージェント（出典 4）
 

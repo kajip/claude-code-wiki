@@ -3,6 +3,7 @@ type: concept
 title: fast mode
 updated: 2026-10-10
 sources:
+  - sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09
   - sources/pricing/2026-10-10-pricing
   - sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5
   - sources/claude-dev/2026-09-22-getting-the-most-out-of-opus-5-5
@@ -28,6 +29,7 @@ sources:
 
 ## 変更履歴
 
+- 2026-09-22 — Claude API で Opus 5.5 の fast mode を研究プレビューとして提供開始（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）
 - 2026-10-05 — 2.1.290: Claude Tag で fast mode に対応（[[sources/gh-changelog/2026-10-09-v2-1-290-to-2-1-296]]）
 
 ## 未解決・矛盾

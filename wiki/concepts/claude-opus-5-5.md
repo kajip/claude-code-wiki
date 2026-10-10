@@ -3,6 +3,7 @@ type: concept
 title: Claude Opus 5.5
 updated: 2026-10-10
 sources:
+  - sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09
   - sources/pricing/2026-10-10-pricing
   - sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5
   - sources/claude-dev/2026-09-22-getting-the-most-out-of-opus-5-5
@@ -23,7 +24,8 @@ Claude 5.5 ファミリーの最初のモデル。2026-09-22 に発表された�
 - 価格（100万トークンあたり）: 入力 $4、出力 $20、キャッシュ書き込み $5（5分）／$8（1時間）、キャッシュヒット $0.20（入力単価の0.05倍）（[[sources/pricing/2026-10-10-pricing]]）。
 - Claude Code では **v2.1.280 以降**が必要。既定の effort は medium（[[sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5]]）。
 - fast mode に対応（入力 $8、出力 $40）（[[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]]）。公開時点では研究プレビュー（[[sources/claude-dev/2026-09-22-getting-the-most-out-of-opus-5-5]]）。→ [[concepts/fast-mode]]
-- thinking は無効にできない（[[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]]）。
+- thinking は無効にできない（[[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]]）。API では `thinking: {"type": "disabled"}` が 400 になり、強制の `tool_choice` も 400 になる（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。
+- コンテキストは 1M（既定）、最大出力は 128k（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。
 - Fable と同じ水準の bio とサイバーの安全策を持つ。フラグが付いたメッセージは古いモデルに回されることがある（[[sources/claude-dev/2026-09-22-getting-the-most-out-of-opus-5-5]]）。→ [[concepts/cyber-safeguards]]
 - セッションの途中で effort を変えてもキャッシュが保たれる（Opus 5.5 と Fable 5.1）（[[sources/claude-blog/2026-09-24-opus-5-5-built-for-longer-coding-sessions]]）。ただし Bedrock、Google Cloud、ゲートウェイでは消える（[[sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5]]）。
 - Pro、Max、Team、席単位の Enterprise で、5時間ごとの利用上限が引き上げられた（[[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]]）。
@@ -36,4 +38,5 @@ Claude 5.5 ファミリーの最初のモデル。2026-09-22 に発表された�
 
 ## 未解決・矛盾
 
-- コンテキスト長と最大出力は、取り込んだ出典のどれにも書かれていない。
+- （なし）
+- 解決済み（2026-10-10）: コンテキスト長と最大出力は、リリースノートで 1M と 128k と確認した（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。

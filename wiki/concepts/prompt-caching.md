@@ -3,6 +3,7 @@ type: concept
 title: プロンプトキャッシュとセッションの費用
 updated: 2026-10-10
 sources:
+  - sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09
   - sources/pricing/2026-10-10-pricing
   - sources/docs/2026-10-10-prompt-caching
   - sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5
@@ -28,10 +29,12 @@ Claude Code のセッションは長くなり、1回のリクエストのコン�
 - fork したサブエージェントは親のキャッシュから始まる（同）。
 - キャッシュを保つための推奨: 長く間を空けない、途中でモデルを変えない、MCP を後からつながない、fast mode は最初に有効にする（[[sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5]]）。
 - 確認は `/usage`、`/cost`（同）。
+- API の cache diagnostics は 2026-09-23 に GA になり、beta ヘッダーが不要になった（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。
 
 ## 変更履歴
 
-- 2026-10-07 — Sonnet 5.5 のキャッシュ読み取りを $0.20 から $0.10 に引き下げ（[[sources/anthropic-news/2026-10-07-introducing-claude-haiku-5-5]]）
+- 2026-10-07 — Sonnet 5.5 のキャッシュ読み取りを $0.20 から $0.10 に引き下げ（[[sources/anthropic-news/2026-10-07-introducing-claude-haiku-5-5]]、[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）
+- 2026-09-23 — API の cache diagnostics が GA（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）
 
 ## 未解決・矛盾
 

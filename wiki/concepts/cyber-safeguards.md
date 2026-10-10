@@ -3,6 +3,7 @@ type: concept
 title: サイバー・安全策と Cyber Verification Program
 updated: 2026-10-10
 sources:
+  - sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09
   - sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5
   - sources/anthropic-news/2026-09-28-introducing-claude-sonnet-5-5
   - sources/anthropic-news/2026-10-07-introducing-claude-haiku-5-5
@@ -30,8 +31,11 @@ Claude 5.5 ファミリーには、サイバーと bio の安全策がある。�
 - オープンソース向けの無料のスキャン（OSS Scanner）が始まった（[[sources/anthropic-news/2026-10-08-introducing-the-anthropic-cyber-mission]]）。
 - Usage Policy は 11月12日に改定が施行される。Claude Code で Claude が会話を終了できる機能に触れている（[[sources/anthropic-news/2026-10-08-2026-usage-policy-update]]）。
 
+- 拒否の課金: 出力の前に拒否された場合、`bio`、`frontier_llm`、`reasoning_extraction` の3分類は課金される。ほかの分類（`cyber` など）は課金されない（2026-09-24 から）（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。
+
 ## 変更履歴
 
+- 2026-09-24 — 出力の前の拒否のうち3分類について課金を再開（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）
 - 2026-10-08 — Usage Policy の改定を発表、Cyber Mission を発表（[[sources/anthropic-news/2026-10-08-2026-usage-policy-update]]、[[sources/anthropic-news/2026-10-08-introducing-the-anthropic-cyber-mission]]）
 - 2026-10-06 — CVP を拡大し、Opus 5.5／Sonnet 5.5 を含めた（[[sources/anthropic-news/2026-10-06-expanding-the-cyber-verification-program]]）
 
