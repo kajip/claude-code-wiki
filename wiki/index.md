@@ -1,6 +1,6 @@
 # Index
 
-最終更新: 2026-10-10（要約 40・概念 25）
+最終更新: 2026-10-10（要約 43・概念 25）
 
 ## 状態
 
@@ -42,6 +42,9 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 - [[sources/claude-dev/2026-09-22-getting-the-most-out-of-opus-5-5]] — Opus 5.5 の使い方。止まる条件、フラグが付いたときの対応、fast mode（2026-09-22）
 
 ### docs
+- [[sources/docs/2026-10-10-auto-mode-config]] — Configure auto mode。`autoMode` の設定キー、`claude auto-mode` サブコマンド、`/auto-mode-setup`（公開日不明。取得 2026-10-10）
+- [[sources/docs/2026-10-10-sandboxing]] — Bash サンドボックス。有効化、設定キー、ファイルとネットワークの境界、Seatbelt と bubblewrap、管理者のロック、既知の制限（公開日不明。取得 2026-10-10）
+- [[sources/docs/2026-10-10-permission-modes]] — Choose a permission mode。各モードと切り替え方、auto mode の要件、分類器（既定は Sonnet 5）、既定でブロックするもの、critical paths（公開日不明。取得 2026-10-10）
 - [[sources/docs/2026-10-10-claude-projects]] — Projects の提供範囲、ローカルでのスレッド実行、上限（公開日不明。取得 2026-10-10）
 - [[sources/docs/2026-10-10-prompt-caching]] — effort を変えたときのキャッシュの扱い（公開日不明。取得 2026-10-10）
 
@@ -73,7 +76,7 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 形式: `- [[concepts/<slug>]] — 1行要約（出典数）`
 
 - [[concepts/agent-evals]] — エージェントの評価（evals）（出典 5）
-- [[concepts/auto-mode]] — auto mode（権限の自動判定）（出典 5）
+- [[concepts/auto-mode]] — auto mode（権限の自動判定）（出典 8）
 - [[concepts/claude-api-skill]] — claude-api スキル（出典 5）
 - [[concepts/claude-apps-gateway]] — Claude apps gateway（出典 1）
 - [[concepts/claude-code-quality-incidents]] — Claude Code の品質低下の報告と原因（2026年3〜4月）（出典 1）
@@ -94,7 +97,7 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 - [[concepts/projects]] — Projects（作り直された Projects）（出典 3）
 - [[concepts/prompt-caching]] — プロンプトキャッシュとセッションの費用（出典 10）
 - [[concepts/routines]] — routines（ルーティン）（出典 2）
-- [[concepts/sandboxing]] — サンドボックスと隔離（封じ込め）の設計と教訓（出典 2）
+- [[concepts/sandboxing]] — サンドボックスと隔離（封じ込め）の設計と教訓（出典 3）
 - [[concepts/subagents]] — サブエージェント（出典 7）
 - [[concepts/unintended-model-actions]] — モデルの意図しない行動と、運用上の安全策（出典 1）
 

@@ -126,3 +126,10 @@
 ## [2026-10-10] error | engineering の取得で別の記事が返った
 - engineering の auto mode の記事を curl で取ると、1回目は別の記事（research の GLM-5.3）が返った。2回目で正しい記事を取れた（title と canonical で確認）。原因は分からない。
 - 以後の取り込みでは、生 HTML の title と canonical を確かめた。ほかの記事では一致した。
+
+## [2026-10-10] ingest | docs の auto mode とサンドボックス
+- 人間の指示により、docs の auto-mode-config、sandboxing、permission-modes を取り込んだ（permission-modes は auto mode 本体の仕様が載るため追加した）。
+- docs/2026-10-10-auto-mode-config: concepts/auto-mode を docs の仕様で更新した（提供範囲、設定キー、CLI、優先順位）。既定の block rules は一部を確かめ、全文は `claude auto-mode defaults` で見る前提。分類器のモデルと数値は設定ページに記載が無い。
+- docs/2026-10-10-sandboxing: concepts/sandboxing の現状を docs に基づいて書き直した。記事（2026-05-25）の記述は docs と矛盾せず、「公開時点」として残した。記事の数値（プロンプト 84% 減など）は docs に記載が無い。
+- docs/2026-10-10-permission-modes: concepts/auto-mode の未解決を docs で閉じた。分類器の既定は Sonnet 5（engineering の記事の Sonnet 4.6 は公開時点の値）。対応プランと対応モデル、既定でブロックするもの、critical paths を反映した。`claude -p` で拒否が上限に達したときの挙動は、記事（終了する）と docs（作業を続ける）で食い違うため、docs を採った。
+- サンドボックスと auto mode の組み合わせ（コマンドごとのホストの審査、v2.1.271 以降）を auto-mode に追記した。FPR などの性能の数値は docs に記載が無く、未解決に残した。
