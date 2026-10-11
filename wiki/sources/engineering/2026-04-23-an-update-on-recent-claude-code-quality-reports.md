@@ -7,7 +7,7 @@ published: 2026-04-23
 retrieved: 2026-10-10
 version: v2.1.116（3件すべて解消した版）
 tier: primary
-review: pending
+review: ok
 recheck: none
 fingerprint: 0f9a0d03e0025589850bb2c4a151b7cca3cb01d86d0973be1231c42d99b3c8f0
 archive_url:

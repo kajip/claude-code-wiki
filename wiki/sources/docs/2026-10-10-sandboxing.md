@@ -5,9 +5,9 @@ title: Configure the sandboxed Bash tool
 url: https://code.claude.com/docs/en/sandboxing.md
 published: unknown
 retrieved: 2026-10-10
-version: 
+version:
 tier: primary
-review: pending
+review: ok
 recheck: none
 fingerprint: sha256:4b3ad95a235ff8ea1c98ce60775c08ef3e8e9b2aa2e2bc39e643967b8747cbbb
 archive_url:
