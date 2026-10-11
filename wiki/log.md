@@ -133,3 +133,17 @@
 - docs/2026-10-10-sandboxing: concepts/sandboxing の現状を docs に基づいて書き直した。記事（2026-05-25）の記述は docs と矛盾せず、「公開時点」として残した。記事の数値（プロンプト 84% 減など）は docs に記載が無い。
 - docs/2026-10-10-permission-modes: concepts/auto-mode の未解決を docs で閉じた。分類器の既定は Sonnet 5（engineering の記事の Sonnet 4.6 は公開時点の値）。対応プランと対応モデル、既定でブロックするもの、critical paths を反映した。`claude -p` で拒否が上限に達したときの挙動は、記事（終了する）と docs（作業を続ける）で食い違うため、docs を採った。
 - サンドボックスと auto mode の組み合わせ（コマンドごとのホストの審査、v2.1.271 以降）を auto-mode に追記した。FPR などの性能の数値は docs に記載が無く、未解決に残した。
+
+## [2026-10-10] query | mods の作り方
+- concepts/mods、claude-dev と claude-blog の mods 記事（2026-10-01）、CHANGELOG v2.1.290〜296 をもとに回答した。いずれも review: ok。
+- 不足: plugin.json の全フィールド、hooks.json とモジュールのコード例、`$` API の引数。取り込み候補は docs の mods overview（https://code.claude.com/docs/en/plugins/mods/overview）。
+
+## [2026-10-10] ingest | docs の mods
+- 人間の指示により、docs の Mods（plugins/mods 配下の overview、create、events、api、reference、test、admin、interface、troubleshoot）と plugins の manifest-reference、publish を取り込んだ。reference は v2.1.290 時点。
+- 追加: sources/docs/2026-10-10-mods。更新: concepts/mods（plugin.json、register の例、`$` の API、テスト、型定義、ディレクトリ構成、組み込み mod、管理者設定、公開手順）。
+- 食い違い: claude-dev の記事（2026-10-01）にあるイベント `session.usage` が docs の一覧に無い。近いのは `session.measure` と `$.session.usage()`。docs を現状とし、concepts/mods の未解決に残した。
+- 版の差: 記事は 2.1.287 以降とするが、docs は Desktop のみ 2.1.286 以降。
+- 未取得: interface と troubleshoot の細部、申請の審査の中身（claude.com 側）。
+
+## [2026-10-11] query | mods の作り方を analysis に保存
+- 人間の指示により、docs の mods 取り込み後の内容で analysis/mods-howto を作った。出典は docs/2026-10-10-mods を主に、claude-dev と claude-blog の記事、CHANGELOG v2.1.290〜296。

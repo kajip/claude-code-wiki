@@ -47,6 +47,7 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 - [[sources/docs/2026-10-10-permission-modes]] — Choose a permission mode。各モードと切り替え方、auto mode の要件、分類器（既定は Sonnet 5）、既定でブロックするもの、critical paths（公開日不明。取得 2026-10-10）
 - [[sources/docs/2026-10-10-claude-projects]] — Projects の提供範囲、ローカルでのスレッド実行、上限（公開日不明。取得 2026-10-10）
 - [[sources/docs/2026-10-10-prompt-caching]] — effort を変えたときのキャッシュの扱い（公開日不明。取得 2026-10-10）
+- [[sources/docs/2026-10-10-mods]] — Mods の公式 docs。plugin.json の全フィールド、hooks.json と register の例、`$` の API、`claude plugin test`、型定義、組み込み mod、管理者設定、公開申請の手順（公開日不明。取得 2026-10-10）
 
 ### engineering
 - [[sources/engineering/2026-05-25-how-we-contain-claude]] — 封じ込めの設計（claude.ai の gVisor、Claude Code の OS サンドボックス、Cowork の VM）と、見落とした4件のリスク（2026-05-25）
@@ -92,7 +93,7 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 - [[concepts/long-running-agent-harness]] — 長時間動くエージェントのハーネス（ループ、ロックによる並列化、テストの設計）（出典 3）
 - [[concepts/managed-agents]] — Claude Managed Agents（出典 4）
 - [[concepts/mcp]] — MCP（Model Context Protocol）（出典 2）
-- [[concepts/mods]] — mods（Claude Code mods）（出典 3）
+- [[concepts/mods]] — mods（Claude Code mods）（出典 4）
 - [[concepts/oss-scanner]] — OSS Scanner（OSS 向けの無償・opt-in の脆弱性発見サービス）（出典 4）
 - [[concepts/projects]] — Projects（作り直された Projects）（出典 3）
 - [[concepts/prompt-caching]] — プロンプトキャッシュとセッションの費用（出典 10）
@@ -104,3 +105,4 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 ## 分析（analysis）
 
 - [[analysis/opus-5-5-prompting]] — Opus 5.5 に渡すプロンプトの注意点と事例（as of 2026-10-10）
+- [[analysis/mods-howto]] — mods の作り方。ファイル構成、hook の書き方、試し方、検証とテスト、配布（as of 2026-10-11）
