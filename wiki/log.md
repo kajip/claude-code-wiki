@@ -218,3 +218,6 @@
 - `Bash(git push *)` と `Edit(/sources.md)` の ask ルールを、リポジトリの設定から手元だけの `.claude/settings.local.json` に移した。
 - routine の push は、環境変数 `WIKI_ROUTINE` があるときだけ働くフック `.claude/hooks/routine-guard.sh` で、`claude/` のブランチの単独の push に絞った。GitHub の道具も読み取りと PR 作成だけにした。テストは `tests/test-routine-guard.sh`。
 - 手順書に、巡回の二度手間をしないこと、PR を作ったら見張らずに終えることを足した。
+
+## [2026-10-17] ingest | concepts/routines の訂正
+- 「routine は承認のために止まらない」に、明示的な ask ルールは例外であることを追記した。出典は docs/2026-10-10-permission-modes。2026-10-16 の試しの実行で、ask ルールに当たって止まったことで分かった。

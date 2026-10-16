@@ -1,11 +1,12 @@
 ---
 type: concept
 title: routines（ルーティン）
-updated: 2026-10-16
+updated: 2026-10-17
 sources:
   - sources/claude-dev/2026-10-06-claude-code-in-the-cloud
   - sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296
   - sources/docs/2026-10-16-routines-and-cloud-sessions
+  - sources/docs/2026-10-10-permission-modes
 ---
 
 # routines
@@ -23,7 +24,7 @@ sources:
 - **料金と利用枠**: 実行は対話セッションと同じようにサブスクリプションの利用枠を消費する。VM への別料金の記載は無い（cloud session 全般が「別料金なし」）。枠を超えたとき、usage credits が有効な組織は従量の超過分で続行でき、無効なら枠のリセットまで追加実行は拒否される。API の従量課金ではない。
 - **1時間あたりの上限**（どれも overage なし）: スケジュール実行は100回／アカウント。Run now、API fire、1回きり routine の再設定は30回／routine（3つで1つの数）。Run now と1回きりの再設定は100回／アカウント、API fire は100回／アカウント（別カウント）。GitHub イベントにも routine 単位・アカウント単位の上限があるが数値は docs に記載なし。超えたイベントは破棄される。
 - スケジュールの最短は1時間間隔（短い cron は拒否）。ちょうど毎時0分は数分遅れることがある。
-- 無人実行: 権限モードの選択が無く、シェル、skills、コネクタ（既定では接続済みの全部、書き込み含む）を承認のために止まらず使う。一部の artifact 操作は確認される。`settings.json` の ask ルールがこの無人実行でどう扱われるかは docs に記載なし。
+- 無人実行: 権限モードの選択が無く、シェル、skills、コネクタ（既定では接続済みの全部、書き込み含む）を承認のために止まらず使う。一部の artifact 操作は確認される。ただし、明示的な ask ルール（例 `Bash(git push *)`）は、どの権限モードでも自動では承認されない（[[sources/docs/2026-10-10-permission-modes]]）。routine の docs はこの点に触れていない。この wiki の試しの実行（2026-10-16）では、リポジトリの `.claude/settings.json` の ask ルールに当たった操作で承認待ちになり、止まった（log.md の 2026-10-17 の schema を参照）。
 - push 先: 既定は `claude/` 始まりのブランチ。プロンプトで別のブランチへの push を指示すればそちらへ push する。専用の設定項目は無く、制限は GitHub の branch protection／ruleset で行う。
 - ネットワーク: 環境に従う。Default 環境は Trusted（許可リストのみ）で、許可外ホストは `403`／`host_not_allowed`。Custom か Full に変えられる。コネクタの通信は Anthropic のサーバー経由で、許可リストの対象外。
 - repo の `.claude/agents/`、`.claude/settings.json` の hooks と権限ルールは、リポジトリ1つのセッションで読み込まれる。複数リポジトリのセッションでは読まれない。ユーザーの `~/.claude/` は読まれない。
@@ -36,6 +37,7 @@ sources:
 
 ## 変更履歴
 
+- 2026-10-17 — 「承認のために止まらない」に、明示的な ask ルールは例外であることを追記（[[sources/docs/2026-10-10-permission-modes]]）
 - 2026-10-16 — docs を取り込み。利用枠の扱い、1時間あたりの上限の数値、`claude/` 以外への push が可能なこと、ネットワークの既定を追加（[[sources/docs/2026-10-16-routines-and-cloud-sessions]]）
 - 2026-10-09 — 2.1.295: telemetry を無効にした環境でも artifact を承認なしで公開するよう変更（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）
 - 2026-10-07 — 2.1.292: 自分だけが見られる artifact を承認なしで公開するよう変更（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）
@@ -43,4 +45,5 @@ sources:
 
 ## 未解決・矛盾
 
-- `settings.json` の ask ルールと無人実行の関係、routine 内のサブエージェント、同時実行数、1回の実行時間の上限、GitHub イベントの1時間上限の数値は、docs に記載が無く未確認（[[sources/docs/2026-10-16-routines-and-cloud-sessions]]）。
+- 解決済み（2026-10-17）: `settings.json` の ask ルールと無人実行の関係。ask ルールは自動承認されない（[[sources/docs/2026-10-10-permission-modes]]）。
+- routine 内のサブエージェント、同時実行数、1回の実行時間の上限、GitHub イベントの1時間上限の数値は、docs に記載が無く未確認（[[sources/docs/2026-10-16-routines-and-cloud-sessions]]）。

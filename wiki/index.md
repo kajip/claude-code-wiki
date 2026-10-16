@@ -116,7 +116,7 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 - [[concepts/oss-scanner]] — OSS Scanner（OSS 向けの無償・opt-in の脆弱性発見サービス）（出典 4）
 - [[concepts/projects]] — Projects（作り直された Projects）（出典 3）
 - [[concepts/prompt-caching]] — プロンプトキャッシュとセッションの費用（出典 12）
-- [[concepts/routines]] — routines（ルーティン）（出典 3）
+- [[concepts/routines]] — routines（ルーティン）（出典 4）
 - [[concepts/sandboxing]] — サンドボックスと隔離（封じ込め）の設計と教訓（出典 4）
 - [[concepts/subagents]] — サブエージェント（出典 8）
 - [[concepts/unintended-model-actions]] — モデルの意図しない行動と、運用上の安全策（出典 1）
