@@ -14,7 +14,7 @@ Claude Code に関する**一次情報**を公開 URL から要約し、Markdown
 
 ```
 sources.md        情報源の台帳（URL、頻度、取得方法、last_seen）
-rules/            サブエージェントが読む共通の規則（fetching.md、writing.md）
+rules/            サブエージェントが読む共通の規則（fetching.md、writing.md）、routine の手順（daily-routine.md）
 templates/        ページの雛形
 .claude/agents/   各作業のサブエージェント
 wiki/index.md     目録 / log.md 作業ログ（追記のみ）/ status.md バージョンのスナップショット
@@ -55,4 +55,5 @@ wiki/sources/<id>/  要約ページ    wiki/concepts/  概念ページ    wiki/a
   - 理由2: Obsidian の保管庫は、いま切り替えているブランチの中身を表示し、Sync で他の端末にも伝える。
   - 確認の関門は `review: pending/ok` が担う。
 - 規則と設定（このファイル、`rules/`、`templates/`、`.claude/`、`sources.md` の情報源の追加・削除）を変えるときは、短命のブランチを切って PR にする。
-- push は人間の指示があるときだけ。
+- クラウドの自動実行（routine）は例外で、`claude/daily-<日付>` のブランチに push して PR を作る。マージは人間が行う。手順は `rules/daily-routine.md`。
+- push は人間の指示があるときだけ（routine の手順による push を除く）。
