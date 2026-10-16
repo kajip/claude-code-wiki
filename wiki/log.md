@@ -212,3 +212,9 @@
 - gh-releases、gh-changelog、npm: 新規なし（最新 2.1.301。latest／next 2.1.301、stable 2.1.292）。status.md の値と同じ。
 - claude-blog、anthropic-news、claude-dev: 新規・過去分なし（一覧の記事はすべて登録済みか skip 済み）。anthropic-news と claude.dev は「See more」「Load more」より先は未確認。
 - 取得の失敗、ページ内の指示文: なし。
+
+## [2026-10-17] schema | routine が確認のルールで止まる問題への対処
+- 2026-10-16 の試しの実行で、routine が `Bash(git push *)` の ask ルールで止まった。docs（permission-modes）のとおり、ask ルールはどのモードでも自動では通らない。
+- `Bash(git push *)` と `Edit(/sources.md)` の ask ルールを、リポジトリの設定から手元だけの `.claude/settings.local.json` に移した。
+- routine の push は、環境変数 `WIKI_ROUTINE` があるときだけ働くフック `.claude/hooks/routine-guard.sh` で、`claude/` のブランチの単独の push に絞った。GitHub の道具も読み取りと PR 作成だけにした。テストは `tests/test-routine-guard.sh`。
+- 手順書に、巡回の二度手間をしないこと、PR を作ったら見張らずに終えることを足した。

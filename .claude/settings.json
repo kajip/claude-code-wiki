@@ -21,16 +21,27 @@
     ],
     "ask": [
       "Bash(rm *)",
-      "Bash(git push *)",
       "Bash(git merge *)",
       "Edit(/CLAUDE.md)",
-      "Edit(/sources.md)",
       "Edit(/rules/**)",
       "Edit(/.claude/**)"
     ],
     "deny": [
       "WebSearch",
       "Agent(claude-code-guide)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|mcp__github__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/routine-guard.sh"
+          }
+        ]
+      }
     ]
   }
 }
