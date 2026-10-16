@@ -207,3 +207,8 @@
 - 人間の質問（routine の料金）に答えるため、docs の routines、claude-code-on-the-web、cloud-environments、web-quickstart と settings の該当節を取り込んだ。sources/docs/2026-10-16-routines-and-cloud-sessions を作成し、concepts/routines と concepts/cloud-sessions を更新した。
 - 要点: 実行はサブスクリプションの利用枠を消費し、VM の別料金は無い。スケジュール実行は1時間あたり100回（アカウント）など。push 先はプロンプトで変えられる。既定の環境（Trusted）の許可リストに claude.dev は無い（cloud-environments の Default allowed domains で確認）。
 - docs に記載なし: ask ルールの無人実行での扱い、同時実行数、1回の実行時間の上限。
+
+## [2026-10-16] check | 毎日チェック 1〜6（routine）
+- gh-releases、gh-changelog、npm: 新規なし（最新 2.1.301。latest／next 2.1.301、stable 2.1.292）。status.md の値と同じ。
+- claude-blog、anthropic-news、claude-dev: 新規・過去分なし（一覧の記事はすべて登録済みか skip 済み）。anthropic-news と claude.dev は「See more」「Load more」より先は未確認。
+- 取得の失敗、ページ内の指示文: なし。
