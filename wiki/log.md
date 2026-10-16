@@ -147,3 +147,16 @@
 
 ## [2026-10-11] query | mods の作り方を analysis に保存
 - 人間の指示により、docs の mods 取り込み後の内容で analysis/mods-howto を作った。出典は docs/2026-10-10-mods を主に、claude-dev と claude-blog の記事、CHANGELOG v2.1.290〜296。
+
+## [2026-10-11] check | 毎日チェック 1〜6
+- gh-releases、gh-changelog: 新規なし（最新 2.1.296）。gh-releases の通常 URL は今回取得できた。
+- npm: latest／next 2.1.296、stable 2.1.287（status.md の値と同じ）。
+- claude-blog: 新規なし（Block の事例は 10-10 に skip 済み）。
+- anthropic-news: 新規なし。台帳に無い 2026-09-01「Developing Enterprise Frontier Safeguards with our customers」を検出（初回 Ingest の範囲外）。
+- claude-dev: 台帳に無い 2026-07-24「The new rules of context engineering for Claude 5 generation models」を検出（初回 Ingest の範囲外）。一覧の LOAD MORE より古い記事は未確認。
+- 取得の失敗、ページ内の指示文: なし。
+
+## [2026-10-11] ingest | 初回範囲より前の記事2件
+- 台帳に無い記事を Check で検出し、取り込んだ。初回 Ingest（直近約1か月）の範囲外だが、人間の了承を得て残した。
+- claude-dev/2026-07-24-new-rules-of-context-engineering-claude-5: concepts/context-engineering を新規作成。concepts/claude-opus-5-5 にリンクを追加。記事の対象は Opus 5 と Fable 5 で、5.5 世代への適用は推測として書いた。
+- anthropic-news/2026-09-01-enterprise-frontier-safeguards: concepts/enterprise-frontier-safeguards を新規作成。concepts/cyber-safeguards に追記。公開日はページ表示の Sep 1, 2026（メタデータは JST で 09-02 08:31）。docs 側の EFS 設定は未確認。

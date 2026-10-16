@@ -29,6 +29,7 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 - [[sources/anthropic-news/2026-10-06-expanding-the-cyber-verification-program]] — CVP の拡大。3段階のアクセス、Glasswing を統合（2026-10-06）
 - [[sources/anthropic-news/2026-09-28-introducing-claude-sonnet-5-5]] — Sonnet 5.5 の発表。30%以上速く、最大30%安い（2026-09-28）
 - [[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]] — Opus 5.5 の発表。Fable 5.1 と同程度の性能で、Opus 5 より約40%安い（2026-09-22）
+- [[sources/anthropic-news/2026-09-01-enterprise-frontier-safeguards]] — Enterprise Frontier Safeguards。ZDR と誤用検知の両立、データは顧客のクラウドに保存、今秋に段階展開（2026-09-01）
 
 ### claude-dev
 - [[sources/claude-dev/2026-10-08-building-effective-agent-automations]] — Managed Agents（ベータ）で定期実行するエージェントの参考実装（2026-10-08）
@@ -40,6 +41,7 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 - [[sources/claude-dev/2026-09-25-spending-your-effort]] — effort の使い分けと計測の結果（2026-09-25）
 - [[sources/claude-dev/2026-09-23-how-we-made-claude-ai-faster]] — Claude Tag を使って claude.ai を3倍速くした事例（2026-09-23）
 - [[sources/claude-dev/2026-09-22-getting-the-most-out-of-opus-5-5]] — Opus 5.5 の使い方。止まる条件、フラグが付いたときの対応、fast mode（2026-09-22）
+- [[sources/claude-dev/2026-07-24-new-rules-of-context-engineering-claude-5]] — Claude Code のシステムプロンプトを 80% 超削った経緯と、CLAUDE.md・skills の整え方（2026-07-24）
 
 ### docs
 - [[sources/docs/2026-10-10-auto-mode-config]] — Configure auto mode。`autoMode` の設定キー、`claude auto-mode` サブコマンド、`/auto-mode-setup`（公開日不明。取得 2026-10-10）
@@ -82,11 +84,13 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 - [[concepts/claude-apps-gateway]] — Claude apps gateway（出典 1）
 - [[concepts/claude-code-quality-incidents]] — Claude Code の品質低下の報告と原因（2026年3〜4月）（出典 1）
 - [[concepts/claude-haiku-5-5]] — Claude Haiku 5.5（出典 5）
-- [[concepts/claude-opus-5-5]] — Claude Opus 5.5（出典 8）
+- [[concepts/claude-opus-5-5]] — Claude Opus 5.5（出典 9）
 - [[concepts/claude-sonnet-5-5]] — Claude Sonnet 5.5（出典 7）
 - [[concepts/claude-tag]] — Claude Tag（Claude in Slack）（出典 3）
 - [[concepts/cloud-sessions]] — cloud sessions（Claude Code in the cloud）（出典 4）
-- [[concepts/cyber-safeguards]] — サイバー・安全策と Cyber Verification Program（出典 12）
+- [[concepts/context-engineering]] — コンテキストエンジニアリング（Claude 5 世代）（出典 1）
+- [[concepts/cyber-safeguards]] — サイバー・安全策と Cyber Verification Program（出典 13）
+- [[concepts/enterprise-frontier-safeguards]] — Enterprise Frontier Safeguards（EFS。顧客管理ストレージ、CMEK、自動レビューの opt-in。Claude Code も対応先）（出典 1）
 - [[concepts/effort]] — effort（思考量の設定）（出典 9）
 - [[concepts/fast-mode]] — fast mode（出典 7）
 - [[concepts/hooks]] — hooks（設定のフック）（出典 4）

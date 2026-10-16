@@ -11,6 +11,7 @@ sources:
   - sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5
   - sources/claude-blog/2026-09-24-opus-5-5-built-for-longer-coding-sessions
   - sources/claude-dev/2026-09-28-building-with-claude-sonnet-5-5
+  - sources/claude-dev/2026-07-24-new-rules-of-context-engineering-claude-5
 ---
 
 # Claude Opus 5.5
@@ -32,7 +33,7 @@ Claude 5.5 ファミリーの最初のモデル。2026-09-22 に発表された�
 - キャッシュの最小長は 512 トークン（Claude API）（[[sources/platform-docs/2026-10-10-prompt-caching]]）。
 - Pro、Max、Team、席単位の Enterprise で、5時間ごとの利用上限が引き上げられた（[[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]]）。
 
-- プロンプトの書き方: 完了の条件と止まる条件を伝えて、タスクを丸ごと任せる。「think carefully」のような指示は消す。止まる条件は CLAUDE.md に、タスクの一覧はファイルに置く。返答の中で内部の推論を再現させない。デザインの作業では、避けたいパターンを具体的に挙げる（[[sources/claude-dev/2026-09-22-getting-the-most-out-of-opus-5-5]]）。まとめは [[analysis/opus-5-5-prompting]]。
+- プロンプトの書き方: 完了の条件と止まる条件を伝えて、タスクを丸ごと任せる。「think carefully」のような指示は消す。止まる条件は CLAUDE.md に、タスクの一覧はファイルに置く。返答の中で内部の推論を再現させない。デザインの作業では、避けたいパターンを具体的に挙げる（[[sources/claude-dev/2026-09-22-getting-the-most-out-of-opus-5-5]]）。まとめは [[analysis/opus-5-5-prompting]]。コンテキスト（CLAUDE.md、skills）の整え方の一般論は [[concepts/context-engineering]]（Opus 5 / Fable 5 時点の記事、[[sources/claude-dev/2026-07-24-new-rules-of-context-engineering-claude-5]]）。
 
 ## 変更履歴
 

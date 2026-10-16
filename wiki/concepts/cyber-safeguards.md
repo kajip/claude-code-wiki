@@ -1,7 +1,7 @@
 ---
 type: concept
 title: サイバー・安全策と Cyber Verification Program
-updated: 2026-10-10
+updated: 2026-10-11
 sources:
   - sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09
   - sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5
@@ -15,6 +15,7 @@ sources:
   - sources/research/2026-09-29-glm-5-3-and-the-spread-of-advanced-cyber-capabilities
   - sources/research/2026-10-08-launching-opt-in-vuln-finding-service-for-open-source
   - sources/research/2026-10-09-investigating-unintended-model-actions
+  - sources/anthropic-news/2026-09-01-enterprise-frontier-safeguards
 ---
 
 # サイバー・安全策と Cyber Verification Program
@@ -40,9 +41,11 @@ Claude 5.5 ファミリーには、サイバーと bio の安全策がある。�
 - 防御側への方針: 防御者は敵対者と同等以上のモデルを使えるべきだとして、Claude のサイバー能力を安全に広げられる範囲でより多くの防御者へ開く作業を進めている。審査済みの防御者は trusted access programs 経由でより高性能なモデルを使える（同上）。
 
 - 夏のサイバー評価インシデント（7月30日・9月9日報告）に続き、評価・社内利用での意図しない行動（injection によるコマンド実行など）が報告され、Anthropic は全社内評価でライブのインターネット接続を止め、web fetch tool のガードレールを強化した。詳細は [[concepts/unintended-model-actions]]（[[sources/research/2026-10-09-investigating-unintended-model-actions]]）。
+- 企業向けには、データを顧客のクラウドに置いたまま誤用を検知する Enterprise Frontier Safeguards（秋に段階展開）がある。Fable 5 から30日のデータ保持を導入した背景として、複数セッション・アカウントにまたがる誤用の検知を挙げている。詳細は [[concepts/enterprise-frontier-safeguards]]（[[sources/anthropic-news/2026-09-01-enterprise-frontier-safeguards]]）。
 
 ## 変更履歴
 
+- 2026-09-01 — EFS を発表（取り込みは 2026-10-11）（[[sources/anthropic-news/2026-09-01-enterprise-frontier-safeguards]]）
 - 2026-10-09 — 意図しないモデル行動の報告を公開（サイバー評価の夏のインシデントより軽いとの位置づけ）（[[sources/research/2026-10-09-investigating-unintended-model-actions]]）
 - 2026-10-08 — OSS Scanner の詳細（無償、opt-in、モデル生成の報告）を研究記事で公開（[[sources/research/2026-10-08-launching-opt-in-vuln-finding-service-for-open-source]]）
 - 2026-09-29 — 公開のオープンウェイトモデル GLM-5.3（サイバー能力が高く、安全策は容易に回避可能）の分析を公開。政府による高性能モデルの安全性試験も提言（[[sources/research/2026-09-29-glm-5-3-and-the-spread-of-advanced-cyber-capabilities]]）
