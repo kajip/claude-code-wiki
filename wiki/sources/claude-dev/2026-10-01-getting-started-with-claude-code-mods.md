@@ -43,5 +43,5 @@ archive_url:
 
 ## 取り込みメモ
 
-- API は変わりうると明記されているため `recheck: weekly`。その後の版での API 追加は CHANGELOG を参照（[[sources/gh-changelog/2026-10-09-v2-1-290-to-2-1-296]]）。
+- API は変わりうると明記されているため `recheck: weekly`。その後の版での API 追加は CHANGELOG を参照（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）。
 - Blast Radius は権限の仕組みの代わりにはならないと注意がある（`$(…)` などで迂回できる）。

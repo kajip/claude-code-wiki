@@ -25,7 +25,7 @@
 - 規模: 約 8,700 行・約 950 KB。最新バージョンが先頭に並ぶ。**先頭から `last_seen_version` に達するまでだけ読む。**
 - 差分検知: 先頭のバージョンが `last_seen_version` より新しければ新規。
 - 初期観測（2026-10-10）: 先頭は **2.1.295**。直近の 2.1.290〜2.1.295 では、Claude Mods（プラグインによる深い挙動変更）、Claude Haiku 5.5 の追加（2.1.293）、MCP プロトコル 2026-07-28 のネゴシエーション既定化などが確認できた（内容は未 Ingest）。
-- `last_seen_version`: **2.1.296**（2026-10-10 Ingest。2.1.290〜2.1.296 を取り込み済み。2.1.289 以前は未 Ingest）
+- `last_seen_version`: **2.1.301**（2026-10-16 Ingest。2.1.290〜2.1.301 を取り込み済み。2.1.297 と 2.1.298 は CHANGELOG に無い。2.1.289 以前は未 Ingest）
 
 ### 3. npm — @anthropic-ai/claude-code　✅（取得方法に注意）
 
@@ -76,14 +76,14 @@
 
 - URL: https://www.anthropic.com/engineering
 - 差分検知: 一覧の記事 URL が `wiki/sources/engineering/` に無ければ新規。
-- 初期観測（2026-10-10）: 日付つきの最新は 2026-04-23「An update on recent Claude Code quality reports」。先頭の特集「How we contain Claude across products」は一覧に日付の表示がない（Ingest 時に記事ページで日付を確認する）。更新の間隔は数か月おき。
+- 初期観測（2026-10-10）: 日付つきの最新は 2026-04-23「An update on recent Claude Code quality reports」。先頭の特集「How we contain Claude across products」は一覧に日付の表示がない（記事ページで 2026-05-25 と確認）。一覧は日付順ではなく特集枠が先頭に来る。一覧は 25 件。2026-10-10 に、2026 年の8件を Ingest した（2025 年以前の記事は未 Ingest）。更新の間隔は数か月おき。
 
 ### 9. research — Anthropic Research　✅
 
 - URL: https://www.anthropic.com/research
 - 差分検知: 一覧の記事 URL が `wiki/sources/research/` に無ければ新規。Claude Code との関連が薄い研究は skip する（刊行は多い）。
 - Economic Index: https://www.anthropic.com/economic-index（追加確認）。データはページ読み込み後に表示される動的なダッシュボードで、本文は取得できない。取得できるのは「Last updated」の日付のみ。Economics チームの投稿（例: 2026-09-30「What work can robots do?」、2026-09-24「Project Swap」）は `/research` の一覧から検知する。
-- 初期観測（2026-10-10）: 一覧の最新は 2026-10-08（Claude Science による紫外線の全天マップ、オープンソース向け脆弱性発見サービスの提供開始）。Economic Index の「Last updated」は 2026-06-26。
+- 初期観測（2026-10-10）: 一覧の最新は 2026-10-08（Claude Science による紫外線の全天マップ、オープンソース向け脆弱性発見サービスの提供開始）。Economic Index の「Last updated」は 2026-06-26。一覧の「See more」より先は WebFetch で展開できず、`?page=2` も同じ内容を返す（2026-10-10。09-10〜09-16 の記事は未確認）。
 
 ---
 
@@ -95,6 +95,20 @@
 - 差分検知: モデルの価格表と、キャッシュ、fast mode、Batch の節を前回の要約ページと比べる。変わっていれば新しい要約ページを作り、各モデルの概念ページの変更履歴に書く。
 - 頻度: 週次。新しいモデルの発表や値下げの記事を取り込んだときは、その都度確認する。
 - 初期観測（2026-10-10）: Opus 5.5 は $4／$20、Sonnet 5.5 は $2／$10（キャッシュヒット $0.10）、Haiku 5.5 は $0.10／$0.50（100K 以下）。fast mode は研究プレビュー。2つの URL の値は一致した。
+
+### 11. platform-docs — Claude Platform ドキュメント（API 側）　✅
+
+- URL: https://platform.claude.com/docs （Claude API、SDK、Console、Managed Agents などのドキュメント）
+- 差分検知（上から優先）:
+  1. `https://platform.claude.com/docs/en/release-notes/overview.md` — Claude Platform のリリースノート。日付の見出し（`### October 9, 2026` の形）が新しい順に並ぶ。前回見た日付より新しい見出しがあれば新規。旧 URL の `/release-notes/api.md` は、ここにリダイレクトされる。
+  2. `https://platform.claude.com/llms.txt` — ページ一覧の増減（`/docs/llms.txt` は、ここにリダイレクトされる）。
+- 取り込みの単位: docs（7）と同じ。ページごとの要約ページは作らず、変更が検知された機能について `concepts/` を更新し、根拠として該当ページの要約ページ（必要な箇所だけ）を作る。リリースノートは、前回からの分を1ページにまとめる（CHANGELOG と同じバッチ方式）。ページの Markdown 版は URL の末尾に `.md` を付けると取れる。
+- 価格のページはこの中にあるが、情報源 10（pricing）として別に扱う。
+- Query で `claude-api` スキルを補足に使い、残す価値がある情報が見つかったときは、スキルが示すこの情報源の URL から取り込む（CLAUDE.md の Query 手順 5）。
+- 追加日: 2026-10-10（人間の指示による）。
+- 頻度: 週次。
+- 初期観測（2026-10-10）: リリースノートの最新の見出しは October 9, 2026。llms.txt のリンクは 762 件。モデル一覧は `/docs/en/about-claude/models/overview.md` から `/docs/en/models/overview.md` に移っている（リダイレクトされる）。
+- `last_seen_release_note`: **October 9, 2026**（2026-10-10 Ingest。2026-09-10〜10-09 を取り込み済み。それより前は未 Ingest）
 
 ---
 

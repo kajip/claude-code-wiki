@@ -8,7 +8,7 @@ retrieved: 2026-10-10
 version:
 tier: primary
 review: ok
-recheck: none
+recheck: weekly
 fingerprint:
 archive_url:
 ---
@@ -43,5 +43,5 @@ archive_url:
 
 ## 取り込みメモ
 
-- コンテキスト長と最大出力は記事に書かれていない。1M コンテキストは CHANGELOG 2.1.293 の記述（[[sources/gh-changelog/2026-10-09-v2-1-290-to-2-1-296]]）。
+- コンテキスト長と最大出力は記事に書かれていない。1M コンテキストは CHANGELOG 2.1.293 の記述（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）。
 - 本文に Claude Code への言及は無い。

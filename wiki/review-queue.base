@@ -1,0 +1,20 @@
+filters:
+  and:
+    - file.inFolder("sources")
+    - review != "ok"
+views:
+  - type: table
+    name: レビュー待ち
+    order:
+      - file.name
+      - source_id
+      - published
+      - retrieved
+      - review
+    sort:
+      - property: retrieved
+        direction: DESC
+      - property: published
+        direction: DESC
+    columnSize:
+      file.name: 426
