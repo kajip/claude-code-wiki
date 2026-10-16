@@ -57,3 +57,4 @@ wiki/sources/<id>/  要約ページ    wiki/concepts/  概念ページ    wiki/a
 - 規則と設定（このファイル、`rules/`、`templates/`、`.claude/`、`sources.md` の情報源の追加・削除）を変えるときは、短命のブランチを切って PR にする。
 - クラウドの自動実行（routine）は例外で、`claude/daily-<日付>` のブランチに push して PR を作る。マージは人間が行う。手順は `rules/daily-routine.md`。
 - push は人間の指示があるときだけ（routine の手順による push を除く）。
+- 「push と `sources.md` の編集の前に確認する」ルールは、手元だけで読まれる `.claude/settings.local.json` に置く。routine は確認のルールで止まってしまい、そこで動けなくなるため。routine の push は、環境変数 `WIKI_ROUTINE` があるときに働くフック（`.claude/hooks/routine-guard.sh`）が `claude/` のブランチだけに絞る。
