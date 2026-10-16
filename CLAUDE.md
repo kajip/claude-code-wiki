@@ -46,3 +46,13 @@ wiki/sources/<id>/  要約ページ    wiki/concepts/  概念ページ    wiki/a
 1. **最初の2週間**: Ingest のたびに、作成・更新したファイルと要約を人間に見せる。人間が確認したら `review: ok` にする。スケジュールでの自動実行はまだ使わない。
 2. **安定後**: スケジュール実行に移す。新規ページは `review: pending` で作り、週次でまとめて確認してもらう。
 3. 品質に問題が出たら、規則（このファイル、`rules/`、`.claude/agents/`）を人間と相談して直し、log に `schema` として記録する。
+
+## Git の運用（GitHub Flow の簡略版）
+
+- ブランチは `main` だけを使う。`develop` は使わない（ユーザー共通の「Git-Flow に従う」より、こちらを優先する）。
+- wiki の取り込み、レビュー（`review: ok`）、`index.md`・`log.md`・`status.md` の更新、`sources.md` の `last_seen_*` の更新は、`main` に直接コミットする。
+  - 理由1: 取り込みのたびに共有ファイルを書くため、ブランチを並べると衝突する。
+  - 理由2: Obsidian の保管庫は、いま切り替えているブランチの中身を表示し、Sync で他の端末にも伝える。
+  - 確認の関門は `review: pending/ok` が担う。
+- 規則と設定（このファイル、`rules/`、`templates/`、`.claude/`、`sources.md` の情報源の追加・削除）を変えるときは、短命のブランチを切って PR にする。
+- push は人間の指示があるときだけ。

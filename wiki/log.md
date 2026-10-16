@@ -194,3 +194,7 @@
 - 人間の指示により、docs の code-review の下位5ページ（setup、customize、pull-requests、costs、troubleshooting）を取得し、sources/docs/2026-10-16-code-review に統合した。URL は llms.txt で確認した。
 - concepts/code-review を更新（有効化手順、`REVIEW.md` の読み込み元、`@claude review` 系のコマンド、費用と月次の支出上限、トラブルシューティング）。記事との食い違いは無し。
 - 未確認: 1レビューあたりの単価（docs に数値なし）、Enterprise のクレジット条件。未取得: code-review-local、ultrareview、github-actions、github-enterprise-server。
+
+## [2026-10-16] schema | Git の運用を GitHub Flow の簡略版に変更
+- 人間の指示により、Git-Flow をやめ、`main` だけを使う運用にした。wiki の取り込みとレビューは `main` に直接コミットし、規則と設定の変更だけを短命のブランチと PR で行う。CLAUDE.md に「Git の運用」節を追加した。
+- `develop` ブランチを手元と GitHub から削除した（`main` にマージ済み）。
