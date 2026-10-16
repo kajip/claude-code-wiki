@@ -198,3 +198,7 @@
 ## [2026-10-16] schema | Git の運用を GitHub Flow の簡略版に変更
 - 人間の指示により、Git-Flow をやめ、`main` だけを使う運用にした。wiki の取り込みとレビューは `main` に直接コミットし、規則と設定の変更だけを短命のブランチと PR で行う。CLAUDE.md に「Git の運用」節を追加した。
 - `develop` ブランチを手元と GitHub から削除した（`main` にマージ済み）。
+
+## [2026-10-16] schema | クラウドの routine による毎日の自動実行の手順
+- 人間の指示により `rules/daily-routine.md` を追加した。routine は `claude/daily-<日付>` のブランチで Check と Ingest を行い、PR を作る。迷うもの（過去分、関係の薄いもの）は取り込まず「保留」として PR に挙げる。
+- CLAUDE.md の Git の運用に、routine の例外（ブランチと PR、マージは人間）を追記した。予定を組むのは運用の段階どおり 2026-10-24 以降。それまでは手動で1回ずつ試す。
