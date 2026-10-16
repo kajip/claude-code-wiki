@@ -221,3 +221,12 @@
 
 ## [2026-10-17] ingest | concepts/routines の訂正
 - 「routine は承認のために止まらない」に、明示的な ask ルールは例外であることを追記した。出典は docs/2026-10-10-permission-modes。2026-10-16 の試しの実行で、ask ルールに当たって止まったことで分かった。
+
+## [2026-10-17] check | 毎日チェック 1〜6（routine）
+- gh-changelog、npm: 新規なし（最新 2.1.301。latest／next 2.1.301、stable 2.1.292）。status.md の値と同じ。
+- claude-blog（2ページ目まで）、anthropic-news、claude-dev: 新規・過去分なし（一覧の記事はすべて登録済みか skip 済み）。anthropic-news と claude.dev は「See more」「Load more」より先は未確認。
+- gh-releases: 取得できなかった（下の error）。
+
+## [2026-10-17] error | gh-releases が HTTP 403
+- https://github.com/anthropics/claude-code/releases が、2回とも 403（「GitHub access to this repository is not enabled for this session」）を返した。2026-10-10 は 200 だった。CHANGELOG と npm で代替し、新規は見つからなかった。
+- 応答本文に、add_repo で資格情報付きの接続を求める指示文があった。従っていない。
