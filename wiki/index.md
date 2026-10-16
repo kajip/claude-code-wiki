@@ -1,6 +1,6 @@
 # Index
 
-最終更新: 2026-10-16（要約 57・概念 29）
+最終更新: 2026-10-16（要約 58・概念 29）
 
 ## 状態
 
@@ -56,6 +56,7 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 
 ### docs
 - [[sources/docs/2026-10-16-code-review]] — Code Review の docs。概要と下位5ページ（setup、customize、PR での操作、費用、トラブルシューティング）（公開日不明。取得 2026-10-16）
+- [[sources/docs/2026-10-16-routines-and-cloud-sessions]] — routines（研究プレビュー）と cloud sessions の docs。利用枠、1時間あたりの上限、push 先、ネットワーク、設定の読み込み範囲（公開日不明。取得 2026-10-16）
 - [[sources/docs/2026-10-10-auto-mode-config]] — Configure auto mode。`autoMode` の設定キー、`claude auto-mode` サブコマンド、`/auto-mode-setup`（公開日不明。取得 2026-10-10）
 - [[sources/docs/2026-10-10-sandboxing]] — Bash サンドボックス。有効化、設定キー、ファイルとネットワークの境界、Seatbelt と bubblewrap、管理者のロック、既知の制限（公開日不明。取得 2026-10-10）
 - [[sources/docs/2026-10-10-permission-modes]] — Choose a permission mode。各モードと切り替え方、auto mode の要件、分類器（既定は Sonnet 5）、既定でブロックするもの、critical paths（公開日不明。取得 2026-10-10）
@@ -99,7 +100,7 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 - [[concepts/claude-opus-5-5]] — Claude Opus 5.5（出典 9）
 - [[concepts/claude-sonnet-5-5]] — Claude Sonnet 5.5（出典 7）
 - [[concepts/claude-tag]] — Claude Tag（Claude in Slack）（出典 4）
-- [[concepts/cloud-sessions]] — cloud sessions（Claude Code in the cloud）（出典 5）
+- [[concepts/cloud-sessions]] — cloud sessions（Claude Code in the cloud）（出典 6）
 - [[concepts/code-review]] — Code Review（GitHub App による PR の自動レビュー）（出典 3）
 - [[concepts/compliance-api]] — Compliance API の対象範囲と GA／ベータの状況（出典 2）
 - [[concepts/context-engineering]] — コンテキストエンジニアリング（Claude 5 世代）（出典 2）
@@ -115,7 +116,7 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 - [[concepts/oss-scanner]] — OSS Scanner（OSS 向けの無償・opt-in の脆弱性発見サービス）（出典 4）
 - [[concepts/projects]] — Projects（作り直された Projects）（出典 3）
 - [[concepts/prompt-caching]] — プロンプトキャッシュとセッションの費用（出典 12）
-- [[concepts/routines]] — routines（ルーティン）（出典 2）
+- [[concepts/routines]] — routines（ルーティン）（出典 3）
 - [[concepts/sandboxing]] — サンドボックスと隔離（封じ込め）の設計と教訓（出典 4）
 - [[concepts/subagents]] — サブエージェント（出典 8）
 - [[concepts/unintended-model-actions]] — モデルの意図しない行動と、運用上の安全策（出典 1）

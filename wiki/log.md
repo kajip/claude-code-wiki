@@ -202,3 +202,8 @@
 ## [2026-10-16] schema | クラウドの routine による毎日の自動実行の手順
 - 人間の指示により `rules/daily-routine.md` を追加した。routine は `claude/daily-<日付>` のブランチで Check と Ingest を行い、PR を作る。迷うもの（過去分、関係の薄いもの）は取り込まず「保留」として PR に挙げる。
 - CLAUDE.md の Git の運用に、routine の例外（ブランチと PR、マージは人間）を追記した。予定を組むのは運用の段階どおり 2026-10-24 以降。それまでは手動で1回ずつ試す。
+
+## [2026-10-16] ingest | docs の routines と cloud sessions
+- 人間の質問（routine の料金）に答えるため、docs の routines、claude-code-on-the-web、cloud-environments、web-quickstart と settings の該当節を取り込んだ。sources/docs/2026-10-16-routines-and-cloud-sessions を作成し、concepts/routines と concepts/cloud-sessions を更新した。
+- 要点: 実行はサブスクリプションの利用枠を消費し、VM の別料金は無い。スケジュール実行は1時間あたり100回（アカウント）など。push 先はプロンプトで変えられる。既定の環境（Trusted）の許可リストに claude.dev は無い（cloud-environments の Default allowed domains で確認）。
+- docs に記載なし: ask ルールの無人実行での扱い、同時実行数、1回の実行時間の上限。
