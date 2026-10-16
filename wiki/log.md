@@ -185,3 +185,12 @@
 - 2026-08-14 セッションの費用: prompt-caching、effort、fast-mode、subagents、context-engineering を更新。「`/effort` でキャッシュが壊れる」は docs を現状として解決済みで閉じた。
 ## [2026-10-16] schema | レビュー待ちの一覧ページを追加
 - 人間の了承を得て `review-queue.base` を追加した。Obsidian の Bases で、`sources/` のうち review が ok でないページを取得日の新しい順に表示する。index の「状態」からリンクした。
+
+## [2026-10-16] query | Code Review の使い方
+- concepts/code-review、docs/2026-10-16-code-review、claude-blog と claude-dev の 2026-10-15 の記事をもとに回答した。いずれも review: pending。
+- 不足: docs の下位ページ（setup、customize、pull-requests、troubleshooting、costs）、レベルの選び方、費用の単価、クレジットの条件。
+
+## [2026-10-16] ingest | docs の Code Review 下位ページ
+- 人間の指示により、docs の code-review の下位5ページ（setup、customize、pull-requests、costs、troubleshooting）を取得し、sources/docs/2026-10-16-code-review に統合した。URL は llms.txt で確認した。
+- concepts/code-review を更新（有効化手順、`REVIEW.md` の読み込み元、`@claude review` 系のコマンド、費用と月次の支出上限、トラブルシューティング）。記事との食い違いは無し。
+- 未確認: 1レビューあたりの単価（docs に数値なし）、Enterprise のクレジット条件。未取得: code-review-local、ultrareview、github-actions、github-enterprise-server。

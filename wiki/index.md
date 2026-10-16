@@ -55,7 +55,7 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 - [[sources/claude-dev/2026-07-24-new-rules-of-context-engineering-claude-5]] — Claude Code のシステムプロンプトを 80% 超削った経緯と、CLAUDE.md・skills の整え方（2026-07-24）
 
 ### docs
-- [[sources/docs/2026-10-16-code-review]] — Code Review の概要。提供範囲、レビューレベル、動作、REVIEW.md（公開日不明。取得 2026-10-16）
+- [[sources/docs/2026-10-16-code-review]] — Code Review の docs。概要と下位5ページ（setup、customize、PR での操作、費用、トラブルシューティング）（公開日不明。取得 2026-10-16）
 - [[sources/docs/2026-10-10-auto-mode-config]] — Configure auto mode。`autoMode` の設定キー、`claude auto-mode` サブコマンド、`/auto-mode-setup`（公開日不明。取得 2026-10-10）
 - [[sources/docs/2026-10-10-sandboxing]] — Bash サンドボックス。有効化、設定キー、ファイルとネットワークの境界、Seatbelt と bubblewrap、管理者のロック、既知の制限（公開日不明。取得 2026-10-10）
 - [[sources/docs/2026-10-10-permission-modes]] — Choose a permission mode。各モードと切り替え方、auto mode の要件、分類器（既定は Sonnet 5）、既定でブロックするもの、critical paths（公開日不明。取得 2026-10-10）

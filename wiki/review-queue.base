@@ -16,3 +16,5 @@ views:
         direction: DESC
       - property: published
         direction: DESC
+    columnSize:
+      file.name: 426

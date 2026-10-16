@@ -7,7 +7,7 @@ published: 2026-10-15
 retrieved: 2026-10-16
 version:
 tier: primary
-review: pending
+review: ok
 recheck: none
 fingerprint: f24384123b558f9d52812999bbdbadd27f477de83cf1dd6e3b82e4fe186ddd68
 archive_url:
