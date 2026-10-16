@@ -1,12 +1,13 @@
 ---
 type: concept
 title: mods（Claude Code mods）
-updated: 2026-10-10
+updated: 2026-10-16
 sources:
   - sources/docs/2026-10-10-mods
   - sources/claude-blog/2026-10-01-customize-claude-code-with-mods
   - sources/claude-dev/2026-10-01-getting-started-with-claude-code-mods
   - sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296
+  - sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301
 ---
 
 # mods（Claude Code mods）
@@ -15,7 +16,7 @@ sources:
 
 Claude Code の動きと見た目を変える、小さな TypeScript／JavaScript の関数。プラグインに入れて配る（[[sources/claude-blog/2026-10-01-customize-claude-code-with-mods]]）。docs の定義では、mod は Claude Code のプロセス内で動くイベントハンドラ（hook）を持つプラグインで、ミドルウェアのような鎖として動く。設定ファイルの hook（[[concepts/hooks]]）とは別物で、docs は後者を「settings hook」と呼ぶ（[[sources/docs/2026-10-10-mods]]）。詳しいフィールドや API は docs の要約ページにある。
 
-## 現状（as of 2026-10-10）
+## 現状（as of 2026-10-16）
 
 - **対応版**: ターミナルは 2.1.287 以降、Desktop アプリは 2.1.286 以降で既定有効。CLI と Desktop の Code タブで動く。ベータ等の表記は docs に無い（[[sources/docs/2026-10-10-mods]]）。API は版ごとに変わりうるので、`.claude-plugin/types/` に書き出される型定義を正とする（同）。
 - **構成**: `.claude-plugin/plugin.json`、`hooks/hooks.json`（`"modules": ["./register.js"]`）、hooks モジュール（`export function register(on, options)`）の3つ。mods が plugin.json に足す必須フィールドは無い。mod 用の任意キーは `types`（`$.state` などの型宣言）と `userConfig`。plugin.json の全フィールドは要約ページの一覧を参照（同）。
@@ -29,9 +30,13 @@ Claude Code の動きと見た目を変える、小さな TypeScript／JavaScrip
 - **動作環境の差**: VS Code 拡張、`claude -p`、Agent SDK、クラウドセッションでは hook は走るが描画は出ない。Desktop の WSL セッションはどちらも不可（同）。
 - **配布と公開**: `/plugin install <name>@<marketplace>`。公開は自前マーケットプレイス、または claude.ai/directory/manage の開発者ポータルへの申請（有料プラン、`claude plugin validate --strict` を通す、Claude Code 専用要素の確認、ポータルで申請）。`claude-plugins-official` は申請不可。公開済みの `name` は変えない。`claude-` などで始まる名前は `validate` がエラーにする（同）。
 - 2.1.290〜2.1.296 で追加された API: `turn.step` の `serverToolUses`、`tool.check` の `agentId`／`ceiling`、`prompt.autocomplete`、`$.model.complete` の `cache: true`、`$.tool.register` の `isDeferred`、`$.ui.notify`（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）。
+- 2.1.299〜2.1.301 で追加・変更された API: **`prompt.change` フック**（入力欄の文字がタイプ以外で変わったとき。履歴の呼び戻し、クリア、undo、プラグインの入力）、`virtualText`（プロンプトの装飾。ドラフトにも送信にも入らない）、`$.ui.view({ agentId })`、`Text` の `dir`、`size`／`weight`／`mono`／`tabular`（`bold` は非推奨）、`Box` の間隔 `xs`〜`xl`、`Input` の `rows`、`$.prompt.media` と `$.session.identity()`（managed settings で入れた mod 向け）、`skill.prompt` の受け取る情報、`session.append` の `queue` door、`agent.spawn` での workflow エージェントの `prompt`／`model` の書き換えと resume への発火、`turn.start` がサブエージェントも受け取る（`e.agentId`）（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）。
+- 挙動の変更: フックの `.catch` は throw かタイムアウトのときだけ走る（2.1.301）。`$.env.set` は成功で `{}`、拒否で `{ deny }` を返す（2.1.301）。`claude plugin test` は 10 秒答えない `$` メソッドを失敗とし、`ui.render` の木の各 mod ルートに `part: { plugin }` が付くので、木を厳密に比べるテストは更新が必要（2.1.299）（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）。
+- 強制の強化: managed な permission rule、hook、組織の MCP ツール名が、ユーザー mod に対してより確実に効く（2.1.299）。ユーザー mod の `$.env.set` が managed settings のコマンドフックの環境を変えられなくなった（2.1.300）。`__proto__` キーが黙って消されて `tool.check` の guard を飛ばせた問題を修正（2.1.299）（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）。
 
 ## 変更履歴
 
+- 2026-10-14〜10-15 — 2.1.299〜2.1.301 で上記の API を追加・変更（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）
 - 2026-10-10 — docs（Mods overview と配下のページ）を取り込み、plugin.json、hooks.json、register の例、`$` の API、テスト、型定義、公開手順、管理者設定を追加（[[sources/docs/2026-10-10-mods]]）。
 - 2026-10-06〜10-10 — 2.1.290〜2.1.296 で API を追加（上記）。組織の mod のトーストを先に出すよう変更（2.1.295）（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）
 - 2026-10-01 — 発表（[[sources/claude-blog/2026-10-01-customize-claude-code-with-mods]]）。同日の claude-dev の入門記事では、必要な版を 2.1.287 以降と書いていた（[[sources/claude-dev/2026-10-01-getting-started-with-claude-code-mods]]）。docs は Desktop のみ 2.1.286 以降とする。

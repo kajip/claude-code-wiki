@@ -1,7 +1,7 @@
 ---
 type: concept
 title: サイバー・安全策と Cyber Verification Program
-updated: 2026-10-11
+updated: 2026-10-16
 sources:
   - sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09
   - sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5
@@ -16,6 +16,7 @@ sources:
   - sources/research/2026-10-08-launching-opt-in-vuln-finding-service-for-open-source
   - sources/research/2026-10-09-investigating-unintended-model-actions
   - sources/anthropic-news/2026-09-01-enterprise-frontier-safeguards
+  - sources/anthropic-news/2026-10-14-2026-us-midterms
 ---
 
 # サイバー・安全策と Cyber Verification Program
@@ -42,9 +43,11 @@ Claude 5.5 ファミリーには、サイバーと bio の安全策がある。�
 
 - 夏のサイバー評価インシデント（7月30日・9月9日報告）に続き、評価・社内利用での意図しない行動（injection によるコマンド実行など）が報告され、Anthropic は全社内評価でライブのインターネット接続を止め、web fetch tool のガードレールを強化した。詳細は [[concepts/unintended-model-actions]]（[[sources/research/2026-10-09-investigating-unintended-model-actions]]）。
 - 企業向けには、データを顧客のクラウドに置いたまま誤用を検知する Enterprise Frontier Safeguards（秋に段階展開）がある。Fable 5 から30日のデータ保持を導入した背景として、複数セッション・アカウントにまたがる誤用の検知を挙げている。詳細は [[concepts/enterprise-frontier-safeguards]]（[[sources/anthropic-news/2026-09-01-enterprise-frontier-safeguards]]）。
+- 選挙の誤用対策（Claude.ai 中心、Claude Code 固有の記述なし）: 多段階の誤用（偽 SNS アカウント、偽ニュースサイト、金銭目的の選挙詐欺）向けの新しい classifier、外国の国家主体の検知、選挙インフラ・陣営向けのサイバー防御を追加。ISD と McCain Institute の試験で、分割された依頼による組織的キャンペーンの見逃しが課題と判明した。偽ニュースサイト運営者などのアカウントを停止（[[sources/anthropic-news/2026-10-14-2026-us-midterms]]）。
 
 ## 変更履歴
 
+- 2026-10-14 — 米中間選挙に向けた安全策の更新を公開（取り込みは 2026-10-16）（[[sources/anthropic-news/2026-10-14-2026-us-midterms]]）
 - 2026-09-01 — EFS を発表（取り込みは 2026-10-11）（[[sources/anthropic-news/2026-09-01-enterprise-frontier-safeguards]]）
 - 2026-10-09 — 意図しないモデル行動の報告を公開（サイバー評価の夏のインシデントより軽いとの位置づけ）（[[sources/research/2026-10-09-investigating-unintended-model-actions]]）
 - 2026-10-08 — OSS Scanner の詳細（無償、opt-in、モデル生成の報告）を研究記事で公開（[[sources/research/2026-10-08-launching-opt-in-vuln-finding-service-for-open-source]]）

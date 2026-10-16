@@ -1,8 +1,9 @@
 ---
 type: concept
 title: コンテキストエンジニアリング（Claude 5 世代）
-updated: 2026-10-11
+updated: 2026-10-16
 sources:
+  - sources/claude-blog/2026-08-14-maximizing-the-value-of-your-claude-code-sessions
   - sources/claude-dev/2026-07-24-new-rules-of-context-engineering-claude-5
 ---
 
@@ -20,9 +21,11 @@ sources:
 - 記憶は `#` による手動保存から、Claude の自動メモリへ（同）。
 - 参照物は単純な markdown より、HTML artifacts、テストスイート、移植元コード、rubric など豊かなものを @ メンションで渡す（同）。
 - `/doctor`（`claude doctor`）に上記の指針が入っており、skills と CLAUDE.md の整理に使える（同）。
+- （費用の観点、公開時点 2026-08-14）会話に入ったものは以後の全ターンで再送されるため、コンテキストは短く関連のあるものに保つ。新しいタスクは `/clear`、区切りは `/compact`（指示付き、または CLAUDE.md の「Compact instructions」）。CLAUDE.md は具体的な指示に絞り、ワークフロー固有のものは skills に移す。`/context` で読み込み内容を確認し、不要な MCP サーバーは `/mcp` で切る。ファイルは @ メンションで添付すると Read が省けるが、同じファイルを再度 @ すると2つ目のコピーが付くことがある。コマンド出力は30,000文字超でファイル化される（`BASH_MAX_OUTPUT_LENGTH`）。1M モデルでは `/autocompact 200k` で自動コンパクトの安全網を戻せる（v2.1.221 以降）（[[sources/claude-blog/2026-08-14-maximizing-the-value-of-your-claude-code-sessions]]）
 
 ## 変更履歴
 
+- 2026-08-14 — （公開時点）トークン費用の観点からコンテキストを管理する記事が公開された（[[sources/claude-blog/2026-08-14-maximizing-the-value-of-your-claude-code-sessions]]）
 - 2026-07-24 — 記事公開。Then/Now 形式で旧来の定石を見直し（[[sources/claude-dev/2026-07-24-new-rules-of-context-engineering-claude-5]]）
 
 ## 未解決・矛盾

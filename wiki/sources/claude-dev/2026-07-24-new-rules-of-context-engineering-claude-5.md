@@ -6,8 +6,8 @@ url: https://claude.dev/blog/the-new-rules-of-context-engineering-for-claude-5-g
 published: 2026-07-24
 retrieved: 2026-10-11
 version:
-tier: ok
-review: pending
+tier: primary
+review: ok
 recheck: none
 fingerprint: 567cbcc5bc9481a658ad3cc27a67f02b9ce732b6ca53aa5f06f7b241cbd14bf4
 archive_url:

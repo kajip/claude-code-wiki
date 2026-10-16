@@ -1,11 +1,12 @@
 ---
 type: concept
 title: サンドボックスと隔離（封じ込め）
-updated: 2026-10-10
+updated: 2026-10-16
 sources:
   - sources/engineering/2026-05-25-how-we-contain-claude
   - sources/engineering/2026-04-08-scaling-managed-agents
   - sources/docs/2026-10-10-sandboxing
+  - sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301
 ---
 
 # サンドボックスと隔離（封じ込め）
@@ -38,8 +39,13 @@ docs の Bash サンドボックスのページを仕様の正として更新し
 - 設計上の教訓: 許可ドメインは「宛先フィルタ」ではなく「機能の付与」と考える。信頼ダイアログ前にプロジェクト設定を実行しない。symlink 解決をパス検証より先に行う。自前の部品が最も弱い（[[sources/engineering/2026-05-25-how-we-contain-claude]]）。docs も広い許可ドメインの流出リスクを記し、保護パスに symlink が現れたら指す先も書き込み拒否にする（[[sources/docs/2026-10-10-sandboxing]]）
 - 他の実装例: Managed Agents は sandbox を session、harness と分離し、認証情報を sandbox から届かない場所に置く（[[sources/engineering/2026-04-08-scaling-managed-agents]]）。→ [[concepts/managed-agents]]
 
+### 最近の CHANGELOG の修正（2.1.299〜2.1.300）
+- サンドボックス内のシェルコマンドが、`--plugin-dir` のフォルダ（Claude Code がサンドボックス外で再読み込み・実行するコード）に書き込めた問題を修正（2.1.299）。macOS で denied path が symlink 経由のとき、実体の場所から読み書きできた問題を修正（2.1.299）。`denyRead`／`allowRead` のグロブで、フォルダ名に波括弧・括弧・バックスラッシュがあると設定の確認とサンドボックスで解釈が違った問題を修正（2.1.299）。`allowRead`／`allowWrite` の起点ディレクトリが symlink に置き換わったとき再確認するようにした（2.1.299）（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）。
+- `/sandbox` は、プロジェクトフォルダが書き込み不可で設定を保存できなかったとき、成功と報告せず「何も変わらなかった」と理由を示す（2.1.299）。モード表示は "Sandbox commands"（2.1.300）。`claude remote-control` の `--sandbox`／`--no-sandbox` は効果が無かったため削除され、指定するとエラーになる。代わりに設定の `sandbox.enabled`（2.1.300）（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）。
+
 ## 変更履歴
 
+- 2026-10-14〜10-15 — 2.1.299〜2.1.300 のサンドボックス関連の修正を追記（上記）（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）
 - 2026-10-10 — docs のサンドボックスページを取り込み、`## 現状` を docs 基準に更新。記事の記述（Seatbelt / bubblewrap、書き込み範囲、ネットワーク既定拒否、OSS）は docs と一致し、「公開時点」のまま残した。docs で新たに分かったこと: 既定オフ、auto-allow と regular の2モード、サンドボックス外への再実行と strict sandbox mode、認証情報の deny / mask、managed 設定による admin-required。段階表記は無い（[[sources/docs/2026-10-10-sandboxing]]）
 - 2026-05-25 — 3製品の封じ込め設計と、見落とした4件のリスクを Engineering 記事で公開。Cowork は full-VM mode から、agent loop を VM 外に置く host mode へ移行済み（[[sources/engineering/2026-05-25-how-we-contain-claude]]）
 

@@ -160,3 +160,28 @@
 - 台帳に無い記事を Check で検出し、取り込んだ。初回 Ingest（直近約1か月）の範囲外だが、人間の了承を得て残した。
 - claude-dev/2026-07-24-new-rules-of-context-engineering-claude-5: concepts/context-engineering を新規作成。concepts/claude-opus-5-5 にリンクを追加。記事の対象は Opus 5 と Fable 5 で、5.5 世代への適用は推測として書いた。
 - anthropic-news/2026-09-01-enterprise-frontier-safeguards: concepts/enterprise-frontier-safeguards を新規作成。concepts/cyber-safeguards に追記。公開日はページ表示の Sep 1, 2026（メタデータは JST で 09-02 08:31）。docs 側の EFS 設定は未確認。
+
+## [2026-10-16] check | 毎日チェック 1〜6
+- gh-releases、gh-changelog、npm: 新規 2.1.299〜2.1.301。latest／next 2.1.301、stable 2.1.292。2.1.297 と 2.1.298 は CHANGELOG・npm ともに無い。
+- claude-blog: 新規 2026-10-15「Code Review is now generally available」。?page=2 に初回範囲より前の Claude Code 関連記事 8件（2026-08-06〜08-24）を検出。
+- anthropic-news: 新規 3件（10-15 independent evaluators、10-14 US midterms、10-14 Singapore office）。
+- claude-dev: 新規 2026-10-15「How the Claude Code team does code review」。
+- 取得の失敗、ページ内の指示文: なし。
+## [2026-10-16] skip | Anthropic opens Singapore office and signs MOU with the Government of Singapore | 拠点開設と MOU
+## [2026-10-16] skip | The AI-native SDLC playbook | 初回範囲より前の手引き。人間の判断で見送り
+## [2026-10-16] skip | The Claude Code guide for startups | 初回範囲より前の手引き。人間の判断で見送り
+## [2026-10-16] skip | How an Anthropic field marketer uses Claude Code to send weekly personalized updates to every sales rep | 初回範囲より前の社内事例。人間の判断で見送り
+
+## [2026-10-16] ingest | 2.1.299〜2.1.301、Code Review、anthropic-news 2件
+- gh-changelog/2026-10-16-v2-1-299-to-2-1-301: mods、mcp、prompt-caching、hooks、sandboxing、claude-tag、claude-apps-gateway を更新。非互換の可能性: MCP の allow ルールが名前で指したサーバーだけに効くようになった（2.1.299）。`last_seen_version` を 2.1.301 に更新。
+- claude-blog/2026-10-15-code-review-is-now-generally-available、docs/2026-10-16-code-review、claude-dev/2026-10-15-how-the-claude-code-team-does-code-review: concepts/code-review を新規作成。研究プレビュー期の仕様は一次資料が無く未確認。docs は概要ページのみ取得。
+- anthropic-news/2026-10-15-an-update-on-independent-evaluators: 概念ページは作らず（Claude Code と無関係で単一の資料）。
+- anthropic-news/2026-10-14-2026-us-midterms: concepts/cyber-safeguards に選挙の誤用対策を追記。
+## [2026-10-16] ingest | claude-blog の過去分5件（2026-08-06〜08-14）
+- 人間の了承を得て、初回範囲より前の記事のうち仕様に関わる5件を取り込んだ。
+- 2026-08-07 auto mode 既定化、2026-08-07 auto mode の本番運用: concepts/auto-mode を更新。既定化の範囲は docs（v2.1.283 以降は全プラン）を現状とし、記事の値は公開時点として残した。分類器の課金停止が今も有効かは未確認。
+- 2026-08-06 self-hosted environments: concepts/cloud-sessions を更新。docs の self-hosted ページとは未照合。
+- 2026-08-11 Compliance API: concepts/compliance-api を新規作成（platform-docs のリリースノートと統合）。M365 アドインの GA 時期の食い違いを未解決に残した。
+- 2026-08-14 セッションの費用: prompt-caching、effort、fast-mode、subagents、context-engineering を更新。「`/effort` でキャッシュが壊れる」は docs を現状として解決済みで閉じた。
+## [2026-10-16] schema | レビュー待ちの一覧ページを追加
+- 人間の了承を得て `review-queue.base` を追加した。Obsidian の Bases で、`sources/` のうち review が ok でないページを取得日の新しい順に表示する。index の「状態」からリンクした。

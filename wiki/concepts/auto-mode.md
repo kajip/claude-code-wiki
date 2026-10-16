@@ -1,8 +1,10 @@
 ---
 type: concept
 title: auto mode（権限の自動判定）
-updated: 2026-10-10
+updated: 2026-10-16
 sources:
+  - sources/claude-blog/2026-08-07-running-auto-mode-in-production
+  - sources/claude-blog/2026-08-07-auto-mode-default-in-claude-code
   - sources/engineering/2026-03-25-claude-code-auto-mode
   - sources/engineering/2026-05-25-how-we-contain-claude
   - sources/claude-dev/2026-10-06-claude-code-in-the-cloud
@@ -53,6 +55,20 @@ Claude Code の承認を、人ではなくモデルベースの分類器に任�
 - 既定ルールの全文はページに無く `claude auto-mode defaults` で確認する前提。ページ内で名前が出るのは soft_deny の `Git Destructive`、allow の `Test Artifacts`、拒否理由の `[Data Exfiltration]`、`[Production Deploy]`。`$defaults` なしで失う例は force push、`curl | bash`、本番デプロイ、auto-mode bypass（soft_deny）と組み込みのデータ流出ルール（hard_deny）（同）。
 - 環境の文脈は context / trust / sensitivity の3種のスロット（Organization、Source control、Trusted cloud buckets、Host containment 等）。`/auto-mode-setup` が下書きを生成（Pro、Max、Team、v2.1.228 以降、cloud session では不可）。`/permissions` の Auto mode タブは v2.1.246 以降（同）。
 
+**Claude ブログ（2026-08-07）の記述（公開時点・Anthropic 側の主張）**
+
+- 既定化と課金: 2026-08-14 から Pro、Max、Team の新規セッションが auto mode で開始。既定を固定していれば変更なし。分類器の上乗せトークンは Pro、Max、Team では課金しない。Enterprise、API、Claude Platform on AWS、Bedrock、Agent Platform、Foundry は当時 opt-in で、翌月中に既定化と課金停止を予定（[[sources/claude-blog/2026-08-07-auto-mode-default-in-claude-code]]）。
+- 安全性の根拠: 1,053人の有償テスターの実験で、危険なコマンドを人間は 13.6%、auto mode は 89% 阻止。実セッション（2026-05〜06）で、本番級の意図しない有害行為を含む割合は手動 6.3%、auto mode 2.4%。Apollo Research の合成攻撃で見逃し率 12%→7%（実トラフィックの値ではないと明記）。Trajectory Labs の評価（2026-07-17 時点、Claude Code v2.1.205）では、auto mode の Fable 5、Opus 5、Sonnet 5 に対する 720回の攻撃は全て失敗（同）。
+- 動機の数値: 権限プロンプトの 97% が承認されている（2026-05-25 の engineering 記事では約 93%）（同）。
+- 追加機能として、hard deny、データ取り扱いルール、push／PR 宛先の public／private／trusted 確認、`git reset --hard` 前の git status 参照、API 側の injection probe。docs の記述（hard_deny、サーバー側 probe、`classifierContext` 等）と方向は一致するが、記事の説明は概括的（同）。
+- 記事も、リスクは排除されず、本番インフラの重大な変更は自分で確認するよう推奨している（同）。
+
+**Claude ブログ「Running auto mode in production」（2026-08-07、顧客事例・公開時点）**
+
+- 同日の既定化の記事の事例編。Anthropic 側は、社内評価で分類器が手動クリックより多くの危険操作を止め、第三者のレッドチームでも性能が保たれたと主張。中断が減り、Claude Code 全体で以前の既定より「9倍長く」中断なしで動く、とする（算出方法の記載なし）（[[sources/claude-blog/2026-08-07-running-auto-mode-in-production]]）。
+- 運用パターン: Nuro は夜間の長時間エージェント（評価指標を改善し続ける研究、22時〜5時で PR 3件の例）。Gusto は拒否がセッションの約 10%、本番寄りの作業は accept edits に切り替え。Garner Health は 550人に展開し、Slack やメール送信など他者への連絡は承認しない設定にした（同）。
+- 共通点: 再帰削除などは deny ルールで先に止める、他チームや本番に関わる作業は手動に戻す、MCP プロキシやテレメトリと併用する（同）。分類器の注入プロンプトを緩く／厳しく調整できるとの記述はあるが、設定名は無い。docs の `autoMode.*` が対応すると思われる（推測）。
+
 **engineering 記事に基づく設計**
 
 - 2層: 入力側の prompt-injection probe と、出力側の transcript classifier（[[sources/engineering/2026-03-25-claude-code-auto-mode]]）。
@@ -68,6 +84,8 @@ Claude Code の承認を、人ではなくモデルベースの分類器に任�
 
 ## 変更履歴
 
+- 2026-10-16 — Claude ブログ「Running auto mode in production」（2026-08-07）を取り込み。Nuro、Gusto、Garner Health の運用事例と「9倍長く中断なしで動く」との主張を追記。仕様や提供範囲の新情報は無く、現状の docs 記述は変更なし（[[sources/claude-blog/2026-08-07-running-auto-mode-in-production]]）
+- 2026-10-16 — Claude ブログ（2026-08-07）を取り込み。公開時点の記述: 2026-08-14 から Pro、Max、Team の新規セッションを auto mode 既定にし、分類器のオーバーヘッドは課金しない（2026-08-07 から）。Enterprise、API、各クラウドは当時 opt-in で「翌月中」に既定化予定。現行は docs が、v2.1.283 以降は全プラン・全プロバイダで組み込みの開始モードとする（上記の現状を正とする）。記事は安全性の根拠として 1,053人の実験（人間 13.6% vs auto mode 89% で危険コマンドを阻止）、Apollo Research による見逃し率 12%→7%、Trajectory Labs の injection 評価を提示（[[sources/claude-blog/2026-08-07-auto-mode-default-in-claude-code]]）
 - 2026-10-10 — docs の Permission modes と sandboxing を取り込み。分類器の既定モデルが Sonnet 5（公開時点は Sonnet 4.6）、対応プラン・モデル、既定ブロックの一覧、critical paths、サンドボックスとの連携を docs の記載で更新。headless の挙動は docs では「実行は止まらない」（[[sources/docs/2026-10-10-permission-modes]]、[[sources/docs/2026-10-10-sandboxing]]）
 - 2026-10-10 — docs の設定ページを取り込み。提供範囲、設定キー、CLI、優先順位、既定の挙動を docs の記載で更新（[[sources/docs/2026-10-10-auto-mode-config]]）
 - 2026-10-07 — 2.1.292: auto mode が、ネットワーク（UNC）パスからのファイル読み込みで許可の確認を飛ばしていた問題を修正（Security）。同期間のバッチで、2.1.281 で入れた auto mode の拒否メッセージの変更を取り消し（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）
@@ -81,5 +99,7 @@ Claude Code の承認を、人ではなくモデルベースの分類器に任�
 - 解決済み: 「分類器のモデル」。docs では既定で Sonnet 5（セッションが Sonnet 4.6 などの場合の代替あり）。公開時点（2026-03）の Sonnet 4.6 は過去の値（[[sources/engineering/2026-03-25-claude-code-auto-mode]]、[[sources/docs/2026-10-10-permission-modes]]）。
 - 解決済み: 「対応プランと対応モデル」。全プラン、モデルはプロバイダ別（現状の節を参照）（[[sources/docs/2026-10-10-permission-modes]]）。
 - 解決済み: headless（`claude -p`）での連続拒否時の挙動。engineering 記事（公開時点）は「終了する」、docs は「そのアクションは実行されず、Claude は作業を続け、実行は止まらない」。docs を正とする（[[sources/engineering/2026-03-25-claude-code-auto-mode]]、[[sources/docs/2026-10-10-permission-modes]]）。
+- 解決済み: 既定化の範囲。ブログ（2026-08-07、公開時点）は Pro、Max、Team のみ既定化し他は opt-in としていたが、docs は全プラン・全プロバイダで v2.1.283 以降の組み込みの開始モードとする。docs を正とする（[[sources/claude-blog/2026-08-07-auto-mode-default-in-claude-code]]、[[sources/docs/2026-10-10-permission-modes]]）。
+- 未解決: ブログの課金停止（分類器オーバーヘッド）が現在も有効か。docs には記載が無く、pricing は未確認。
 - 未解決: 性能数値（FPR 0.4%、overeager の FNR 17%、合成 exfil の FNR 5.7%）が、分類器が Sonnet 5 になった現行でも当てはまるか。docs に性能数値の記載は無い。公開時点の値として残す（同）。
 - 未解決: auto mode の段階（プレビュー等）。docs の2ページに記載が無く、一般提供かどうかは明記されていない。「全ユーザー・全プラン」「組み込みの開始モード」とのみ書かれている（同、[[sources/docs/2026-10-10-auto-mode-config]]）。

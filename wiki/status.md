@@ -4,14 +4,14 @@
 
 ## Claude Code のバージョン
 
-- 取得日: 2026-10-11
+- 取得日: 2026-10-16
 - 出典: npm registry（https://registry.npmjs.org/@anthropic-ai/claude-code/latest ほか、`npm view` の `dist-tags` と `time`）
 
 | タグ | バージョン | 公開日時（JST） |
 | --- | --- | --- |
-| latest | 2.1.296 | 2026-10-10 01:58 |
-| next | 2.1.296 | 2026-10-10 01:58 |
-| stable | 2.1.287 | 2026-10-02 01:59 |
+| latest | 2.1.301 | 2026-10-15 23:34 |
+| next | 2.1.301 | 2026-10-15 23:34 |
+| stable | 2.1.292 | 2026-10-07 02:10 |
 
-- CHANGELOG.md の先頭は 2.1.296（一致。取得日 2026-10-11）。
-- GitHub Releases の最新は v2.1.296（https://github.com/anthropics/claude-code/releases 、取得日 2026-10-11）。
+- CHANGELOG.md の先頭は 2.1.301（一致。取得日 2026-10-16）。2.1.297 と 2.1.298 は CHANGELOG にも npm にも無い。
+- GitHub Releases の最新は v2.1.301（https://github.com/anthropics/claude-code/releases 、取得日 2026-10-16）。
