@@ -1,11 +1,12 @@
 ---
 type: concept
 title: MCP（Model Context Protocol）
-updated: 2026-10-16
+updated: 2026-10-18
 sources:
   - sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296
   - sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301
   - sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5
+  - sources/gh-changelog/2026-10-18-v2-1-302
 ---
 
 # MCP（Model Context Protocol）
@@ -29,8 +30,11 @@ Claude Code が外部のツールやデータにつなぐためのプロトコ�
 - WebSocket（`ws`）のサーバーで 16 MiB を超えるメッセージを受け取ると、接続を閉じる（2.1.295）（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）。
 - キャッシュを保つため、MCP をセッションの途中からつながないこと、使わないサーバーは切ることが推奨されている（[[sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5]]）。
 
+- 2.1.302（2026-10-17）: プロトコル 2026-07-28 をネゴシエーションするが `resultType`、`ttlMs`、`cacheScope` を返さないサーバーで、ツールが表示されない／全呼び出しが失敗する問題を修正（[[sources/gh-changelog/2026-10-18-v2-1-302]]）。
+
 ## 変更履歴
 
+- 2026-10-17 — 2.1.302: 2026-07-28 で `resultType`／`ttlMs`／`cacheScope` を省くサーバーの問題を修正（[[sources/gh-changelog/2026-10-18-v2-1-302]]）
 - 2026-10-14 — 2.1.299: allow ルールを名前指定のサーバーだけに限定（非互換の可能性）。agent の `tools:` も同様。cloud／Remote Control のコネクタの 2026-07-28 既定をフラグ未取得の環境にも拡大。第一者サーバーの説明の 4,096 字切り詰めを廃止（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）
 - 2026-10-10 — 2.1.296: 最初に送るツール説明の上限を 2,048 字から 4,096 字に変更（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）
 - 2026-10-09 — 2.1.295: claude.ai のコネクタも 2026-07-28 を既定に。tool search 経由の説明の上限を 2,048 字から 16,384 字に変更（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）

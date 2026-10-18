@@ -1,12 +1,13 @@
 ---
 type: concept
 title: routines（ルーティン）
-updated: 2026-10-17
+updated: 2026-10-18
 sources:
   - sources/claude-dev/2026-10-06-claude-code-in-the-cloud
   - sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296
   - sources/docs/2026-10-16-routines-and-cloud-sessions
   - sources/docs/2026-10-10-permission-modes
+  - sources/gh-changelog/2026-10-18-v2-1-302
 ---
 
 # routines
@@ -35,8 +36,15 @@ sources:
 - GitHub 接続が切れると最大72時間はスキップされ、それ以降は routine がオフになる。
 - スケジュール実行と Run now の実行は、自分だけが見られる新しい artifact を承認なしで公開する（2.1.292）。telemetry を無効にした環境でも同じ動きになった（2.1.295）（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）。docs にも同じ趣旨の節がある。API／GitHub トリガーの実行では常に確認する。
 
+**2.1.302 の CHANGELOG（2026-10-17）**
+
+- routine のページに、直近の実行が始まらなかった理由のバナーを追加（例: 組織の同時 cloud session の上限）（[[sources/gh-changelog/2026-10-18-v2-1-302]]）。
+- 実行状態の表示を修正: cloud session が異常停止した実行は Completed でなく failed、開始前にアーカイブされた実行は Cancelled でなく failed（同）。
+- 途中で失敗した scheduled routine が 1 時間以上後に最初から再実行され、同じレポートの 2 回投稿などが起きうる問題を修正（同）。
+
 ## 変更履歴
 
+- 2026-10-17 — 2.1.302: 実行が始まらなかった理由のバナーを追加。失敗した実行の状態表示と、失敗後の再実行の問題を修正（[[sources/gh-changelog/2026-10-18-v2-1-302]]）
 - 2026-10-17 — 「承認のために止まらない」に、明示的な ask ルールは例外であることを追記（[[sources/docs/2026-10-10-permission-modes]]）
 - 2026-10-16 — docs を取り込み。利用枠の扱い、1時間あたりの上限の数値、`claude/` 以外への push が可能なこと、ネットワークの既定を追加（[[sources/docs/2026-10-16-routines-and-cloud-sessions]]）
 - 2026-10-09 — 2.1.295: telemetry を無効にした環境でも artifact を承認なしで公開するよう変更（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）

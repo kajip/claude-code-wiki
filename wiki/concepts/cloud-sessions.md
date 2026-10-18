@@ -1,7 +1,7 @@
 ---
 type: concept
 title: cloud sessions（Claude Code in the cloud）
-updated: 2026-10-16
+updated: 2026-10-18
 sources:
   - sources/docs/2026-10-16-routines-and-cloud-sessions
   - sources/claude-dev/2026-10-06-claude-code-in-the-cloud
@@ -9,6 +9,7 @@ sources:
   - sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296
   - sources/engineering/2026-05-25-how-we-contain-claude
   - sources/claude-blog/2026-08-06-run-claude-code-sessions-on-your-own-compute
+  - sources/gh-changelog/2026-10-18-v2-1-302
 ---
 
 # cloud sessions
@@ -36,8 +37,15 @@ sources:
 - Projects のスレッドは cloud session として動く（[[sources/claude-blog/2026-09-17-projects-redesigned]]）。→ [[concepts/projects]]
 - 関連（隔離の考え方）: ローカルでは OS サンドボックス、Cowork ではローカル VM で封じ込める。cloud sessions に対する記事の記述は無い。→ [[concepts/sandboxing]]（[[sources/engineering/2026-05-25-how-we-contain-claude]]）
 
+**2.1.302 の CHANGELOG（2026-10-17）**
+
+- 費用と使用量が、新しいプロセスで再開すると 0 から数え直しになる問題を修正。「Rewind to here」が最新のメッセージ以外で失敗する問題を修正（self-hosted runner は v2.1.246 以降が必要）。PR 状態バー、リポジトリ改名・移動後の diff、別デバイスのメッセージ表示の修正。起動失敗時のエラーは "Connection lost"／"Server error" と表示（[[sources/gh-changelog/2026-10-18-v2-1-302]]）。
+- self-hosted runner: reftable 形式の checkout を再利用するセッションの git fetch 失敗を修正（同）。
+- Remote Control: オフライン後にサブエージェントのペインが回り続ける問題を修正（同）。
+
 ## 変更履歴
 
+- 2026-10-17 — 2.1.302: cloud session の修正（費用の数え直し、Rewind、diff、エラー表示）と self-hosted runner の reftable 対応の修正（[[sources/gh-changelog/2026-10-18-v2-1-302]]）
 - 2026-10-16 — docs を取り込み。記事（2026-10-06 公開時点）の提供範囲・VM の値と食い違いは無し。Enterprise は premium seat／Chat + Claude Code seat が条件、という補足が加わった（[[sources/docs/2026-10-16-routines-and-cloud-sessions]]）
 - 2026-08-06 — self-hosted environments が public beta（Team／Enterprise）として発表された（[[sources/claude-blog/2026-08-06-run-claude-code-sessions-on-your-own-compute]]）。2026-10-16 に取り込み
 - 2026-10-06 — 2.1.290: 組み込みの `gh api` で github.com 以外のホストを拒否するよう変更（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）

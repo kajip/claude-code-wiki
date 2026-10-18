@@ -1,6 +1,6 @@
 # Index
 
-最終更新: 2026-10-16（要約 58・概念 29）
+最終更新: 2026-10-18（要約 59・概念 29）
 
 ## 状態
 
@@ -12,6 +12,7 @@
 ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行要約（公開日）`
 
 ### gh-changelog
+- [[sources/gh-changelog/2026-10-18-v2-1-302]] — 2.1.302。`CLAUDE_CODE_AUTO_MODE_MODEL`、サードパーティのプロバイダの `claude -p` は条件付きで default 開始、fork subagent の既定化、デスクトップアプリと VS Code のサブエージェントは常にバックグラウンド、Claude Design 単体版は 2026-12-14 に終了（2026-10-17）
 - [[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]] — 2.1.299〜2.1.301。MCP の allow ルールの限定（非互換の可能性）、アイドル時のコンパクション、mods の `prompt.change` ほか API 追加、サンドボックス関連の修正（2026-10-15）
 - [[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]] — 2.1.290〜2.1.296。mods の API、Claude apps gateway、MCP 2026-07-28 の既定化、Haiku 5.5 の追加、セキュリティ修正（2026-10-10）
 
@@ -92,16 +93,16 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 形式: `- [[concepts/<slug>]] — 1行要約（出典数）`
 
 - [[concepts/agent-evals]] — エージェントの評価（evals）（出典 5）
-- [[concepts/auto-mode]] — auto mode（権限の自動判定）（出典 10）
+- [[concepts/auto-mode]] — auto mode（権限の自動判定）（出典 11）
 - [[concepts/claude-api-skill]] — claude-api スキル（出典 5）
 - [[concepts/claude-apps-gateway]] — Claude apps gateway（出典 2）
 - [[concepts/claude-code-quality-incidents]] — Claude Code の品質低下の報告と原因（2026年3〜4月）（出典 1）
 - [[concepts/claude-haiku-5-5]] — Claude Haiku 5.5（出典 5）
 - [[concepts/claude-opus-5-5]] — Claude Opus 5.5（出典 9）
 - [[concepts/claude-sonnet-5-5]] — Claude Sonnet 5.5（出典 7）
-- [[concepts/claude-tag]] — Claude Tag（Claude in Slack）（出典 4）
-- [[concepts/cloud-sessions]] — cloud sessions（Claude Code in the cloud）（出典 6）
-- [[concepts/code-review]] — Code Review（GitHub App による PR の自動レビュー）（出典 3）
+- [[concepts/claude-tag]] — Claude Tag（Claude in Slack）（出典 5）
+- [[concepts/cloud-sessions]] — cloud sessions（Claude Code in the cloud）（出典 7）
+- [[concepts/code-review]] — Code Review（GitHub App による PR の自動レビュー）（出典 4）
 - [[concepts/compliance-api]] — Compliance API の対象範囲と GA／ベータの状況（出典 2）
 - [[concepts/context-engineering]] — コンテキストエンジニアリング（Claude 5 世代）（出典 2）
 - [[concepts/cyber-safeguards]] — サイバー・安全策と Cyber Verification Program（出典 14）
@@ -111,14 +112,14 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 - [[concepts/hooks]] — hooks（設定のフック）（出典 5）
 - [[concepts/long-running-agent-harness]] — 長時間動くエージェントのハーネス（ループ、ロックによる並列化、テストの設計）（出典 3）
 - [[concepts/managed-agents]] — Claude Managed Agents（出典 4）
-- [[concepts/mcp]] — MCP（Model Context Protocol）（出典 3）
+- [[concepts/mcp]] — MCP（Model Context Protocol）（出典 4）
 - [[concepts/mods]] — mods（Claude Code mods）（出典 5）
 - [[concepts/oss-scanner]] — OSS Scanner（OSS 向けの無償・opt-in の脆弱性発見サービス）（出典 4）
 - [[concepts/projects]] — Projects（作り直された Projects）（出典 3）
 - [[concepts/prompt-caching]] — プロンプトキャッシュとセッションの費用（出典 12）
-- [[concepts/routines]] — routines（ルーティン）（出典 4）
+- [[concepts/routines]] — routines（ルーティン）（出典 5）
 - [[concepts/sandboxing]] — サンドボックスと隔離（封じ込め）の設計と教訓（出典 4）
-- [[concepts/subagents]] — サブエージェント（出典 8）
+- [[concepts/subagents]] — サブエージェント（出典 9）
 - [[concepts/unintended-model-actions]] — モデルの意図しない行動と、運用上の安全策（出典 1）
 
 ## 分析（analysis）

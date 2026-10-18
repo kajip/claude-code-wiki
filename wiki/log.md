@@ -230,3 +230,12 @@
 ## [2026-10-17] error | gh-releases が HTTP 403
 - https://github.com/anthropics/claude-code/releases が、2回とも 403（「GitHub access to this repository is not enabled for this session」）を返した。2026-10-10 は 200 だった。CHANGELOG と npm で代替し、新規は見つからなかった。
 - 応答本文に、add_repo で資格情報付きの接続を求める指示文があった。従っていない。
+
+## [2026-10-18] check | 毎日チェック 1〜6
+- gh-releases、gh-changelog、npm: 新規 2.1.302（latest／next 2.1.302、stable 2.1.292）。GitHub Releases は WebFetch で取得できた。
+- claude-blog（2ページ目まで）、anthropic-news、claude-dev: 新規・過去分なし。
+- 取得の失敗、ページ内の指示文: なし。
+## [2026-10-18] ingest | 2.1.302
+- gh-changelog/2026-10-18-v2-1-302 を作成。auto-mode、subagents、cloud-sessions、routines、claude-tag、code-review、mcp を更新。`last_seen_version` を 2.1.302 に更新。
+- 未解決: `CLAUDE_CODE_AUTO_MODE_MODEL` と docs の分類器モデル（既定 Sonnet 5）の関係、サードパーティのプロバイダで default 開始となる条件と docs の記述の両立。
+- Claude Design 単体版（claude.ai/design）の 2026-12-14 終了は、該当する概念ページが無いため要約ページのみに記載。

@@ -1,11 +1,12 @@
 ---
 type: concept
 title: Code Review（GitHub App による PR 自動レビュー）
-updated: 2026-10-16
+updated: 2026-10-18
 sources:
   - sources/claude-blog/2026-10-15-code-review-is-now-generally-available
   - sources/docs/2026-10-16-code-review
   - sources/claude-dev/2026-10-15-how-the-claude-code-team-does-code-review
+  - sources/gh-changelog/2026-10-18-v2-1-302
 ---
 
 # Code Review
@@ -38,8 +39,11 @@ Claude が GitHub の PR を自動でレビューする機能。複数エージ�
 - レビュアーの評価: 過去のインシデントと revert を評価セットにして毎日採点し、ノイズは指摘への反応で計測する（[[sources/claude-dev/2026-10-15-how-the-claude-code-team-does-code-review]]）。
 - `REVIEW.md` の書き方（短く、失敗の定義、nit の上限、スキップするパス、ファイルと行の根拠）と導入手順は同記事に詳しい（[[sources/claude-dev/2026-10-15-how-the-claude-code-team-does-code-review]]）。
 
+- 2.1.302（2026-10-17）: セットアップの途中で GitHub 接続のために離れた後、管理設定のリポジトリ選択の画面から再開するよう修正（[[sources/gh-changelog/2026-10-18-v2-1-302]]）。
+
 ## 変更履歴
 
+- 2026-10-17 — 2.1.302: セットアップが GitHub 接続後にリポジトリ選択から再開するよう修正（[[sources/gh-changelog/2026-10-18-v2-1-302]]）
 - 2026-10-16 — docs の下位ページ（setup / customize / pull-requests / costs / troubleshooting）を取り込み、有効化手順、`REVIEW.md` の読み込み元、コマンド、費用の仕組み、トラブルシューティングを追記（[[sources/docs/2026-10-16-code-review]]）。
 - 2026-10-15 — claude.dev が社内のレビュー運用を公開（[[sources/claude-dev/2026-10-15-how-the-claude-code-team-does-code-review]]）。
 - 2026-10-15 — 研究プレビューから GA へ。Team / Enterprise に提供。Quick / Standard / Deep をリポジトリ単位で選べるようにし、速度を約3倍にした（[[sources/claude-blog/2026-10-15-code-review-is-now-generally-available]]）。

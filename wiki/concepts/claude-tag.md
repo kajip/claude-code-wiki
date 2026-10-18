@@ -1,12 +1,13 @@
 ---
 type: concept
 title: Claude Tag（Claude in Slack）
-updated: 2026-10-16
+updated: 2026-10-18
 sources:
   - sources/claude-blog/2026-09-14-agentic-coding-is-straining-ci
   - sources/claude-dev/2026-09-23-how-we-made-claude-ai-faster
   - sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296
   - sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301
+  - sources/gh-changelog/2026-10-18-v2-1-302
 ---
 
 # Claude Tag（Claude in Slack）
@@ -28,8 +29,15 @@ Slack から Claude を動かす機能。Claude Code そのものではないが
 
 - 社内版の Claude Tag で長時間動かしたセッションに、CI のテスト選択サービスを監視させた例がある（[[sources/claude-blog/2026-09-14-agentic-coding-is-straining-ci]]）。
 
+**2.1.302 の CHANGELOG（2026-10-17）**
+
+- 管理設定で Claude のアクセスを 4 タブ（Bundles、Connectors、Skills and plugins、Channels）に整理。manager ロールが Slack での Claude Tag も許可する。同一ホストの MCP サーバーのカスタムコネクタは、サーバーごとに別コネクタとして表示。リポジトリ検索は接続済み GitHub アカウント最大 100、GitHub App のインストールの 5,000 件超の private リポジトリにも対応（[[sources/gh-changelog/2026-10-18-v2-1-302]]）。
+- Slack: HEIC／SVG／TIFF／BMP の添付がファイルとして Claude に届く。一時的な Slack 参照の停滞で DM を落とす問題は、先に再試行する。Enterprise Grid の DM は最後に Claude を開いた接続済みワークスペースで動く。チャンネルの月間利用上限の通知は organization owner と usage ページを案内（同）。
+- ほか表示の修正多数（"is thinking…" の残留、コードブロック内 URL、リンクの終端）。
+
 ## 変更履歴
 
+- 2026-10-17 — 2.1.302: 管理設定の 4 タブ化、コネクタのサーバー別表示、Slack の添付・DM・通知の修正（[[sources/gh-changelog/2026-10-18-v2-1-302]]）
 - 2026-10-14 — 2.1.300: Slack Connect 対応、Allow once／Deny カード、音声クリップ対応など（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）
 - 2026-10-10 — 2.1.296: メモリファイルの編集を追加（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）
 - 2026-10-08 — 2.1.293: チャンネルのルールの上限を 50 に変更（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）

@@ -1,7 +1,7 @@
 ---
 type: concept
 title: auto mode（権限の自動判定）
-updated: 2026-10-16
+updated: 2026-10-18
 sources:
   - sources/claude-blog/2026-08-07-running-auto-mode-in-production
   - sources/claude-blog/2026-08-07-auto-mode-default-in-claude-code
@@ -13,6 +13,7 @@ sources:
   - sources/docs/2026-10-10-auto-mode-config
   - sources/docs/2026-10-10-permission-modes
   - sources/docs/2026-10-10-sandboxing
+  - sources/gh-changelog/2026-10-18-v2-1-302
 ---
 
 # auto mode
@@ -82,8 +83,16 @@ Claude Code の承認を、人ではなくモデルベースの分類器に任�
 - Managed Agents の権限ポリシー `auto` も、サーバーが各呼び出しを判定する。Claude Code の auto mode との実装上の関係は出典に記述が無い（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。→ [[concepts/managed-agents]]
 - 位置づけ（2026-05-25の記事）: 確率的な防御で取りこぼしがあるため、サンドボックス内の多層防御の一層であり代替ではない。当時の説明では overeager の約 83% を実行前に捕捉（FPR 0.4%、FNR 約 17% は3月の値と整合）。環境側の防御が使えない場面でモデル層が補う役割（[[sources/engineering/2026-05-25-how-we-contain-claude]]）。→ [[concepts/sandboxing]]
 
+**2.1.302 の CHANGELOG（2026-10-17、公開時点の記述）**
+
+- `CLAUDE_CODE_AUTO_MODE_MODEL` で、クライアント側の auto mode 分類器のモデルを選べる。サーバー側 auto mode のモデルは変わらない。docs の分類器モデルの記述（既定 Sonnet 5、サーバー設定が優先）との関係は、docs 側に変数の記載があるか未確認（[[sources/gh-changelog/2026-10-18-v2-1-302]]）。
+- サーバー側分類器では、安全確認には長すぎる会話をコンパクションする。以前は確認対象のツール呼び出しがすべて拒否されていた（同）。
+- サードパーティのプロバイダで、権限モード未指定の `claude -p` と Agent SDK は、telemetry 無効または新規インストールのとき `default` で開始する。`--permission-mode auto` を指定すれば auto のまま（同）。docs の「全プロバイダで組み込みの開始モード」とは対象（対話か非対話か）が異なる可能性がある（推測）。
+- OpenTelemetry の `tool_decision` イベントに、auto mode 分類器のブロックの `classifier_category` が付かない問題を修正（同）。
+
 ## 変更履歴
 
+- 2026-10-17 — 2.1.302: `CLAUDE_CODE_AUTO_MODE_MODEL` を追加。サーバー側分類器で長い会話はコンパクションする。サードパーティのプロバイダの `claude -p`／Agent SDK は条件付きで `default` 開始に（[[sources/gh-changelog/2026-10-18-v2-1-302]]）
 - 2026-10-16 — Claude ブログ「Running auto mode in production」（2026-08-07）を取り込み。Nuro、Gusto、Garner Health の運用事例と「9倍長く中断なしで動く」との主張を追記。仕様や提供範囲の新情報は無く、現状の docs 記述は変更なし（[[sources/claude-blog/2026-08-07-running-auto-mode-in-production]]）
 - 2026-10-16 — Claude ブログ（2026-08-07）を取り込み。公開時点の記述: 2026-08-14 から Pro、Max、Team の新規セッションを auto mode 既定にし、分類器のオーバーヘッドは課金しない（2026-08-07 から）。Enterprise、API、各クラウドは当時 opt-in で「翌月中」に既定化予定。現行は docs が、v2.1.283 以降は全プラン・全プロバイダで組み込みの開始モードとする（上記の現状を正とする）。記事は安全性の根拠として 1,053人の実験（人間 13.6% vs auto mode 89% で危険コマンドを阻止）、Apollo Research による見逃し率 12%→7%、Trajectory Labs の injection 評価を提示（[[sources/claude-blog/2026-08-07-auto-mode-default-in-claude-code]]）
 - 2026-10-10 — docs の Permission modes と sandboxing を取り込み。分類器の既定モデルが Sonnet 5（公開時点は Sonnet 4.6）、対応プラン・モデル、既定ブロックの一覧、critical paths、サンドボックスとの連携を docs の記載で更新。headless の挙動は docs では「実行は止まらない」（[[sources/docs/2026-10-10-permission-modes]]、[[sources/docs/2026-10-10-sandboxing]]）
@@ -103,3 +112,5 @@ Claude Code の承認を、人ではなくモデルベースの分類器に任�
 - 未解決: ブログの課金停止（分類器オーバーヘッド）が現在も有効か。docs には記載が無く、pricing は未確認。
 - 未解決: 性能数値（FPR 0.4%、overeager の FNR 17%、合成 exfil の FNR 5.7%）が、分類器が Sonnet 5 になった現行でも当てはまるか。docs に性能数値の記載は無い。公開時点の値として残す（同）。
 - 未解決: auto mode の段階（プレビュー等）。docs の2ページに記載が無く、一般提供かどうかは明記されていない。「全ユーザー・全プラン」「組み込みの開始モード」とのみ書かれている（同、[[sources/docs/2026-10-10-auto-mode-config]]）。
+- 未解決: `CLAUDE_CODE_AUTO_MODE_MODEL` と、docs の分類器モデルの記述（既定 Sonnet 5、`ANTHROPIC_DEFAULT_OPUS_MODEL` 等）の関係。docs（2026-10-10 取得）に当該の環境変数の記載は無い。docs を正とし、再取得で確認する（[[sources/gh-changelog/2026-10-18-v2-1-302]]、[[sources/docs/2026-10-10-permission-modes]]）。
+- 未解決: サードパーティのプロバイダでの `default` 開始の条件（telemetry 無効／新規インストール）が、docs の「全プロバイダで組み込みの開始モード」とどう両立するか。docs 未確認（同）。

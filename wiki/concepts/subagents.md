@@ -1,7 +1,7 @@
 ---
 type: concept
 title: サブエージェント
-updated: 2026-10-16
+updated: 2026-10-18
 sources:
   - sources/claude-blog/2026-08-14-maximizing-the-value-of-your-claude-code-sessions
   - sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296
@@ -11,6 +11,7 @@ sources:
   - sources/engineering/2026-02-05-building-a-c-compiler-with-parallel-claudes
   - sources/engineering/2026-03-24-harness-design-long-running-apps
   - sources/research/2026-10-01-claude-shaped-science
+  - sources/gh-changelog/2026-10-18-v2-1-302
 ---
 
 # サブエージェント
@@ -34,8 +35,16 @@ sources:
 - 参考: 役割を分けた planner、generator、evaluator の3エージェントで、数時間のアプリ開発を自律的に行わせた事例がある（Claude Agent SDK で構築、2026-03-24 公開、Opus 4.5〜4.6 の時点）。Claude Code のサブエージェント機能そのものの説明ではない（[[sources/engineering/2026-03-24-harness-design-long-running-apps]]）。
 - 実践例: 長期の研究で、各セッションが計算をバックグラウンドのサブエージェントに任せ、途中結果を markdown に残した。分類器のブロックを1つのエージェントだけに閉じ込めることも、サブエージェントに分けた理由に挙がっている（一人称の実践談で、docs では未確認）（[[sources/research/2026-10-01-claude-shaped-science]]）。
 
+**2.1.302 の CHANGELOG（2026-10-17）**
+
+- fork subagent（`subagent_type: "fork"`）が `claude -p`、Agent SDK、デスクトップアプリ、VS Code でも既定オン（ターミナルは元からオン）。`CLAUDE_CODE_FORK_SUBAGENT=0` で無効化。`claude mcp serve` は常に提供しない（[[sources/gh-changelog/2026-10-18-v2-1-302]]）。
+- デスクトップアプリと VS Code は、メイン会話のサブエージェントを常にバックグラウンドで実行する（Claude に選ばせない）。サブエージェント自身の Agent 呼び出しは、`claude -p`、Agent SDK、デスクトップアプリ、VS Code では既定でフォアグラウンド（同）。
+- prompt hook と agent hook は、同一イベントで同時に最大 12 件まで（同）。
+- 出典は CHANGELOG のみ。docs でのサブエージェントの記述は未取り込み。
+
 ## 変更履歴
 
+- 2026-10-17 — 2.1.302: fork subagent を `claude -p`、Agent SDK、デスクトップアプリ、VS Code でも既定オンに。デスクトップアプリと VS Code はメイン会話のサブエージェントを常にバックグラウンド実行（[[sources/gh-changelog/2026-10-18-v2-1-302]]）
 - 2026-08-14 — （公開時点）コンテキストを守る手段としての subagent を説明する記事が公開された（[[sources/claude-blog/2026-08-14-maximizing-the-value-of-your-claude-code-sessions]]）
 - 2026-10-10 — 2.1.296: `autoCompactWindow` と `CLAUDE_CODE_WORKFLOW_SUBAGENT_MODEL` を追加（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）
 - 2026-10-09 — 2.1.295: `skills` の先読みを最大32件に（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）
