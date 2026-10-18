@@ -7,7 +7,7 @@ published: unknown
 retrieved: 2026-10-16
 version:
 tier: primary
-review: pending
+review: ok
 recheck: weekly
 fingerprint: sha256:7e17c96c0b9eff83779590e596a792e2cdb1c6bbea8095aa1989c305cfe29cac
 archive_url:
