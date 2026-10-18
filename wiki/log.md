@@ -239,3 +239,7 @@
 - gh-changelog/2026-10-18-v2-1-302 を作成。auto-mode、subagents、cloud-sessions、routines、claude-tag、code-review、mcp を更新。`last_seen_version` を 2.1.302 に更新。
 - 未解決: `CLAUDE_CODE_AUTO_MODE_MODEL` と docs の分類器モデル（既定 Sonnet 5）の関係、サードパーティのプロバイダで default 開始となる条件と docs の記述の両立。
 - Claude Design 単体版（claude.ai/design）の 2026-12-14 終了は、該当する概念ページが無いため要約ページのみに記載。
+
+## [2026-10-18] schema | routine の手直し（2回目の試しを受けて）
+- 手順書: 巡回の結果を待つ間は `npm view`・CHANGELOG を含めて何も取得しないこと、GitHub Releases は WebFetch で取ることを追記した。
+- sources.md: gh-releases の取得方法を WebFetch とし、クラウドでは `curl`・`gh` が 403 になることを記した。古くなった「次の Check で再試行」を外した。npm の初期観測に、現在の値は status.md を見る旨を添えた（PR #4 の保留2点への対応）。
