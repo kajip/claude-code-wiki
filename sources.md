@@ -13,9 +13,9 @@
 
 - URL: https://github.com/anthropics/claude-code/releases
 - 状態: 初回確認時に HTTP 504 を返した（再試行は未実施）。`releases.atom` は robots により自動取得を拒否された。`gh` CLI は、このセッションではリポジトリへのアクセスが未許可（`add_repo` で許可が必要）だった。
-- 2026-10-10 の Check で通常 URL を再試行し取得できた（HTTP 200）。本文は「What's changed」の一覧で、一覧ページでは「Read more」で切り詰められる。
-- 当面の代替: 2（CHANGELOG）と 3（npm）でバージョンの出現を検知する。
-- 次の Check で通常 URL を再試行する。取れた場合は、リリースノート本文と CHANGELOG の差分を確認する。
+- 2026-10-10 の Check で通常 URL を再試行し取得できた（HTTP 200）。本文は「What's changed」の一覧で、一覧ページでは「Read more」で切り詰められる。以後の手元の Check（2026-10-16、10-18）でも WebFetch で取得できている。
+- **取得方法: WebFetch を使う。** クラウドの routine では、github.com への通信が専用の経路を通り、このリポジトリ（kajip/claude-code-wiki）以外への `curl` や `gh` は HTTP 403 になる（2026-10-17 の routine で確認）。WebFetch では取得できた（2026-10-16 の routine）。
+- 取れないときの代替: 2（CHANGELOG）と 3（npm）でバージョンの出現を検知する。
 - 初期観測: なし
 
 ### 2. gh-changelog — CHANGELOG.md　✅
@@ -33,7 +33,7 @@
 - シェルが使える場合: `npm view @anthropic-ai/claude-code dist-tags time --json`
 - ⚠ **パッケージのページ https://www.npmjs.com/package/@anthropic-ai/claude-code は使わない。** 初回確認時に古い内容（バージョン 1.0.27）が表示された。
 - 記録するもの: `latest` / `stable` / `next` のバージョンと、それぞれの公開日時（`time` フィールド）。`wiki/status.md` に上書きで記録する。
-- 初期観測（2026-10-10）: latest 2.1.295（公開 2026-10-08T18:22:58Z）、stable 2.1.286、next 2.1.295。CHANGELOG の先頭と一致。
+- 初期観測（2026-10-10）: latest 2.1.295（公開 2026-10-08T18:22:58Z）、stable 2.1.286、next 2.1.295。CHANGELOG の先頭と一致。（初期観測は当時の値。現在の値は `wiki/status.md` を見る）
 
 ### 4. claude-blog — Claude ブログ（Claude Code カテゴリ）　✅
 
