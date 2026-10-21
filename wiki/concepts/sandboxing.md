@@ -1,12 +1,13 @@
 ---
 type: concept
 title: サンドボックスと隔離（封じ込め）
-updated: 2026-10-16
+updated: 2026-10-21
 sources:
   - sources/engineering/2026-05-25-how-we-contain-claude
   - sources/engineering/2026-04-08-scaling-managed-agents
   - sources/docs/2026-10-10-sandboxing
   - sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301
+  - sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305
 ---
 
 # サンドボックスと隔離（封じ込め）
@@ -43,8 +44,15 @@ docs の Bash サンドボックスのページを仕様の正として更新し
 - サンドボックス内のシェルコマンドが、`--plugin-dir` のフォルダ（Claude Code がサンドボックス外で再読み込み・実行するコード）に書き込めた問題を修正（2.1.299）。macOS で denied path が symlink 経由のとき、実体の場所から読み書きできた問題を修正（2.1.299）。`denyRead`／`allowRead` のグロブで、フォルダ名に波括弧・括弧・バックスラッシュがあると設定の確認とサンドボックスで解釈が違った問題を修正（2.1.299）。`allowRead`／`allowWrite` の起点ディレクトリが symlink に置き換わったとき再確認するようにした（2.1.299）（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）。
 - `/sandbox` は、プロジェクトフォルダが書き込み不可で設定を保存できなかったとき、成功と報告せず「何も変わらなかった」と理由を示す（2.1.299）。モード表示は "Sandbox commands"（2.1.300）。`claude remote-control` の `--sandbox`／`--no-sandbox` は効果が無かったため削除され、指定するとエラーになる。代わりに設定の `sandbox.enabled`（2.1.300）（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）。
 
+**2.1.304〜2.1.305 の CHANGELOG（2026-10-20〜21、公開時点の記述）**
+
+- **`sandbox.allowNestedUserNamespaces`（Linux、2.1.305）**: サンドボックス内のコマンドがユーザー名前空間を作れるようになる（Chromium、rootless podman 向け）。CHANGELOG は、これによりサンドボックスのファイル保護を回避しうると明記している。有効化すると隔離が弱まる設定で、docs の既知の制限にある `enableWeakerNestedSandbox` と同じ性格（推測）。設定の置き場所と既定値は CHANGELOG に無い（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+- `sandbox.filesystem.denyRead` のグロブに、文字クラスでない角括弧（`[user-id]` のルートフォルダなど）があると、Linux でサンドボックス内のコマンドが起動しない問題を修正（2.1.304）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+- `rm -r` でマウント済みドライブやトップレベルのフォルダ（`/Volumes`、`/media`、WSL の `/mnt/c`）を消すとき、`rm -rf /Applications` と同じ安全確認が出るようにした（2.1.304）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+
 ## 変更履歴
 
+- 2026-10-21 — 2.1.305: `sandbox.allowNestedUserNamespaces` を追加（ファイル保護を回避しうる）。2.1.304: `denyRead` の角括弧グロブの修正、`rm -r` のマウント先への安全確認（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）
 - 2026-10-14〜10-15 — 2.1.299〜2.1.300 のサンドボックス関連の修正を追記（上記）（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）
 - 2026-10-10 — docs のサンドボックスページを取り込み、`## 現状` を docs 基準に更新。記事の記述（Seatbelt / bubblewrap、書き込み範囲、ネットワーク既定拒否、OSS）は docs と一致し、「公開時点」のまま残した。docs で新たに分かったこと: 既定オフ、auto-allow と regular の2モード、サンドボックス外への再実行と strict sandbox mode、認証情報の deny / mask、managed 設定による admin-required。段階表記は無い（[[sources/docs/2026-10-10-sandboxing]]）
 - 2026-05-25 — 3製品の封じ込め設計と、見落とした4件のリスクを Engineering 記事で公開。Cowork は full-VM mode から、agent loop を VM 外に置く host mode へ移行済み（[[sources/engineering/2026-05-25-how-we-contain-claude]]）

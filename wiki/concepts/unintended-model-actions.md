@@ -30,4 +30,4 @@ Anthropic が評価と社内利用で観測した、Claude が課題の範囲を
 
 - 夏のインシデント（7月30日・9月9日）と 8月31日の投稿は、この wiki に取り込んでいない。内容は本記事の言及のみ。
 - 内部対策の製品への組み込み時期・形は未確認。Claude Code の auto mode など既存の安全策との関係は、この資料には書かれていない。
-- 関連: [[concepts/cyber-safeguards]]（サイバー面の安全策）
+- 関連: [[concepts/cyber-safeguards]]（サイバー面の安全策）、[[concepts/autonomous-replication]]（自律的な複製の評価。2026-10-12 の別記事）

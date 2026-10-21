@@ -4,14 +4,16 @@
 
 ## Claude Code のバージョン
 
-- 取得日: 2026-10-18
+- 取得日: 2026-10-21
 - 出典: npm registry（https://registry.npmjs.org/@anthropic-ai/claude-code/latest ほか、`npm view` の `dist-tags` と `time`）
 
 | タグ | バージョン | 公開日時（JST） |
 | --- | --- | --- |
-| latest | 2.1.302 | 2026-10-17 01:48 |
-| next | 2.1.302 | 2026-10-17 01:48 |
-| stable | 2.1.292 | 2026-10-07 02:10 |
+| latest | 2.1.305 | 2026-10-21 04:29 |
+| next | 2.1.305 | 2026-10-21 04:29 |
+| stable | 2.1.304 | 2026-10-20 04:47 |
 
-- CHANGELOG.md の先頭は 2.1.302（一致。取得日 2026-10-18）。2.1.297 と 2.1.298 は CHANGELOG にも npm にも無い。
-- GitHub Releases の最新は v2.1.302（https://github.com/anthropics/claude-code/releases 、取得日 2026-10-18。WebFetch で取得。2026-10-17 の routine では curl が HTTP 403）。
+- 公開日時は版の公開時刻（`time`）で、stable タグが移った時刻ではない。2.1.303 の公開は 2026-10-19 06:15。
+- CHANGELOG.md の先頭は 2.1.305（一致。取得日 2026-10-21）。2.1.297 と 2.1.298 は今回も CHANGELOG に無い。
+- GitHub Releases の最新は v2.1.305（https://github.com/anthropics/claude-code/releases 、取得日 2026-10-21。WebFetch で取得）。
+- docs の changelog（https://code.claude.com/docs/en/changelog.md）の最新は 2.1.304 で、CHANGELOG.md より遅れている（取得日 2026-10-21）。

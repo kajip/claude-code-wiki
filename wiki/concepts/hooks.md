@@ -1,13 +1,14 @@
 ---
 type: concept
 title: hooks（設定のフック）
-updated: 2026-10-16
+updated: 2026-10-21
 sources:
   - sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296
   - sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301
   - sources/claude-dev/2026-10-01-getting-started-with-claude-code-mods
   - sources/claude-dev/2026-10-06-claude-code-in-the-cloud
   - sources/engineering/2026-05-25-how-we-contain-claude
+  - sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20
 ---
 
 # hooks（設定のフック）
@@ -41,4 +42,4 @@ sources:
 
 ## 未解決・矛盾
 
-- （なし）
+- platform-docs の「Inference hooks」（2026-10-20 に Enterprise 向けでベータ終了）が、この Claude Code の hooks と同じ仕組みかは不明。リリースノートに説明が無く、別物と思われる（推測）（[[sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20]]）。

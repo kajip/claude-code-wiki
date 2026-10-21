@@ -1,12 +1,13 @@
 ---
 type: concept
 title: Code Review（GitHub App による PR 自動レビュー）
-updated: 2026-10-18
+updated: 2026-10-21
 sources:
   - sources/claude-blog/2026-10-15-code-review-is-now-generally-available
   - sources/docs/2026-10-16-code-review
   - sources/claude-dev/2026-10-15-how-the-claude-code-team-does-code-review
   - sources/gh-changelog/2026-10-18-v2-1-302
+  - sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305
 ---
 
 # Code Review
@@ -41,8 +42,14 @@ Claude が GitHub の PR を自動でレビューする機能。複数エージ�
 
 - 2.1.302（2026-10-17）: セットアップの途中で GitHub 接続のために離れた後、管理設定のリポジトリ選択の画面から再開するよう修正（[[sources/gh-changelog/2026-10-18-v2-1-302]]）。
 
+**2.1.304〜2.1.305 の CHANGELOG（公開時点の記述）**
+
+- review levels（2.1.304）: Owner が組織に Quick、Standard（既定）、Deep を選び、リポジトリごとに別のレベルも設定できる。管理設定に、GitHub 組織の全リポジトリ（後から追加も含む）をレビューする選択肢が加わった。有効化から 1〜2 分以内に開かれた PR が黙ってスキップされる問題は、再試行して解消（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+- 複数の push が重なると最新のコミットをレビューしないことがある問題を修正。再レビューは、以前のブロッキング指摘が未解決の間は LGTM で始めない（2.1.305）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+
 ## 変更履歴
 
+- 2026-10-20〜10-21 — 2.1.304: review levels を CHANGELOG に追加、組織の全リポジトリ選択、有効化直後の PR の取りこぼし修正。2.1.305: 最新コミットの取りこぼしと再レビューの LGTM を修正（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）
 - 2026-10-17 — 2.1.302: セットアップが GitHub 接続後にリポジトリ選択から再開するよう修正（[[sources/gh-changelog/2026-10-18-v2-1-302]]）
 - 2026-10-16 — docs の下位ページ（setup / customize / pull-requests / costs / troubleshooting）を取り込み、有効化手順、`REVIEW.md` の読み込み元、コマンド、費用の仕組み、トラブルシューティングを追記（[[sources/docs/2026-10-16-code-review]]）。
 - 2026-10-15 — claude.dev が社内のレビュー運用を公開（[[sources/claude-dev/2026-10-15-how-the-claude-code-team-does-code-review]]）。

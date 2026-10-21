@@ -1,10 +1,11 @@
 ---
 type: concept
 title: Compliance API
-updated: 2026-10-16
+updated: 2026-10-21
 sources:
   - sources/claude-blog/2026-08-11-compliance-api-cowork-and-claude-code
   - sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09
+  - sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20
 ---
 
 # Compliance API
@@ -13,7 +14,7 @@ sources:
 
 Claude Enterprise の監査や eDiscovery のために、組織内での Claude の利用内容とメタデータを取得する API。Claude Code のセッションも取得対象に含まれる（[[sources/claude-blog/2026-08-11-compliance-api-cowork-and-claude-code]]）。
 
-## 現状（as of 2026-10-16）
+## 現状（as of 2026-10-21）
 
 - Cowork（デスクトップ、web、モバイル）と Claude Code（CLI、デスクトップ）のセッション取得は GA（2026-08-26 の追記）（[[sources/claude-blog/2026-08-11-compliance-api-cowork-and-claude-code]]）。
 - セッション記録は、プロンプト、応答、ツール呼び出し（web と MCP）、skills と artifacts の内容と、ユーザー ID・メール・組織 ID・各種 ID・タイムスタンプのメタデータからなる（同上）。
@@ -21,9 +22,11 @@ Claude Enterprise の監査や eDiscovery のために、組織内での Claude 
 - 認証は既存の Compliance Access Key。OpenTelemetry のエクスポートとは併用できる（同上）。
 - そのほかの対象: Claude in Chrome のセッション（2026-09-18、ベータ）、Microsoft 365 のローカルセッション（09-24、GA）、統合された Claude の体験のチャット（10-08、ベータ）（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。
 - Microsoft 365 アドイン（Excel、Word、PowerPoint、Outlook）と Claude Science はベータ（2026-08-26 の追記）（[[sources/claude-blog/2026-08-11-compliance-api-cowork-and-claude-code]]）。
+- claude.ai の **Instructions for Claude** と Cowork の **Global instructions** を取得できる（Enterprise 向け**ベータ**、10-15）。`GET /v1/compliance/organizations/{org_uuid}/user_preferences`、スコープ `read:compliance_user_data`、既存の Compliance Access Key（[[sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20]]）。
 
 ## 変更履歴
 
+- 2026-10-15 — ユーザーの Instructions for Claude／Global instructions の取得を追加（ベータ）（[[sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20]]）。
 - 2026-10-08 — 統合された Claude の体験のチャットを追加（ベータ）（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。
 - 2026-09-24 — Microsoft 365 のローカルセッションが GA（同上）。
 - 2026-09-18 — Claude in Chrome のセッションを追加（ベータ）（同上）。

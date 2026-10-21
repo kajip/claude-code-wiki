@@ -243,3 +243,38 @@
 ## [2026-10-18] schema | routine の手直し（2回目の試しを受けて）
 - 手順書: 巡回の結果を待つ間は `npm view`・CHANGELOG を含めて何も取得しないこと、GitHub Releases は WebFetch で取ることを追記した。
 - sources.md: gh-releases の取得方法を WebFetch とし、クラウドでは `curl`・`gh` が 403 になることを記した。古くなった「次の Check で再試行」を外した。npm の初期観測に、現在の値は status.md を見る旨を添えた（PR #4 の保留2点への対応）。
+
+## [2026-10-21] check | 毎日チェック
+- gh-releases、gh-changelog、npm: 新規 2.1.303〜2.1.305（latest／next 2.1.305、stable 2.1.304）。2.1.305 に `sandbox.allowNestedUserNamespaces`（ファイル保護を回避しうると明記）と `allowedMcpServers` の挙動変更あり。
+- platform-docs: 新しい見出し October 14、15、20, 2026（Opus 5.5 の fast mode が research preview を脱した、Inference hooks の GA など）。
+- anthropic-news: 新規「Strengthening our defenses against distillation attacks」（10-12）。research: 新規「Self-replicating AI」（10-12）。engineering: 新規「Redesigning source control at Anthropic」（10-13、更新 10-15。一覧により日付が食い違う）。
+- docs（What's New は Week 37 のまま）、pricing（fast mode の状態以外は一致）、claude-blog、claude-dev: 新規なし。
+- 取得の失敗: なし。ただし anthropic.com/engineering の一覧の WebFetch が /research/ のパスを返したので、次回に再確認する。
+- ページ内の指示文: code.claude.com の changelog に llms.txt の定型文（llms.txt の取得、`claude --version` の実行を促す文）。従っていない。
+
+## [2026-10-21] skip | 関係の薄い記事 9 件
+- anthropic-news: 「Singapore office opening」（10-14）、「Investing in the public benefit」（10-18）。
+- research: 「Expectations for the future」「Working at the frontier」「How employment is changing at Anthropic」「The AI expectations gap」「Claude reveals ECDSA curve origins」「Designing more efficient quantum circuits with Claude」（いずれも 10-16）、「How Claude designed protein binders against scorpion neurotoxins」（10-20）。
+- 理由: 組織・業界・他分野の研究で、Claude Code や方針との関係が薄い。
+
+## [2026-10-21] ingest | gh-changelog 2.1.303〜2.1.305
+- gh-changelog/2026-10-21-v2-1-303-to-2-1-305 を作成（review: pending）。sandboxing、mcp、mods、auto-mode、code-review、claude-tag、claude-api-skill を更新。`last_seen_version` を 2.1.305 に更新。
+- 重要: `sandbox.allowNestedUserNamespaces`（ファイル保護を回避しうると CHANGELOG に明記）、`allowedMcpServers` が managed-mcp.json の一部の stdio サーバー（`${VAR}` を env だけに使うもの）を絞り込まなくなる変更（止めるには `deniedMcpServers`）。
+- 未解決: `allowNestedUserNamespaces` の既定値と managed 設定で固定できるか、`allowedMcpServers` の変更の詳細、`/auto-mode-setup` の対象拡大と docs の記述の関係（いずれも docs は未確認）。
+
+## [2026-10-21] ingest | Strengthening our defenses against distillation attacks
+- anthropic-news/2026-10-12-distillation-defenses を作成（review: pending）。概念ページ distillation-defenses を新規作成し、cyber-safeguards に蒸留対策の項目を追記した。
+- 未解決: Claude Code への影響は記事に無い。preserved thinking と docs・platform-docs の記述の関係は要確認。
+
+## [2026-10-21] ingest | Redesigning source control at Anthropic
+- engineering/2026-10-13-redesigning-source-control を作成（review: pending）。日付は記事ページ（2026-10-13、更新 10-15）を採った（一覧によっては 10-19）。
+- Claude Code との関連が薄いため、概念ページは更新していない（claude-tag の運用事例が反映の候補）。
+
+## [2026-10-21] ingest | platform-docs リリースノート 10-14〜10-20
+- platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20 を作成（review: pending）。fast-mode、claude-opus-5-5、managed-agents、compliance-api、hooks を更新。gh-changelog 2.1.304 の `/fast` ラベル削除と `/claude-api managed-agents-secure` も関連づけた。`last_seen_release_note` を October 20, 2026 に更新。
+- 食い違い: pricing（2026-10-10 取得）は Opus 5.5 の fast mode を研究プレビューとしている。リリースノートを採り、fast-mode の「未解決・矛盾」に残した。
+- 未解決: Inference hooks と Claude Code の hooks の関係、Opus 5.5 の `between_tools` の値。
+
+## [2026-10-21] ingest | AI models may be capable of self-replicating without access to a datacenter
+- research/2026-10-12-self-replicating-ai を作成（review: pending）。概念ページ autonomous-replication を新規作成し、cyber-safeguards を更新、unintended-model-actions に関連リンクを追加した。
+- 記事に Claude Code の仕様変更の記述は無い。図表の個別の値は取り込めていない。

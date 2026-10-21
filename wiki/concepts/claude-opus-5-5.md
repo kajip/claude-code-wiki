@@ -1,7 +1,7 @@
 ---
 type: concept
 title: Claude Opus 5.5
-updated: 2026-10-10
+updated: 2026-10-21
 sources:
   - sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09
   - sources/pricing/2026-10-10-pricing
@@ -12,6 +12,8 @@ sources:
   - sources/claude-blog/2026-09-24-opus-5-5-built-for-longer-coding-sessions
   - sources/claude-dev/2026-09-28-building-with-claude-sonnet-5-5
   - sources/claude-dev/2026-07-24-new-rules-of-context-engineering-claude-5
+  - sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20
+  - sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305
 ---
 
 # Claude Opus 5.5
@@ -20,12 +22,13 @@ sources:
 
 Claude 5.5 ファミリーの最初のモデル。2026-09-22 に発表された（[[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]]）。多くの作業で Fable 5.1 と同程度の性能を持ち、Opus 5 より約40%安く動く（同）。Claude Code の `default` モデルである（[[sources/claude-dev/2026-09-28-building-with-claude-sonnet-5-5]]）。
 
-## 現状（as of 2026-10-10）
+## 現状（as of 2026-10-21）
 
 - API モデル ID は `claude-opus-5-5`。全プラットフォームで提供（[[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]]）。
 - 価格（100万トークンあたり）: 入力 $4、出力 $20、キャッシュ書き込み $5（5分）／$8（1時間）、キャッシュヒット $0.20（入力単価の0.05倍）（[[sources/pricing/2026-10-10-pricing]]）。
 - Claude Code では **v2.1.280 以降**が必要。既定の effort は medium（[[sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5]]）。
-- fast mode に対応（入力 $8、出力 $40）（[[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]]）。公開時点では研究プレビュー（[[sources/claude-dev/2026-09-22-getting-the-most-out-of-opus-5-5]]）。→ [[concepts/fast-mode]]
+- fast mode に対応（入力 $8、出力 $40）（[[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]]）。公開時点では研究プレビュー（[[sources/claude-dev/2026-09-22-getting-the-most-out-of-opus-5-5]]）だったが、2026-10-15 に脱した（[[sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20]]）。Claude Code の `/fast` のラベルも 2.1.304 で消えた（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。→ [[concepts/fast-mode]]
+- Models API の `capabilities.thinking.types.between_tools` で、各モデルが `thinking: {type: "between_tools"}` を受け付けるか確認できる（10-15。Opus 5.5 の値は未確認）（[[sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20]]）。
 - thinking は無効にできない（[[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]]）。API では `thinking: {"type": "disabled"}` が 400 になり、強制の `tool_choice` も 400 になる（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。
 - コンテキストは 1M（既定）、最大出力は 128k（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。
 - Fable と同じ水準の bio とサイバーの安全策を持つ。フラグが付いたメッセージは古いモデルに回されることがある（[[sources/claude-dev/2026-09-22-getting-the-most-out-of-opus-5-5]]）。→ [[concepts/cyber-safeguards]]
@@ -37,6 +40,7 @@ Claude 5.5 ファミリーの最初のモデル。2026-09-22 に発表された�
 
 ## 変更履歴
 
+- 2026-10-15 — fast mode が研究プレビューを脱した（[[sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20]]）
 - 2026-09-22 — 発表、提供開始（[[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]]）
 
 ## 未解決・矛盾

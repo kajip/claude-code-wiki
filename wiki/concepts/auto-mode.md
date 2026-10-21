@@ -1,7 +1,7 @@
 ---
 type: concept
 title: auto mode（権限の自動判定）
-updated: 2026-10-18
+updated: 2026-10-21
 sources:
   - sources/claude-blog/2026-08-07-running-auto-mode-in-production
   - sources/claude-blog/2026-08-07-auto-mode-default-in-claude-code
@@ -14,6 +14,7 @@ sources:
   - sources/docs/2026-10-10-permission-modes
   - sources/docs/2026-10-10-sandboxing
   - sources/gh-changelog/2026-10-18-v2-1-302
+  - sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305
 ---
 
 # auto mode
@@ -90,8 +91,14 @@ Claude Code の承認を、人ではなくモデルベースの分類器に任�
 - サードパーティのプロバイダで、権限モード未指定の `claude -p` と Agent SDK は、telemetry 無効または新規インストールのとき `default` で開始する。`--permission-mode auto` を指定すれば auto のまま（同）。docs の「全プロバイダで組み込みの開始モード」とは対象（対話か非対話か）が異なる可能性がある（推測）。
 - OpenTelemetry の `tool_decision` イベントに、auto mode 分類器のブロックの `classifier_category` が付かない問題を修正（同）。
 
+**2.1.304 の CHANGELOG（2026-10-20、公開時点の記述）**
+
+- `/auto-mode-setup` を、Bedrock、Vertex、Foundry、Claude apps gateway、telemetry 無効のセッションでも使えるようにした。プロジェクトと最近のセッションを読んで auto mode に環境を教える案内つきの設定（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。docs の設定ページ側の対応範囲の記述との関係は未確認。
+- auto mode のセッションファイルが小さくなった。分類器の文脈を毎リクエスト保存しなくなった（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+
 ## 変更履歴
 
+- 2026-10-20 — 2.1.304: `/auto-mode-setup` の対象拡大、セッションファイルの縮小（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）
 - 2026-10-17 — 2.1.302: `CLAUDE_CODE_AUTO_MODE_MODEL` を追加。サーバー側分類器で長い会話はコンパクションする。サードパーティのプロバイダの `claude -p`／Agent SDK は条件付きで `default` 開始に（[[sources/gh-changelog/2026-10-18-v2-1-302]]）
 - 2026-10-16 — Claude ブログ「Running auto mode in production」（2026-08-07）を取り込み。Nuro、Gusto、Garner Health の運用事例と「9倍長く中断なしで動く」との主張を追記。仕様や提供範囲の新情報は無く、現状の docs 記述は変更なし（[[sources/claude-blog/2026-08-07-running-auto-mode-in-production]]）
 - 2026-10-16 — Claude ブログ（2026-08-07）を取り込み。公開時点の記述: 2026-08-14 から Pro、Max、Team の新規セッションを auto mode 既定にし、分類器のオーバーヘッドは課金しない（2026-08-07 から）。Enterprise、API、各クラウドは当時 opt-in で「翌月中」に既定化予定。現行は docs が、v2.1.283 以降は全プラン・全プロバイダで組み込みの開始モードとする（上記の現状を正とする）。記事は安全性の根拠として 1,053人の実験（人間 13.6% vs auto mode 89% で危険コマンドを阻止）、Apollo Research による見逃し率 12%→7%、Trajectory Labs の injection 評価を提示（[[sources/claude-blog/2026-08-07-auto-mode-default-in-claude-code]]）

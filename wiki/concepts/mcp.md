@@ -1,12 +1,13 @@
 ---
 type: concept
 title: MCP（Model Context Protocol）
-updated: 2026-10-18
+updated: 2026-10-21
 sources:
   - sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296
   - sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301
   - sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5
   - sources/gh-changelog/2026-10-18-v2-1-302
+  - sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305
 ---
 
 # MCP（Model Context Protocol）
@@ -32,8 +33,14 @@ Claude Code が外部のツールやデータにつなぐためのプロトコ�
 
 - 2.1.302（2026-10-17）: プロトコル 2026-07-28 をネゴシエーションするが `resultType`、`ttlMs`、`cacheScope` を返さないサーバーで、ツールが表示されない／全呼び出しが失敗する問題を修正（[[sources/gh-changelog/2026-10-18-v2-1-302]]）。
 
+- **`allowedMcpServers` の挙動変更（2.1.305）**: `managed-mcp.json` の stdio サーバーで `${VAR}` を `env` にだけ使うものは、`allowedMcpServers` が絞り込まなくなった。allowlist に載せていなかったサーバーが、アップグレードで読み込まれる。読み込ませたくないときは `deniedMcpServers` を使う（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+- cloud session や SDK の `setMcpServers` で渡した MCP サーバーが、後から自分の設定の同名サーバーに置き換えられる問題を修正（2.1.305）。MCP の同意ダイアログは、プロンプト向けの Enter を Accept と取りにくくした（2.1.305）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+- cloud session の最初のターンは、claude.ai から同期したプラグインのローカル（stdio）MCP サーバーを待たない。サーバーが `alwaysLoad: true` を指定する場合を除く（2.1.304）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+- カスタム `ANTHROPIC_BASE_URL` 配下では tool search が既定でオンになった（2.1.304）。ゲートウェイが拒否する環境で全リクエストが失敗する回帰が出て、tool search 抜きで再試行するよう 2.1.305 で修正した（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+
 ## 変更履歴
 
+- 2026-10-21 — 2.1.305: `allowedMcpServers` が `managed-mcp.json` の stdio サーバー（`${VAR}` を `env` のみに使うもの）を絞り込まなくなった（allowlist 漏れが読み込まれる）。`setMcpServers` のサーバーが置き換えられる問題を修正。2.1.304: stdio サーバーを待たない cloud session の最初のターン、tool search の既定オン（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）
 - 2026-10-17 — 2.1.302: 2026-07-28 で `resultType`／`ttlMs`／`cacheScope` を省くサーバーの問題を修正（[[sources/gh-changelog/2026-10-18-v2-1-302]]）
 - 2026-10-14 — 2.1.299: allow ルールを名前指定のサーバーだけに限定（非互換の可能性）。agent の `tools:` も同様。cloud／Remote Control のコネクタの 2026-07-28 既定をフラグ未取得の環境にも拡大。第一者サーバーの説明の 4,096 字切り詰めを廃止（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）
 - 2026-10-10 — 2.1.296: 最初に送るツール説明の上限を 2,048 字から 4,096 字に変更（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）

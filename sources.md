@@ -25,7 +25,7 @@
 - 規模: 約 8,700 行・約 950 KB。最新バージョンが先頭に並ぶ。**先頭から `last_seen_version` に達するまでだけ読む。**
 - 差分検知: 先頭のバージョンが `last_seen_version` より新しければ新規。
 - 初期観測（2026-10-10）: 先頭は **2.1.295**。直近の 2.1.290〜2.1.295 では、Claude Mods（プラグインによる深い挙動変更）、Claude Haiku 5.5 の追加（2.1.293）、MCP プロトコル 2026-07-28 のネゴシエーション既定化などが確認できた（内容は未 Ingest）。
-- `last_seen_version`: **2.1.302**（2026-10-18 Ingest。2.1.290〜2.1.302 を取り込み済み。2.1.297 と 2.1.298 は CHANGELOG に無い。2.1.289 以前は未 Ingest）
+- `last_seen_version`: **2.1.305**（2026-10-21 Ingest。2.1.290〜2.1.305 を取り込み済み。2.1.297 と 2.1.298 は CHANGELOG に無い。2.1.289 以前は未 Ingest）
 
 ### 3. npm — @anthropic-ai/claude-code　✅（取得方法に注意）
 
@@ -108,7 +108,7 @@
 - 追加日: 2026-10-10（人間の指示による）。
 - 頻度: 週次。
 - 初期観測（2026-10-10）: リリースノートの最新の見出しは October 9, 2026。llms.txt のリンクは 762 件。モデル一覧は `/docs/en/about-claude/models/overview.md` から `/docs/en/models/overview.md` に移っている（リダイレクトされる）。
-- `last_seen_release_note`: **October 9, 2026**（2026-10-10 Ingest。2026-09-10〜10-09 を取り込み済み。それより前は未 Ingest）
+- `last_seen_release_note`: **October 20, 2026**（2026-10-21 Ingest。2026-09-10〜10-20 を取り込み済み。それより前は未 Ingest）
 
 ---
 

@@ -1,13 +1,14 @@
 ---
 type: concept
 title: claude-api スキル
-updated: 2026-10-10
+updated: 2026-10-21
 sources:
   - sources/claude-dev/2026-09-28-automating-eval-design-and-hillclimbing
   - sources/claude-dev/2026-09-28-building-with-claude-sonnet-5-5
   - sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5
   - sources/claude-dev/2026-10-08-building-effective-agent-automations
   - sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296
+  - sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305
 ---
 
 # claude-api スキル
@@ -24,8 +25,12 @@ Claude Code に同梱されるスキル。Claude API を使った開発を助け
 - `/claude-api managed-agents-onboard <url>`、`<quickstart-name>`: Managed Agents の構成を作る（2.1.290）（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]、[[sources/claude-dev/2026-10-08-building-effective-agent-automations]]）。
 - ソース: github.com/anthropics/skills の `skills/claude-api`（[[sources/claude-dev/2026-09-28-automating-eval-design-and-hillclimbing]]）。
 
+- `/claude-api managed-agents-secure`（2.1.304）: Managed Agents の agent の設定を Anthropic 公開のセキュリティガイドと比較する。何も変更しない（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+- Claude Platform on AWS では、SDK や curl に戻らず `ant` CLI を使う（2.1.304）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+
 ## 変更履歴
 
+- 2026-10-20 — 2.1.304: `managed-agents-secure` を追加。Claude Platform on AWS で `ant` CLI を使うよう更新（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）
 - 2026-10-06 — 2.1.290: `managed-agents-onboard` を追加。Managed Agents の例では、必要なとき以外は web ツールを切り、`auto` の権限ポリシーを使うよう変更（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）
 
 ## 未解決・矛盾

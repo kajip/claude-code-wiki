@@ -1,12 +1,14 @@
 ---
 type: concept
 title: Claude Managed Agents
-updated: 2026-10-10
+updated: 2026-10-21
 sources:
   - sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09
   - sources/claude-dev/2026-10-08-building-effective-agent-automations
   - sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296
   - sources/engineering/2026-04-08-scaling-managed-agents
+  - sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20
+  - sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305
 ---
 
 # Claude Managed Agents
@@ -21,7 +23,7 @@ Anthropic の基盤で、サーバー側で動くエージェントを作る仕�
 - 認証情報は sandbox から到達できない vault などに置く。MCP 呼び出しは専用プロキシ経由で行い、harness は資格情報を扱わない（同）。
 - コンテナを必要時だけ起動する構成で、公開時点の p50 TTFT は約 60%、p95 は 90% 超短縮（同）。この値は公開時点のもので、現在の値は未確認。
 
-## 現状（as of 2026-10-10）
+## 現状（as of 2026-10-21）
 
 - **ベータ**（[[sources/claude-dev/2026-10-08-building-effective-agent-automations]]）。
 - 資源は `ant apply <file>` で作る。手動で動かすには `ant beta:deployments run --deployment-id <id>`（同）。
@@ -31,9 +33,14 @@ Anthropic の基盤で、サーバー側で動くエージェントを作る仕�
 - 権限ポリシーに `auto` がある。サーバーが各呼び出しを判定して、実行する、拒否する、承認を待つ、のどれかにする（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。
 - `web_fetch` は、セッションにすでに現れた URL しか取得しない。networking が `limited` の環境では、`allowed_hosts` が web ツールにも適用される（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。
 - dynamic workflows（**ベータ**）: 多数のエージェントを段階的に動かすプログラムを、エージェント自身に書かせて実行させられる（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。
+- scheduled deployments が Claude Platform on AWS で使える（10-14）（[[sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20]]）。
+- OpenTelemetry export（**ベータ**）で、Managed Agents のセッションを自前の観測基盤でトレースできる（10-14）（同）。
+- `/claude-api managed-agents-secure`（2.1.304）で、agent の設定を Anthropic 公開のセキュリティガイドと比較できる（変更はしない）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
 
 ## 変更履歴
 
+- 2026-10-20 — 2.1.304: `/claude-api managed-agents-secure` を追加（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）
+- 2026-10-14 — scheduled deployments が Claude Platform on AWS で利用可。OpenTelemetry export をベータで開始（[[sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20]]）
 - 2026-10-09 — dynamic workflows をベータで提供（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）
 - 2026-10-07 — `web_fetch` の取得先を制限。`limited` networking で web ツールにも `allowed_hosts` を適用（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）
 - 2026-09-10 — 権限ポリシー `auto` と `ant beta:sessions connect` を追加（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）

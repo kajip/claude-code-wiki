@@ -1,13 +1,14 @@
 ---
 type: concept
 title: mods（Claude Code mods）
-updated: 2026-10-16
+updated: 2026-10-21
 sources:
   - sources/docs/2026-10-10-mods
   - sources/claude-blog/2026-10-01-customize-claude-code-with-mods
   - sources/claude-dev/2026-10-01-getting-started-with-claude-code-mods
   - sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296
   - sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301
+  - sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305
 ---
 
 # mods（Claude Code mods）
@@ -34,8 +35,16 @@ Claude Code の動きと見た目を変える、小さな TypeScript／JavaScrip
 - 挙動の変更: フックの `.catch` は throw かタイムアウトのときだけ走る（2.1.301）。`$.env.set` は成功で `{}`、拒否で `{ deny }` を返す（2.1.301）。`claude plugin test` は 10 秒答えない `$` メソッドを失敗とし、`ui.render` の木の各 mod ルートに `part: { plugin }` が付くので、木を厳密に比べるテストは更新が必要（2.1.299）（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）。
 - 強制の強化: managed な permission rule、hook、組織の MCP ツール名が、ユーザー mod に対してより確実に効く（2.1.299）。ユーザー mod の `$.env.set` が managed settings のコマンドフックの環境を変えられなくなった（2.1.300）。`__proto__` キーが黙って消されて `tool.check` の guard を飛ばせた問題を修正（2.1.299）（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）。
 
+**2.1.304〜2.1.305 の CHANGELOG（公開時点の記述）**
+
+- `tool.check` の答えに `decider: "person"` を追加（2.1.304）。許可ダイアログかホストのコールバックだけが承認でき、誰にも聞けない環境では mod の理由つきで拒否される。`tool.check` のイベントに `e.isReadOnly`（読み取り専用の呼び出しで true）も追加（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+- `settings.read` フックは各 settings 層を受け取り、マージ後の設定を書き換えられる（2.1.304）。managed な mod が組織の設定を上限にでき、保持期間の掃除が使う `cleanupPeriodDays` も対象（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+- 先に走るプラグインが mod のフックを飛ばしたとき、transcript にイベントとプラグイン名の行が出る。mod のリロード失敗で前の版のツールとコマンドが消える問題、同ラベルでキーなしのボタンのクリックが失われる問題を修正。VS Code のチャットパネルで、Bedrock、Vertex、Foundry、LLM ゲートウェイ配下、テレメトリ無効のセッションでも mod を描画（2.1.304）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+- `Image` が iTerm2 3.5 以降の fullscreen rendering で画像を描く。ドック領域は端末幅の 45% 以内（2.1.305）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+
 ## 変更履歴
 
+- 2026-10-20〜10-21 — 2.1.304〜2.1.305: `decider: "person"`、`e.isReadOnly`、`settings.read` の層別受け取りと書き換えなどを追加・変更（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）
 - 2026-10-14〜10-15 — 2.1.299〜2.1.301 で上記の API を追加・変更（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）
 - 2026-10-10 — docs（Mods overview と配下のページ）を取り込み、plugin.json、hooks.json、register の例、`$` の API、テスト、型定義、公開手順、管理者設定を追加（[[sources/docs/2026-10-10-mods]]）。
 - 2026-10-06〜10-10 — 2.1.290〜2.1.296 で API を追加（上記）。組織の mod のトーストを先に出すよう変更（2.1.295）（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）
