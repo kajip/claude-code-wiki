@@ -1,7 +1,7 @@
 ---
 type: concept
 title: プロンプトキャッシュとセッションの費用
-updated: 2026-10-16
+updated: 2026-10-22
 sources:
   - sources/claude-blog/2026-08-14-maximizing-the-value-of-your-claude-code-sessions
   - sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09
@@ -37,15 +37,16 @@ Claude Code のセッションは長くなり、1回のリクエストのコン�
 - effort の変更（**Claude API を直接使う場合**）: `output_config.effort` を変えると messages のキャッシュは常に無効になる。tools と system への影響はモデルごと。既定値の明示指定は省略と同じで無効にならない。per-message effort 対応モデルでは `role: "system"` メッセージで変えれば保たれる。thinking の設定を変えた場合も同様（[[sources/platform-docs/2026-10-10-prompt-caching]]）。
 - 最小キャッシュ可能長（Claude API）: Opus 5.5、Sonnet 5.5、Haiku 5.5、Fable 5.1 は 512 トークン（[[sources/platform-docs/2026-10-10-prompt-caching]]）。
 - API キーやクラウドプロバイダーの利用者も、1時間のキャッシュ寿命を設定できる（[[sources/claude-blog/2026-09-24-opus-5-5-built-for-longer-coding-sessions]]）。
-- fork したサブエージェントは親のキャッシュから始まる（同）。
+- fork したサブエージェントは親のキャッシュから始まる（[[sources/claude-blog/2026-09-24-opus-5-5-built-for-longer-coding-sessions]]）。
 - キャッシュを保つための推奨: 長く間を空けない、途中でモデルを変えない、MCP を後からつながない、fast mode は最初に有効にする（[[sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5]]）。
-- 確認は `/usage`、`/cost`（同）。
+- 確認は `/usage`、`/cost`（[[sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5]]）。
 - （公開時点 2026-08-14 の説明）リクエストは「ツール定義、システムプロンプト、会話（CLAUDE.md が先頭）」の順で、前方が変わると後ろ全部を再処理する。読み取りは入力の0.1倍、書き込みは最大2倍。キャッシュを壊すのは `/model`（opusplan も）、`/effort`、fast mode の途中有効化、`/compact`、時間切れ。モデルや effort の変更は、セッションの最初か `/clear` の直後が安い（[[sources/claude-blog/2026-08-14-maximizing-the-value-of-your-claude-code-sessions]]）。
 - （同記事）キャッシュ寿命はサブスクリプション1時間、API キー5分で、`ENABLE_PROMPT_CACHING_1H=1` で1時間にできる。`/compact` は古い会話がキャッシュにあるうち（休憩の前）が安い。直近の数ターンを捨てるなら `/rewind` が、`/compact` と違い前方のキャッシュを保つ。`/loop` はそのセッションの全会話を運ぶので、別セッションで動かす（[[sources/claude-blog/2026-08-14-maximizing-the-value-of-your-claude-code-sessions]]）。
 - API の cache diagnostics は 2026-09-23 に GA になり、beta ヘッダーが不要になった（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。
 
 ## 変更履歴
 
+- 2026-10-22 出典の表記を整理（Lint）: 「（同）」「（同上）」2 件を直前の出典のリンクに展開。内容の変更なし
 - 2026-10-14〜10-15 — 2.1.299 でアイドル時のコンパクション、2.1.300 で `api_request` の寿命別キャッシュ書き込み、2.1.301 でモデル切り替え時の要約の仕様変更（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）
 - 2026-10-10 — effort 変更時の挙動を、Claude Code と Claude API に分けて書いた（[[sources/platform-docs/2026-10-10-prompt-caching]]）
 - 2026-10-07 — Sonnet 5.5 のキャッシュ読み取りを $0.20 から $0.10 に引き下げ（[[sources/anthropic-news/2026-10-07-introducing-claude-haiku-5-5]]、[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）

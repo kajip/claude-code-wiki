@@ -1,7 +1,7 @@
 ---
 type: concept
 title: サブエージェント
-updated: 2026-10-18
+updated: 2026-10-22
 sources:
   - sources/claude-blog/2026-08-14-maximizing-the-value-of-your-claude-code-sessions
   - sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296
@@ -12,6 +12,7 @@ sources:
   - sources/engineering/2026-03-24-harness-design-long-running-apps
   - sources/research/2026-10-01-claude-shaped-science
   - sources/gh-changelog/2026-10-18-v2-1-302
+  - sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305
 ---
 
 # サブエージェント
@@ -20,7 +21,7 @@ sources:
 
 メインの会話から作業を切り出して動かすエージェント。モデル、effort、スキル、compaction の設定を個別に持てる（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）。
 
-## 現状（as of 2026-10-10）
+## 現状（as of 2026-10-21）
 
 - モデル: `CLAUDE_CODE_SUBAGENT_MODEL` で全サブエージェントのモデルを決める。定義の `model:` の方が優先される（[[sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5]]）。workflow エージェントだけは `CLAUDE_CODE_WORKFLOW_SUBAGENT_MODEL` で一括指定できる（2.1.296）（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）。
 - effort: Agent ツールの `effort` パラメータ（2.1.292）（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）。
@@ -38,12 +39,21 @@ sources:
 **2.1.302 の CHANGELOG（2026-10-17）**
 
 - fork subagent（`subagent_type: "fork"`）が `claude -p`、Agent SDK、デスクトップアプリ、VS Code でも既定オン（ターミナルは元からオン）。`CLAUDE_CODE_FORK_SUBAGENT=0` で無効化。`claude mcp serve` は常に提供しない（[[sources/gh-changelog/2026-10-18-v2-1-302]]）。
-- デスクトップアプリと VS Code は、メイン会話のサブエージェントを常にバックグラウンドで実行する（Claude に選ばせない）。サブエージェント自身の Agent 呼び出しは、`claude -p`、Agent SDK、デスクトップアプリ、VS Code では既定でフォアグラウンド（同）。
-- prompt hook と agent hook は、同一イベントで同時に最大 12 件まで（同）。
-- 出典は CHANGELOG のみ。docs でのサブエージェントの記述は未取り込み。
+- デスクトップアプリと VS Code は、メイン会話のサブエージェントを常にバックグラウンドで実行する（Claude に選ばせない）。サブエージェント自身の Agent 呼び出しは、`claude -p`、Agent SDK、デスクトップアプリ、VS Code では既定でフォアグラウンド（[[sources/gh-changelog/2026-10-18-v2-1-302]]）。
+- prompt hook と agent hook は、同一イベントで同時に最大 12 件まで（[[sources/gh-changelog/2026-10-18-v2-1-302]]）。
+- 出典は CHANGELOG のみ（[[sources/gh-changelog/2026-10-18-v2-1-302]]）。docs でのサブエージェントの記述は未取り込み。
+
+**2.1.304〜2.1.305 の CHANGELOG（2026-10-20〜21）**
+
+- 変更の無い subagent の worktree が掃除されないことがある問題を修正（2.1.305）。bare リポジトリの新規 worktree が既定ブランチでなくローカル HEAD から始まることがある問題も修正（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+- subagent が同時に多数動くときの応答性と throughput を改善（2.1.304）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+- VS Code: background sub-agent は Agent カードの下に1行の状態表示で出る。全文は /tasks で見る（2.1.304）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+- 出典は CHANGELOG のみ（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
 
 ## 変更履歴
 
+- 2026-10-22 出典の表記を整理（Lint）: 「（同）」「（同上）」2 件を直前の出典のリンクに展開、出典の無かった 2 行に出典を付与、「現状」の as of を 2026-10-21 に更新。内容の変更なし
+- 2026-10-21 — 2.1.305: 変更の無い subagent worktree の掃除漏れを修正。2.1.304: 多数時の応答性と throughput の改善、VS Code の background sub-agent の表示変更（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）
 - 2026-10-17 — 2.1.302: fork subagent を `claude -p`、Agent SDK、デスクトップアプリ、VS Code でも既定オンに。デスクトップアプリと VS Code はメイン会話のサブエージェントを常にバックグラウンド実行（[[sources/gh-changelog/2026-10-18-v2-1-302]]）
 - 2026-08-14 — （公開時点）コンテキストを守る手段としての subagent を説明する記事が公開された（[[sources/claude-blog/2026-08-14-maximizing-the-value-of-your-claude-code-sessions]]）
 - 2026-10-10 — 2.1.296: `autoCompactWindow` と `CLAUDE_CODE_WORKFLOW_SUBAGENT_MODEL` を追加（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）

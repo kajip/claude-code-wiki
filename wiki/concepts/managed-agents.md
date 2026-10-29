@@ -1,7 +1,7 @@
 ---
 type: concept
 title: Claude Managed Agents
-updated: 2026-10-21
+updated: 2026-10-22
 sources:
   - sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09
   - sources/claude-dev/2026-10-08-building-effective-agent-automations
@@ -20,25 +20,26 @@ Anthropic の基盤で、サーバー側で動くエージェントを作る仕�
 ## 設計思想（2026-04-08 の記事より。公開時点）
 
 - エージェントを session（追記専用イベントログ）、harness（Claude を呼ぶループ）、sandbox（実行環境）に仮想化し、それぞれを独立に差し替え・失敗させられる設計。harness 自体は特定のものに固定しない meta-harness で、Claude Code も載せ得るハーネスの一例とされる（[[sources/engineering/2026-04-08-scaling-managed-agents]]）。
-- 認証情報は sandbox から到達できない vault などに置く。MCP 呼び出しは専用プロキシ経由で行い、harness は資格情報を扱わない（同）。
-- コンテナを必要時だけ起動する構成で、公開時点の p50 TTFT は約 60%、p95 は 90% 超短縮（同）。この値は公開時点のもので、現在の値は未確認。
+- 認証情報は sandbox から到達できない vault などに置く。MCP 呼び出しは専用プロキシ経由で行い、harness は資格情報を扱わない（[[sources/engineering/2026-04-08-scaling-managed-agents]]）。
+- コンテナを必要時だけ起動する構成で、公開時点の p50 TTFT は約 60%、p95 は 90% 超短縮（[[sources/engineering/2026-04-08-scaling-managed-agents]]）。この値は公開時点のもので、現在の値は未確認。
 
 ## 現状（as of 2026-10-21）
 
 - **ベータ**（[[sources/claude-dev/2026-10-08-building-effective-agent-automations]]）。
-- 資源は `ant apply <file>` で作る。手動で動かすには `ant beta:deployments run --deployment-id <id>`（同）。
-- 予算: `budget.type: limit`、`max_list_cost`。上限に達すると `budget_reached` で一時停止する（同）。
+- 資源は `ant apply <file>` で作る。手動で動かすには `ant beta:deployments run --deployment-id <id>`（[[sources/claude-dev/2026-10-08-building-effective-agent-automations]]）。
+- 予算: `budget.type: limit`、`max_list_cost`。上限に達すると `budget_reached` で一時停止する（[[sources/claude-dev/2026-10-08-building-effective-agent-automations]]）。
 - Claude Code からは `/claude-api managed-agents-onboard <url>` と `/claude-api managed-agents-onboard <quickstart-name>` で構成を作れる（2.1.290）（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）。
 
 - 権限ポリシーに `auto` がある。サーバーが各呼び出しを判定して、実行する、拒否する、承認を待つ、のどれかにする（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。
 - `web_fetch` は、セッションにすでに現れた URL しか取得しない。networking が `limited` の環境では、`allowed_hosts` が web ツールにも適用される（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。
 - dynamic workflows（**ベータ**）: 多数のエージェントを段階的に動かすプログラムを、エージェント自身に書かせて実行させられる（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。
 - scheduled deployments が Claude Platform on AWS で使える（10-14）（[[sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20]]）。
-- OpenTelemetry export（**ベータ**）で、Managed Agents のセッションを自前の観測基盤でトレースできる（10-14）（同）。
+- OpenTelemetry export（**ベータ**）で、Managed Agents のセッションを自前の観測基盤でトレースできる（10-14）（[[sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20]]）。
 - `/claude-api managed-agents-secure`（2.1.304）で、agent の設定を Anthropic 公開のセキュリティガイドと比較できる（変更はしない）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
 
 ## 変更履歴
 
+- 2026-10-22 出典の表記を整理（Lint）: 「（同）」「（同上）」5 件を直前の出典のリンクに展開。内容の変更なし
 - 2026-10-20 — 2.1.304: `/claude-api managed-agents-secure` を追加（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）
 - 2026-10-14 — scheduled deployments が Claude Platform on AWS で利用可。OpenTelemetry export をベータで開始（[[sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20]]）
 - 2026-10-09 — dynamic workflows をベータで提供（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）

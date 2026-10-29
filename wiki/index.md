@@ -1,6 +1,6 @@
 # Index
 
-最終更新: 2026-10-21（要約 64・概念 31）
+最終更新: 2026-10-22（要約 69・概念 31）
 
 ## 状態
 
@@ -38,10 +38,10 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 - [[sources/anthropic-news/2026-10-12-distillation-defenses]] — 蒸留攻撃への対策。preserved thinking、2段 classifier（誤検知率 0.1% 未満）、課金再開。抜き取られた推論トークンは 1/10〜1/100 以下に（2026-10-12）
 - [[sources/anthropic-news/2026-10-08-introducing-the-anthropic-cyber-mission]] — Cyber Mission。OSS Scanner、CIDP（2026-10-08）
 - [[sources/anthropic-news/2026-10-08-2026-usage-policy-update]] — Usage Policy の改定（11月12日施行）（2026-10-08）
-- [[sources/anthropic-news/2026-10-07-introducing-claude-haiku-5-5]] — Haiku 5.5 の発表。Haiku 4.5 より約75%安い。Sonnet 5.5 のキャッシュ読み取りを値下げ（2026-10-07）
+- [[sources/anthropic-news/2026-10-07-introducing-claude-haiku-5-5]] — Haiku 5.5 の発表。運用コストは Haiku 4.5 より平均で約75%安い（発表文）。Sonnet 5.5 のキャッシュ読み取りを値下げ（2026-10-07）
 - [[sources/anthropic-news/2026-10-06-expanding-the-cyber-verification-program]] — CVP の拡大。3段階のアクセス、Glasswing を統合（2026-10-06）
 - [[sources/anthropic-news/2026-09-28-introducing-claude-sonnet-5-5]] — Sonnet 5.5 の発表。30%以上速く、最大30%安い（2026-09-28）
-- [[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]] — Opus 5.5 の発表。Fable 5.1 と同程度の性能で、Opus 5 より約40%安い（2026-09-22）
+- [[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]] — Opus 5.5 の発表。Fable 5.1 と同程度の性能で、運用コストは Opus 5 より約40%安い（発表文。単価は20%安）（2026-09-22）
 - [[sources/anthropic-news/2026-09-01-enterprise-frontier-safeguards]] — Enterprise Frontier Safeguards。ZDR と誤用検知の両立、データは顧客のクラウドに保存、今秋に段階展開（2026-09-01）
 
 ### claude-dev
@@ -58,6 +58,8 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 - [[sources/claude-dev/2026-07-24-new-rules-of-context-engineering-claude-5]] — Claude Code のシステムプロンプトを 80% 超削った経緯と、CLAUDE.md・skills の整え方（2026-07-24）
 
 ### docs
+- [[sources/docs/2026-10-22-managed-mcp]] — managed MCP の許可制御。`${VAR}` 展開を使う managed サーバーは allowlist で検査される（公開日不明、取得 2026-10-22）
+- [[sources/docs/2026-10-22-sandbox-allownestedusernamespaces]] — `sandbox.allowNestedUserNamespaces` の docs の記載。既定 false、隔離の境界を外す設定で、リポジトリの設定では有効にできない（公開日不明、取得 2026-10-22）
 - [[sources/docs/2026-10-16-code-review]] — Code Review の docs。概要と下位5ページ（setup、customize、PR での操作、費用、トラブルシューティング）（公開日不明。取得 2026-10-16）
 - [[sources/docs/2026-10-16-routines-and-cloud-sessions]] — routines（研究プレビュー）と cloud sessions の docs。利用枠、1時間あたりの上限、push 先、ネットワーク、設定の読み込み範囲（公開日不明。取得 2026-10-16）
 - [[sources/docs/2026-10-10-auto-mode-config]] — Configure auto mode。`autoMode` の設定キー、`claude auto-mode` サブコマンド、`/auto-mode-setup`（公開日不明。取得 2026-10-10）
@@ -86,11 +88,14 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 - [[sources/research/2026-09-29-glm-5-3-and-the-spread-of-advanced-cyber-capabilities]] — GLM-5.3 の分析。回避しやすい安全策と、Claude の API 側の対策、防御側へのアクセス方針（2026-09-29）
 
 ### platform-docs
-- [[sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20]] — Claude Platform のリリースノート（10-14〜10-20）。Opus 5.5 の fast mode が研究プレビューを脱した、OpenTelemetry export（ベータ）、Inference hooks が Enterprise でベータ終了、Compliance API でユーザーの instructions を取得可（2026-10-20）
+- [[sources/platform-docs/2026-10-22-inference-hooks]] — Inference hooks: Enterprise 向けのサーバー側 allow／deny フック。Claude Code の hooks とは別の仕組み（公開日不明、取得 2026-10-22）
+- [[sources/platform-docs/2026-10-21-release-notes-2026-10-21]] — Platform リリースノート 10-21: API バージョン 2026-10-21、SDK 新版（Apache 2.0）、user profiles の enforcement フィールド（2026-10-21）
+- [[sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20]] — Claude Platform のリリースノート（10-14〜10-20）。Opus 5.5 の fast mode が研究プレビューを脱した、OpenTelemetry export（ベータ）、Inference hooks が Enterprise でベータ終了、Compliance API でユーザーの instructions を取得可、user profiles、organization webhooks（ベータ）（2026-10-20）
 - [[sources/platform-docs/2026-10-10-prompt-caching]] — Claude API の prompt caching。effort と thinking の変更でのキャッシュ無効化、モデル別の最小長（公開日不明。取得 2026-10-10）
 - [[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]] — Claude Platform のリリースノート（09-10〜10-09）。5.5 世代のモデル、Managed Agents、compaction on demand、Sonnet 4.5 の廃止予告（2026-10-09）
 
 ### pricing
+- [[sources/pricing/2026-10-22-pricing]] — Claude API の価格（現行の全行）。Opus 5.5 の fast mode が研究プレビューから外れ、fast mode の料金は全コンテキストに掛かる（日付なし、取得 2026-10-22）
 - [[sources/pricing/2026-10-10-pricing]] — Claude API の価格表。キャッシュの倍率、fast mode、Batch（公開日不明。取得 2026-10-10）
 
 ## 概念ページ（concepts）
@@ -103,30 +108,30 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 - [[concepts/claude-api-skill]] — claude-api スキル（出典 6）
 - [[concepts/claude-apps-gateway]] — Claude apps gateway（出典 2）
 - [[concepts/claude-code-quality-incidents]] — Claude Code の品質低下の報告と原因（2026年3〜4月）（出典 1）
-- [[concepts/claude-haiku-5-5]] — Claude Haiku 5.5（出典 5）
-- [[concepts/claude-opus-5-5]] — Claude Opus 5.5（出典 11）
+- [[concepts/claude-haiku-5-5]] — Claude Haiku 5.5（出典 6）
+- [[concepts/claude-opus-5-5]] — Claude Opus 5.5（出典 12）
 - [[concepts/claude-sonnet-5-5]] — Claude Sonnet 5.5（出典 7）
-- [[concepts/claude-tag]] — Claude Tag（Claude in Slack）（出典 6）
-- [[concepts/cloud-sessions]] — cloud sessions（Claude Code in the cloud）（出典 7）
-- [[concepts/code-review]] — Code Review（GitHub App による PR の自動レビュー）（出典 5）
+- [[concepts/claude-tag]] — Claude Tag（Claude in Slack）（出典 7）
+- [[concepts/cloud-sessions]] — cloud sessions（Claude Code in the cloud）（出典 8）
+- [[concepts/code-review]] — Code Review（GitHub App による PR の自動レビュー）（出典 6）
 - [[concepts/compliance-api]] — Compliance API の対象範囲と GA／ベータの状況（出典 3）
 - [[concepts/context-engineering]] — コンテキストエンジニアリング（Claude 5 世代）（出典 2）
-- [[concepts/cyber-safeguards]] — サイバー・安全策と Cyber Verification Program（出典 16）
+- [[concepts/cyber-safeguards]] — サイバー・安全策と Cyber Verification Program（出典 17）
 - [[concepts/distillation-defenses]] — 蒸留攻撃への対策（preserved thinking、推論抽出の遮断）（出典 5）
 - [[concepts/effort]] — effort（思考量の設定）（出典 10）
 - [[concepts/enterprise-frontier-safeguards]] — Enterprise Frontier Safeguards（EFS。顧客管理ストレージ、CMEK、自動レビューの opt-in。Claude Code も対応先）（出典 1）
-- [[concepts/fast-mode]] — fast mode（出典 10）
-- [[concepts/hooks]] — hooks（設定のフック）（出典 6）
+- [[concepts/fast-mode]] — fast mode（出典 11）
+- [[concepts/hooks]] — hooks（設定のフック）（出典 8）
 - [[concepts/long-running-agent-harness]] — 長時間動くエージェントのハーネス（ループ、ロックによる並列化、テストの設計）（出典 3）
 - [[concepts/managed-agents]] — Claude Managed Agents（出典 6）
-- [[concepts/mcp]] — MCP（Model Context Protocol）（出典 5）
-- [[concepts/mods]] — mods（Claude Code mods）（出典 6）
+- [[concepts/mcp]] — MCP（Model Context Protocol）（出典 6）
+- [[concepts/mods]] — mods（Claude Code mods）（出典 7）
 - [[concepts/oss-scanner]] — OSS Scanner（OSS 向けの無償・opt-in の脆弱性発見サービス）（出典 4）
 - [[concepts/projects]] — Projects（作り直された Projects）（出典 3）
 - [[concepts/prompt-caching]] — プロンプトキャッシュとセッションの費用（出典 12）
 - [[concepts/routines]] — routines（ルーティン）（出典 5）
-- [[concepts/sandboxing]] — サンドボックスと隔離（封じ込め）の設計と教訓（出典 5）
-- [[concepts/subagents]] — サブエージェント（出典 9）
+- [[concepts/sandboxing]] — サンドボックスと隔離（封じ込め）の設計と教訓（出典 6）
+- [[concepts/subagents]] — サブエージェント（出典 10）
 - [[concepts/unintended-model-actions]] — モデルの意図しない行動と、運用上の安全策（出典 1）
 
 ## 分析（analysis）

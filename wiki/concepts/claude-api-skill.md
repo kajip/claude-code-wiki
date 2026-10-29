@@ -1,7 +1,7 @@
 ---
 type: concept
 title: claude-api スキル
-updated: 2026-10-21
+updated: 2026-10-22
 sources:
   - sources/claude-dev/2026-09-28-automating-eval-design-and-hillclimbing
   - sources/claude-dev/2026-09-28-building-with-claude-sonnet-5-5
@@ -17,7 +17,7 @@ sources:
 
 Claude Code に同梱されるスキル。Claude API を使った開発を助けるサブコマンドを持つ（[[sources/claude-dev/2026-09-28-automating-eval-design-and-hillclimbing]]）。
 
-## 現状（as of 2026-10-10）
+## 現状（as of 2026-10-21）
 
 - `/claude-api build-eval`、`/claude-api hillclimb`: 評価を作り、過学習を避けながらスコアを上げる（[[sources/claude-dev/2026-09-28-automating-eval-design-and-hillclimbing]]）。
 - `/claude-api migrate this project to claude-sonnet-5-5`: モデルの差し替えとパラメータの変更を自動で行う（[[sources/claude-dev/2026-09-28-building-with-claude-sonnet-5-5]]）。
@@ -30,6 +30,7 @@ Claude Code に同梱されるスキル。Claude API を使った開発を助け
 
 ## 変更履歴
 
+- 2026-10-22 出典の表記を整理（Lint）: 「現状」の as of を 2026-10-21 に更新。内容の変更なし
 - 2026-10-20 — 2.1.304: `managed-agents-secure` を追加。Claude Platform on AWS で `ant` CLI を使うよう更新（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）
 - 2026-10-06 — 2.1.290: `managed-agents-onboard` を追加。Managed Agents の例では、必要なとき以外は web ツールを切り、`auto` の権限ポリシーを使うよう変更（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）
 

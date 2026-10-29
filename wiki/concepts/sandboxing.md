@@ -1,24 +1,25 @@
 ---
 type: concept
 title: サンドボックスと隔離（封じ込め）
-updated: 2026-10-21
+updated: 2026-10-22
 sources:
   - sources/engineering/2026-05-25-how-we-contain-claude
   - sources/engineering/2026-04-08-scaling-managed-agents
   - sources/docs/2026-10-10-sandboxing
   - sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301
   - sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305
+  - sources/docs/2026-10-22-sandbox-allownestedusernamespaces
 ---
 
 # サンドボックスと隔離（封じ込め）
 
 ## 概要
 
-エージェントが「何をするか」ではなく「何ができるか」を、環境側の境界で制限する考え方と実装（[[sources/engineering/2026-05-25-how-we-contain-claude]]）。承認ダイアログでの監督は疲れで形骸化するため、封じ込めを先に設計し、モデル側の防御は補助とする（同）。
+エージェントが「何をするか」ではなく「何ができるか」を、環境側の境界で制限する考え方と実装（[[sources/engineering/2026-05-25-how-we-contain-claude]]）。承認ダイアログでの監督は疲れで形骸化するため、封じ込めを先に設計し、モデル側の防御は補助とする（[[sources/engineering/2026-05-25-how-we-contain-claude]]）。
 
-## 現状（as of 2026-10-10）
+## 現状（as of 2026-10-22）
 
-docs の Bash サンドボックスのページを仕様の正として更新した。Cowork の docs と、docs の比較ページ（sandbox-environments）は未取り込み。下の「公開時点」の行は2026-05-25の記事の記述で、docs と矛盾する点は変更履歴と未解決に整理した。
+docs の Bash サンドボックスのページを仕様の正として更新した（[[sources/docs/2026-10-10-sandboxing]]）。Cowork の docs と、docs の比較ページ（sandbox-environments）は未取り込み。下の「公開時点」の行は2026-05-25の記事（[[sources/engineering/2026-05-25-how-we-contain-claude]]）の記述で、docs と矛盾する点は変更履歴と未解決に整理した。
 
 ### Claude Code の Bash サンドボックス（docs）
 - 対象と段階: Bash、PowerShell、Monitor のコマンドとその子プロセスを OS が強制する境界で囲む。既定はオフで、`/sandbox` か `sandbox.enabled: true` で有効にする。ベータ等の段階表記はページに無い（`network.tlsTerminate` のみ experimental）（[[sources/docs/2026-10-10-sandboxing]]）
@@ -44,15 +45,18 @@ docs の Bash サンドボックスのページを仕様の正として更新し
 - サンドボックス内のシェルコマンドが、`--plugin-dir` のフォルダ（Claude Code がサンドボックス外で再読み込み・実行するコード）に書き込めた問題を修正（2.1.299）。macOS で denied path が symlink 経由のとき、実体の場所から読み書きできた問題を修正（2.1.299）。`denyRead`／`allowRead` のグロブで、フォルダ名に波括弧・括弧・バックスラッシュがあると設定の確認とサンドボックスで解釈が違った問題を修正（2.1.299）。`allowRead`／`allowWrite` の起点ディレクトリが symlink に置き換わったとき再確認するようにした（2.1.299）（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）。
 - `/sandbox` は、プロジェクトフォルダが書き込み不可で設定を保存できなかったとき、成功と報告せず「何も変わらなかった」と理由を示す（2.1.299）。モード表示は "Sandbox commands"（2.1.300）。`claude remote-control` の `--sandbox`／`--no-sandbox` は効果が無かったため削除され、指定するとエラーになる。代わりに設定の `sandbox.enabled`（2.1.300）（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）。
 
-**2.1.304〜2.1.305 の CHANGELOG（2026-10-20〜21、公開時点の記述）**
+**2.1.304〜2.1.305 の CHANGELOG の記述（2026-10-20〜21）**
 
-- **`sandbox.allowNestedUserNamespaces`（Linux、2.1.305）**: サンドボックス内のコマンドがユーザー名前空間を作れるようになる（Chromium、rootless podman 向け）。CHANGELOG は、これによりサンドボックスのファイル保護を回避しうると明記している。有効化すると隔離が弱まる設定で、docs の既知の制限にある `enableWeakerNestedSandbox` と同じ性格（推測）。設定の置き場所と既定値は CHANGELOG に無い（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+- **`sandbox.allowNestedUserNamespaces`（Linux、2.1.305）**: サンドボックス内のコマンドがユーザー名前空間を作れるようになる。CHANGELOG は Chromium、rootless podman 向けとし、サンドボックスのファイル保護を回避しうると明記している（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+  - docs（2026-10-22 取得）にも記載がある（依頼時の想定と異なる。下の未解決を参照）。Linux と WSL2 で、既定 `false`。`true` にすると保護パスや `credentials.files` を含むサンドボックスの制限を当てにできず、auto-allow mode では確認なしで走りうる。`true` が効くのは `~/.claude/settings.json`、`--settings`、managed 設定で、プロジェクトの `.claude/settings.json` と `.claude/settings.local.json` では無視される。rootless Podman／Buildah にはこの設定だけでは足りず、docs は `excludedCommands` を案内する（[[sources/docs/2026-10-22-sandbox-allownestedusernamespaces]]）。
 - `sandbox.filesystem.denyRead` のグロブに、文字クラスでない角括弧（`[user-id]` のルートフォルダなど）があると、Linux でサンドボックス内のコマンドが起動しない問題を修正（2.1.304）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
 - `rm -r` でマウント済みドライブやトップレベルのフォルダ（`/Volumes`、`/media`、WSL の `/mnt/c`）を消すとき、`rm -rf /Applications` と同じ安全確認が出るようにした（2.1.304）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
 
 ## 変更履歴
 
-- 2026-10-21 — 2.1.305: `sandbox.allowNestedUserNamespaces` を追加（ファイル保護を回避しうる）。2.1.304: `denyRead` の角括弧グロブの修正、`rm -r` のマウント先への安全確認（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）
+- 2026-10-22 出典の表記を整理（Lint）: 「（同）」「（同上）」1 件を直前の出典のリンクに展開、出典の無かった 1 行に出典を付与、「現状」の as of を 2026-10-22 に更新。内容の変更なし
+- 2026-10-22 — docs で `sandbox.allowNestedUserNamespaces` の記載を確認（既定 `false`、リポジトリ設定からは有効にできない）（[[sources/docs/2026-10-22-sandbox-allownestedusernamespaces]]）
+- 2026-10-21 — 2.1.305: CHANGELOG が `sandbox.allowNestedUserNamespaces` を追加と記載（ファイル保護を回避しうる）。2.1.304: `denyRead` の角括弧グロブの修正、`rm -r` のマウント先への安全確認（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）
 - 2026-10-14〜10-15 — 2.1.299〜2.1.300 のサンドボックス関連の修正を追記（上記）（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）
 - 2026-10-10 — docs のサンドボックスページを取り込み、`## 現状` を docs 基準に更新。記事の記述（Seatbelt / bubblewrap、書き込み範囲、ネットワーク既定拒否、OSS）は docs と一致し、「公開時点」のまま残した。docs で新たに分かったこと: 既定オフ、auto-allow と regular の2モード、サンドボックス外への再実行と strict sandbox mode、認証情報の deny / mask、managed 設定による admin-required。段階表記は無い（[[sources/docs/2026-10-10-sandboxing]]）
 - 2026-05-25 — 3製品の封じ込め設計と、見落とした4件のリスクを Engineering 記事で公開。Cowork は full-VM mode から、agent loop を VM 外に置く host mode へ移行済み（[[sources/engineering/2026-05-25-how-we-contain-claude]]）
@@ -61,3 +65,4 @@ docs の Bash サンドボックスのページを仕様の正として更新し
 
 - 記事の数値（93%、84%、約0.1%／5〜6% など）と Cowork・claude.ai の構成が現行でも同じかは未確認。docs のサンドボックスページに該当記載が無く（[[sources/docs/2026-10-10-sandboxing]]）、Cowork の docs 等の Ingest で確かめる。
 - 記事の「Claude Code は OS サンドボックス＋人の承認」は、docs では auto-allow（承認なし）と regular permissions を選べる形になっている。記事の記述が既定構成の説明か、モード選択の簡略かは不明（推測: 簡略）（[[sources/engineering/2026-05-25-how-we-contain-claude]]、[[sources/docs/2026-10-10-sandboxing]]）。
+- `sandbox.allowNestedUserNamespaces` の記載の確認: 依頼文は「docs の sandboxing ページに記載なし」としたが、2026-10-22 の取得では sandboxing.md（Protected paths の警告、管理者向けキー一覧、トラブルシュート節）と settings-reference.md の両方に記載があった。依頼文は取得内容と合わないため、記載ありとして書いた。上の docs の要約は設定キー単位で、2026-10-10 の sandboxing 要約（[[sources/docs/2026-10-10-sandboxing]]）の更新ではない。残る食い違いは、CHANGELOG が rootless podman 向けとするのに対し docs は Podman／Buildah にはこの設定だけでは足りないとする点（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]、[[sources/docs/2026-10-22-sandbox-allownestedusernamespaces]]）。docs を正とする。

@@ -108,7 +108,7 @@
 - 追加日: 2026-10-10（人間の指示による）。
 - 頻度: 週次。
 - 初期観測（2026-10-10）: リリースノートの最新の見出しは October 9, 2026。llms.txt のリンクは 762 件。モデル一覧は `/docs/en/about-claude/models/overview.md` から `/docs/en/models/overview.md` に移っている（リダイレクトされる）。
-- `last_seen_release_note`: **October 20, 2026**（2026-10-21 Ingest。2026-09-10〜10-20 を取り込み済み。それより前は未 Ingest）
+- `last_seen_release_note`: **October 21, 2026**（2026-10-22 Ingest。2026-09-10〜10-21 を取り込み済み。それより前は未 Ingest）
 
 ---
 

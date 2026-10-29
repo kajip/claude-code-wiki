@@ -1,10 +1,11 @@
 ---
 type: concept
 title: Claude Opus 5.5
-updated: 2026-10-21
+updated: 2026-10-22
 sources:
   - sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09
   - sources/pricing/2026-10-10-pricing
+  - sources/pricing/2026-10-22-pricing
   - sources/platform-docs/2026-10-10-prompt-caching
   - sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5
   - sources/claude-dev/2026-09-22-getting-the-most-out-of-opus-5-5
@@ -20,12 +21,13 @@ sources:
 
 ## 概要
 
-Claude 5.5 ファミリーの最初のモデル。2026-09-22 に発表された（[[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]]）。多くの作業で Fable 5.1 と同程度の性能を持ち、Opus 5 より約40%安く動く（同）。Claude Code の `default` モデルである（[[sources/claude-dev/2026-09-28-building-with-claude-sonnet-5-5]]）。
+Claude 5.5 ファミリーの最初のモデル。2026-09-22 に発表された（[[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]]）。多くの作業で Fable 5.1 と同程度の性能を持ち、Opus 5 より運用コストが約40%安い（発表文の主張。単価の差ではない。下の「現状」を参照）（[[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]]）。Claude Code の `default` モデルである（[[sources/claude-dev/2026-09-28-building-with-claude-sonnet-5-5]]）。
 
-## 現状（as of 2026-10-21）
+## 現状（as of 2026-10-22）
 
 - API モデル ID は `claude-opus-5-5`。全プラットフォームで提供（[[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]]）。
-- 価格（100万トークンあたり）: 入力 $4、出力 $20、キャッシュ書き込み $5（5分）／$8（1時間）、キャッシュヒット $0.20（入力単価の0.05倍）（[[sources/pricing/2026-10-10-pricing]]）。
+- 価格（100万トークンあたり）: 入力 $4、出力 $20、キャッシュ書き込み $5（5分）／$8（1時間）、キャッシュヒット $0.20（入力単価の0.05倍）。2026-10-22 の価格ページでも変わらない（[[sources/pricing/2026-10-10-pricing]]、[[sources/pricing/2026-10-22-pricing]]）。
+- 「約40%安い」は**運用コスト（発表文）**の話。単価は Opus 5（入力 $5、出力 $25）に対し、入力 $4、出力 $20 で、どちらも20%安い（[[sources/pricing/2026-10-22-pricing]]）。運用コストの差が単価の差より大きい理由は発表文からは分からない（推測: 少ないトークンで終わることやキャッシュ単価の差が効く可能性）。
 - Claude Code では **v2.1.280 以降**が必要。既定の effort は medium（[[sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5]]）。
 - fast mode に対応（入力 $8、出力 $40）（[[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]]）。公開時点では研究プレビュー（[[sources/claude-dev/2026-09-22-getting-the-most-out-of-opus-5-5]]）だったが、2026-10-15 に脱した（[[sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20]]）。Claude Code の `/fast` のラベルも 2.1.304 で消えた（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。→ [[concepts/fast-mode]]
 - Models API の `capabilities.thinking.types.between_tools` で、各モデルが `thinking: {type: "between_tools"}` を受け付けるか確認できる（10-15。Opus 5.5 の値は未確認）（[[sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20]]）。
@@ -40,6 +42,8 @@ Claude 5.5 ファミリーの最初のモデル。2026-09-22 に発表された�
 
 ## 変更履歴
 
+- 2026-10-22 出典の表記を整理（Lint）: 「（同）」「（同上）」1 件を直前の出典のリンクに展開。内容の変更なし
+- 2026-10-22 — 価格ページの更新を確認。単価は不変。「約40%安い」を運用コスト（発表文）と明記し、単価差（20%）と区別（[[sources/pricing/2026-10-22-pricing]]）
 - 2026-10-15 — fast mode が研究プレビューを脱した（[[sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20]]）
 - 2026-09-22 — 発表、提供開始（[[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]]）
 

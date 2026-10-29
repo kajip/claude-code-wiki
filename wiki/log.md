@@ -278,3 +278,35 @@
 ## [2026-10-21] ingest | AI models may be capable of self-replicating without access to a datacenter
 - research/2026-10-12-self-replicating-ai を作成（review: pending）。概念ページ autonomous-replication を新規作成し、cyber-safeguards を更新、unintended-model-actions に関連リンクを追加した。
 - 記事に Claude Code の仕様変更の記述は無い。図表の個別の値は取り込めていない。
+
+## [2026-10-22] lint | wiki 全体の点検
+- 壊れたリンク 0（916 件）、孤立ページ 5（要約 4、分析 1）、review: pending 5（14 日超なし）。index の件数と概念ページの出典数は一致。
+- 矛盾: mcp。2.1.305 の CHANGELOG は「`${VAR}` を env にだけ使う managed の stdio サーバーは allowedMcpServers で絞り込まれない」と読めるが、docs の managed-mcp（2026-10-22 取得）は「`${VAR}` を使うサーバーは検査される」としており、2.1.305 の変更には触れていない。セキュリティに関わるので人間の判断を仰ぐ。
+- 解決候補: fast-mode。pricing（2026-10-22 取得）でも Opus 5.5 は研究プレビューの対象外で、リリースノートと一致した。hooks。Inference hooks は Enterprise の Owner が claude.ai で設定するサーバー側の仕組みで、Claude Code の hooks とは別物。
+- docs に無い: `sandbox.allowNestedUserNamespaces` は docs の sandboxing（2026-10-22 取得）に記載が無い。
+- 古い記述: 2.1.303〜2.1.305 が cloud-sessions、subagents、hooks に未反映。「現状（as of）」の日付が古いページが 9 件。出典の無い行が約 24、「（同）」だけの行が約 85。
+- 台帳: claude-blog の URL が `https://claude.com/resources/articles?products=claude-code` にリダイレクトされる。platform-docs の llms.txt はヘッダーで 808 ページ（762、785 とは数え方が違う可能性が高い）。
+- 取り込み漏れ: platform-docs の 10-20 の見出しにある user profiles と organization webhooks（ベータ）。10-21 の見出しも新たに出ている。
+- 訂正: 2026-10-21 の check の項にある「Inference hooks の GA」は誤り。正しくは「Enterprise 向けにベータを終了」。
+
+## [2026-10-22] ingest | pricing（2026-10-22 版）
+- pricing/2026-10-22-pricing を作成（review: pending）。単価は 10-10 版から変わっていない。Opus 5.5 の fast mode が研究プレビューを脱し、fast mode の料金は 200k 超を含む全コンテキストに掛かる、と明記された。
+- fast-mode の価格ページとの食い違いを解決済みにした（根拠は pricing 10-22 版と platform-docs 10-15）。claude-opus-5-5 の「約40%安い」は発表文の運用コストで、単価は 20% 安いと明記した。claude-haiku-5-5 に 1M コンテキストの料金を追記した。
+- 未解決: 10-10 版の要約に無い行（fast mode の全コンテキスト課金、Foundry、Fable 5、Mythos など）が新しく加わったものかは、10-10 の生データが無く判断できない。
+
+## [2026-10-22] ingest | platform-docs 10-21 と Inference hooks、10-20 の漏れ
+- platform-docs/2026-10-21-release-notes-2026-10-21（API version 2026-10-21、SDK 新版で MIT から Apache 2.0 へ、user profiles の enforcement）と platform-docs/2026-10-22-inference-hooks を作成（review: pending）。`last_seen_release_note` を October 21, 2026 に更新。
+- 10-20 の要約に、漏れていた user profiles、organization webhooks（ベータ）、web fetch の組織設定を追記した。見落としか、取り込み後の追記かは判別できない。
+- hooks: Inference hooks は Claude Code の hooks と別の仕組みとして、未解決を閉じた。2.1.304 の hook の変更（skill hooks の上限、SessionStart の初期化制限の除外など）を追加した。code-review: inference-hooks ページの「research preview」表記は古いと見られる旨を未解決に追記した。
+- 未解決: 10-21 の移行ガイド（破壊的変更の具体）と、inference-hooks の下位ページは未取得。
+
+## [2026-10-22] ingest | docs の managed-mcp と sandbox、2.1.303〜2.1.305 の反映漏れ
+- docs/2026-10-22-managed-mcp と docs/2026-10-22-sandbox-allownestedusernamespaces を作成（review: pending）。
+- mcp: 現状を docs の規則（`${VAR}` を使う managed サーバーは allowlist で検査される）にした。2.1.305 の CHANGELOG の記述は「未解決・矛盾」に移した。セキュリティに関わり、確実に止めるには `deniedMcpServers` を使う。
+- sandboxing: `allowNestedUserNamespaces` は docs に記載がある（既定 false。有効にできるのはユーザー設定、`--settings`、managed 設定だけ。有効にすると保護パスを当てにできない）。同日の lint の「docs に未掲載」は誤りで、拙者も curl で確かめた（sandboxing に5か所、settings-reference に4か所）。残る食い違い: CHANGELOG は rootless podman 向けとし、docs は Podman にはこの設定だけでは足りないとしている。
+- cloud-sessions と subagents に 2.1.304〜2.1.305 を反映した。gh-changelog 2026-10-21 の取り込みメモを、docs の確認結果に書き換えた。
+
+## [2026-10-22] lint | 出典の表記の整理（Lint の対応）
+- 概念ページ 26 本で、「（同）」「（同上）」136 件を直前の出典の `[[sources/...]]` に展開し、出典の無かった 28 行に出典を付けた。「現状」の as of の日付を、11 ページで本文の最新の日付に揃えた。内容は変えていない。
+- 被リンク 0 のページのうち、redesigning-source-control を claude-tag から、mods-howto を mods から、independent-evaluators を cyber-safeguards から参照した。claude-for-government-ga と dashboards-and-motion は、適した概念ページが無いので張っていない。
+- 文脈から出典を決めた行（要確認）: auto-mode の未解決 3 行（性能数値、段階、サードパーティのプロバイダでの default 開始）。

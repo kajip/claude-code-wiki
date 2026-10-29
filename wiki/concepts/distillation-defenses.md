@@ -1,7 +1,7 @@
 ---
 type: concept
 title: 蒸留攻撃への対策（distillation defenses）
-updated: 2026-10-21
+updated: 2026-10-22
 sources:
   - sources/anthropic-news/2026-10-12-distillation-defenses
   - sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5
@@ -19,15 +19,16 @@ sources:
 ## 現状（as of 2026-10-21）
 
 - 3つの柱: 推論の行き先の制御、2段 classifier による遮断、繰り返しの試行の抑止（[[sources/anthropic-news/2026-10-12-distillation-defenses]]）。
-- preserved thinking: 2026-08-31 以降に作られた新規 API アカウントは、過去のコンテキストを編集できない。Fable 5.1 と Opus 5.5 で導入（同上）。Opus 5.5 の発表記事も同じ日付を挙げている（[[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]]）。
+- preserved thinking: 2026-08-31 以降に作られた新規 API アカウントは、過去のコンテキストを編集できない。Fable 5.1 と Opus 5.5 で導入（[[sources/anthropic-news/2026-10-12-distillation-defenses]]）。Opus 5.5 の発表記事も同じ日付を挙げている（[[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]]）。
 - Sonnet 5.5 では、推論記録は依頼した組織だけが読める（[[sources/anthropic-news/2026-10-12-distillation-defenses]]）。Sonnet 5.5 の発表記事は、thinking が作ったアカウントに結び付くと説明している。Claude Code でセッション中にアカウントを切り替える場合に影響する（[[sources/anthropic-news/2026-09-28-introducing-claude-sonnet-5-5]]）。
 - 2段 classifier の対象: Sonnet 5.5、Opus 5 と 5.5、Fable 5 と 5.1。誤検知率 0.1% 未満（[[sources/anthropic-news/2026-10-12-distillation-defenses]]）。
 - 課金: 応答前に遮断された依頼のうち、`bio`、`frontier_llm`、`reasoning_extraction` の3分類は課金される（2026-09-24 から）（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。記事は同じ日付の再開を、誤検知率 0.1% 未満の分野（蒸留を含む）への措置と説明している（[[sources/anthropic-news/2026-10-12-distillation-defenses]]）。
 - 効果（Anthropic の推計）: 蒸留者が抜き取った推論トークンは 1/10〜1/100 以下。数万のアカウントを停止（[[sources/anthropic-news/2026-10-12-distillation-defenses]]）。
-- 開発者への影響: preserved thinking により、一部の開発者は連携の更新が必要（同上）。
+- 開発者への影響: preserved thinking により、一部の開発者は連携の更新が必要（[[sources/anthropic-news/2026-10-12-distillation-defenses]]）。
 
 ## 変更履歴
 
+- 2026-10-22 出典の表記を整理（Lint）: 「（同）」「（同上）」2 件を直前の出典のリンクに展開。内容の変更なし
 - 2026-10-12 — 対策の全体像と効果を公開（取り込みは 2026-10-21）（[[sources/anthropic-news/2026-10-12-distillation-defenses]]）
 - 2026-09-28 — Sonnet 5.5 で preserved thinking を拡大（[[sources/anthropic-news/2026-09-28-introducing-claude-sonnet-5-5]]）
 - 2026-09-24 — 遮断された依頼への課金を再開（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）

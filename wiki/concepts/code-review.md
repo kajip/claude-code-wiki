@@ -1,13 +1,14 @@
 ---
 type: concept
 title: Code Review（GitHub App による PR 自動レビュー）
-updated: 2026-10-21
+updated: 2026-10-22
 sources:
   - sources/claude-blog/2026-10-15-code-review-is-now-generally-available
   - sources/docs/2026-10-16-code-review
   - sources/claude-dev/2026-10-15-how-the-claude-code-team-does-code-review
   - sources/gh-changelog/2026-10-18-v2-1-302
   - sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305
+  - sources/platform-docs/2026-10-22-inference-hooks
 ---
 
 # Code Review
@@ -16,7 +17,7 @@ sources:
 
 Claude が GitHub の PR を自動でレビューする機能。複数エージェントが差分と周辺コードを調べ、検証を経た指摘をインラインコメントとチェックランで返す（[[sources/docs/2026-10-16-code-review]]）。2026-10-15 に研究プレビューから GA になった（[[sources/claude-blog/2026-10-15-code-review-is-now-generally-available]]）。
 
-## 現状（as of 2026-10-16）
+## 現状（as of 2026-10-22）
 
 - 段階: 一般提供（GA）。研究プレビューは終了（[[sources/claude-blog/2026-10-15-code-review-is-now-generally-available]]）。
 - 提供プラン: Team と Enterprise。GitHub のリポジトリ（GitHub Enterprise Server、データレジデンシー付き Enterprise Cloud を含む）が対象（[[sources/docs/2026-10-16-code-review]]）。
@@ -49,6 +50,7 @@ Claude が GitHub の PR を自動でレビューする機能。複数エージ�
 
 ## 変更履歴
 
+- 2026-10-22 出典の表記を整理（Lint）: 「現状」の as of を 2026-10-22 に更新。内容の変更なし
 - 2026-10-20〜10-21 — 2.1.304: review levels を CHANGELOG に追加、組織の全リポジトリ選択、有効化直後の PR の取りこぼし修正。2.1.305: 最新コミットの取りこぼしと再レビューの LGTM を修正（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）
 - 2026-10-17 — 2.1.302: セットアップが GitHub 接続後にリポジトリ選択から再開するよう修正（[[sources/gh-changelog/2026-10-18-v2-1-302]]）
 - 2026-10-16 — docs の下位ページ（setup / customize / pull-requests / costs / troubleshooting）を取り込み、有効化手順、`REVIEW.md` の読み込み元、コマンド、費用の仕組み、トラブルシューティングを追記（[[sources/docs/2026-10-16-code-review]]）。
@@ -64,3 +66,4 @@ Claude が GitHub の PR を自動でレビューする機能。複数エージ�
 - 記事の社内値（revert 率40%超減、16%から54% など）は自己申告で、母数・測定方法が不明。製品の効果としては断定しない。
 - 記事は「Admins が Quick / Standard / Deep を設定」と書き、docs は Owner と表記。同じ役割と推測（上記と同様）。docs の setup は Owner ロール（Claude 組織）と明記しており、docs を現状とする。
 - 記事は「PR を承認しない」製品と、社内で低リスク変更を自動チェックのみでマージする運用を区別している。後者は社内運用で、製品機能ではない。
+- platform-docs の inference-hooks ページ（2026-10-22 取得）は Code Review を「research preview」と書くが、GA 記事（2026-10-15）と Claude Code の docs では GA。古い記載と見られる。GA 側を現状とする（[[sources/platform-docs/2026-10-22-inference-hooks]]、[[sources/claude-blog/2026-10-15-code-review-is-now-generally-available]]、[[sources/docs/2026-10-16-code-review]]）。同ページは、Code Review の Anthropic 側レビュー実行は Inference hooks の対象外（ユーザーがローカルで `/code-review` を動かす分は対象）とも書く。

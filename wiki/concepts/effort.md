@@ -1,7 +1,7 @@
 ---
 type: concept
 title: effort（思考量の設定）
-updated: 2026-10-16
+updated: 2026-10-22
 sources:
   - sources/claude-blog/2026-08-14-maximizing-the-value-of-your-claude-code-sessions
   - sources/docs/2026-10-10-prompt-caching
@@ -21,7 +21,7 @@ sources:
 
 タスクにどれだけ計算を使わせるかの目安。上げると、判断と検証を自分で進める度合いが増える（[[sources/claude-dev/2026-09-25-spending-your-effort]]）。
 
-## 現状（as of 2026-10-10）
+## 現状（as of 2026-10-16）
 
 - 段階: `low`、`medium`、`high`、`xhigh`、`max`（[[sources/claude-dev/2026-09-28-building-with-claude-sonnet-5-5]]）。
 - Claude Code での既定: Opus 5.5 は medium（[[sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5]]）、Sonnet 5.5 も medium（[[sources/anthropic-news/2026-09-28-introducing-claude-sonnet-5-5]]）。Claude API での Sonnet 5.5 の既定は high（[[sources/claude-dev/2026-09-28-building-with-claude-sonnet-5-5]]）。
@@ -34,6 +34,7 @@ sources:
 
 ## 変更履歴
 
+- 2026-10-22 出典の表記を整理（Lint）: 「現状」の as of を 2026-10-16 に更新。内容の変更なし
 - 2026-08-14 — （公開時点）effort の役割と `MAX_THINKING_TOKENS=0` を説明する記事が公開された（[[sources/claude-blog/2026-08-14-maximizing-the-value-of-your-claude-code-sessions]]）
 - 2026-04-07 — （公開時点の値）Claude Code の既定を medium（3/4 から）から戻し、Opus 4.7 は `xhigh`、ほかは `high` にした。製品側の既定値が API の `effort` として送られる。現在の既定は上の「現状」を参照（[[sources/engineering/2026-04-23-an-update-on-recent-claude-code-quality-reports]]、詳細は [[concepts/claude-code-quality-incidents]]）
 - 2026-10-10 — Claude API 側の挙動を platform-docs で確認し、「Claude API を直接使う場合」と「Claude Code の場合」を分けて書いた。矛盾は解決済みとして閉じた（[[sources/platform-docs/2026-10-10-prompt-caching]]）
