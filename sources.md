@@ -37,11 +37,12 @@
 
 ### 4. claude-blog — Claude ブログ（Claude Code カテゴリ）　✅
 
-- URL: https://claude.com/blog-category/claude-code
+- URL: https://claude.com/resources/articles?products=claude-code
+  - 旧 URL の `https://claude.com/blog-category/claude-code` は、ここに 308 でリダイレクトされる（2026-10-30 に確認）。記事の URL は `https://claude.com/resources/articles/<slug>` の形。
 - 差分検知: 一覧の記事 URL が `wiki/sources/claude-blog/` に無ければ新規。
 - 注意: このカテゴリの一覧には、Claude Code 以外のタグ（Enterprise AI、Agents など）の記事も混ざる。関連性は Check の手順 5 で判断する。
 - 注意: 一覧には claude.dev や anthropic.com の記事も並ぶ。そうした記事は、記事のドメインに対応する source_id（claude-dev／anthropic-news）で1ページだけ作る。
-- ページ送り: 1ページ目には12件ほどしか出ない（「View more」はブラウザ側で読み込む）。古い記事は `https://claude.com/blog-category/claude-code?page=2` で見る（2026-10-10 に確認）。
+- ページ送り: 1ページ目には12件ほどしか出ない（「View more」はブラウザ側で読み込む）。古い記事は `https://claude.com/resources/articles?products=claude-code&page=2` で見る（2026-10-30 に確認。2ページ目にだけ出る記事がある）。
 - 初期観測（2026-10-10）: 最新は 2026-09-24「Claude Opus 5.5 は、より長くコンテキストを使うコーディングセッション向けに作られた」（英語タイトル: Coding sessions are longer and use more context. Claude Opus 5.5 is built with that in mind.）。続いて 09-23、09-17、09-14（CI のテスト影響分析）、08-24。
 
 ### 5. anthropic-news — Anthropic ニュース　✅
@@ -69,6 +70,7 @@
   1. `https://code.claude.com/docs/en/changelog.md` — ドキュメント側の変更履歴
   2. `https://code.claude.com/docs/en/whats-new/index.md` と週次ダイジェスト（`whats-new/2026-wNN.md`）— 新しい週が増えていないか
   3. `https://code.claude.com/docs/llms.txt` — ページ一覧の増減（英語版。各言語のインデックスへのリンクもある）
+     - 数え方: `](https://code.claude.com/docs/en/` を含む行の数。2026-10-30 は 264 件（2026-10-21 の Check の 275 件は数え方が違う可能性がある）。
 - 取り込みの単位: ドキュメントは約 220 ページあるため、ページごとの要約ページは作らない。変更が検知された機能について `concepts/` を更新し、根拠として該当ドキュメントページの要約ページ（必要な箇所だけ）を作る。ページの Markdown 版は URL の末尾に `.md` を付けると取れる。
 - 初期観測（2026-10-10）: llms.txt に載っている What's New の最新は **Week 37（2026-09-07〜11）**。それ以降の週は一覧に無い（未公開か、一覧への反映の遅れかは未確認）。Week 31 も一覧に無い。
 
@@ -102,6 +104,7 @@
 - 差分検知（上から優先）:
   1. `https://platform.claude.com/docs/en/release-notes/overview.md` — Claude Platform のリリースノート。日付の見出し（`### October 9, 2026` の形）が新しい順に並ぶ。前回見た日付より新しい見出しがあれば新規。旧 URL の `/release-notes/api.md` は、ここにリダイレクトされる。
   2. `https://platform.claude.com/llms.txt` — ページ一覧の増減（`/docs/llms.txt` は、ここにリダイレクトされる）。
+     - 数え方: ファイル先頭のヘッダーの「English (en) - N pages」の N を使う。`](https://platform.claude.com/docs/en/…md)` の行の数と一致する（2026-10-30 はどちらも 826）。過去の値（10-10 の 762、10-21 の 785）は数え方が記録されておらず、比べられない。
 - 取り込みの単位: docs（7）と同じ。ページごとの要約ページは作らず、変更が検知された機能について `concepts/` を更新し、根拠として該当ページの要約ページ（必要な箇所だけ）を作る。リリースノートは、前回からの分を1ページにまとめる（CHANGELOG と同じバッチ方式）。ページの Markdown 版は URL の末尾に `.md` を付けると取れる。
 - 価格のページはこの中にあるが、情報源 10（pricing）として別に扱う。
 - Query で `claude-api` スキルを補足に使い、残す価値がある情報が見つかったときは、スキルが示すこの情報源の URL から取り込む（CLAUDE.md の Query 手順 5）。
