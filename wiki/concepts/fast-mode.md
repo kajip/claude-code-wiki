@@ -1,7 +1,7 @@
 ---
 type: concept
 title: fast mode
-updated: 2026-10-22
+updated: 2026-11-02
 sources:
   - sources/claude-blog/2026-08-14-maximizing-the-value-of-your-claude-code-sessions
   - sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09
@@ -14,6 +14,8 @@ sources:
   - sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296
   - sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20
   - sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305
+  - sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316
+  - sources/platform-docs/2026-10-30-release-notes-2026-10-22-to-10-30
 ---
 
 # fast mode
@@ -22,7 +24,7 @@ sources:
 
 同じモデルのまま出力を速く返すモード。Opus 5.5 では最大2.5倍速く、単価は高くなる（[[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]]）。
 
-## 現状（as of 2026-10-22）
+## 現状（as of 2026-11-02）
 
 - 価格ページ（2026-10-22 取得）も、Opus 5 と Opus 4.8 の fast mode だけを研究プレビューとし、Opus 5.5 は外れた。fast mode の価格は 200k 入力トークン超を含む**全コンテキスト**に掛かる。入力／出力は Opus 5.5 が $8／$40、Opus 5 と Opus 4.8 が $10／$50。Claude API（first-party）で使え、Opus 5.5 は Microsoft Foundry（Azure ホスト）でも使える。Claude Platform on AWS とパートナーのクラウドでは使えず、Batch API でも使えない。キャッシュとデータ所在地の倍率は fast mode の価格に重ねて掛かる（[[sources/pricing/2026-10-22-pricing]]）。
 - **Opus 5.5 の fast mode は 2026-10-15 に研究プレビューを脱した**。アクセス申請は不要で、`fast-mode-2026-02-01` ベータヘッダーも不要（付けても動く）。Start／Build／Scale の usage tier に既定のレート制限が付く。Opus 5 と Opus 4.8 は研究プレビューのままで、ヘッダーが必要（[[sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20]]）。
@@ -36,9 +38,15 @@ sources:
 - （公開時点 2026-08-14 の説明）fast mode はキャッシュのキーに含まれ、途中で有効にすると再処理が fast mode の価格で行われる。有効にするなら最初に。無効に戻すときはキャッシュ上の費用は無い（[[sources/claude-blog/2026-08-14-maximizing-the-value-of-your-claude-code-sessions]]）。
 - Sonnet 5.5 には fast mode が無い（[[sources/claude-dev/2026-09-28-building-with-claude-sonnet-5-5]]）。
 - Claude Tag（Slack）でも `!fast`／`!fast off` で切り替えられる（2.1.290）（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）。
+- Claude Code の CHANGELOG は、**Opus 4.8 の fast mode を 2026-10-30 付けで非推奨**とし、**2026-11-30 に削除**すると記載（2.1.316）。削除後、Opus 4.8 の fast mode リクエストはエラーになり、標準の Opus 4.8 にはフォールバックしない。Opus 5.5 への移行で高速化を維持できる（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）。
+- **Claude Platform のリリースノート（10-30）が Opus 4.8 の fast mode の非推奨を確認**。2026-11-30 に削除し、以降 `claude-opus-4-8` への `speed: "fast"` はエラーを返す。移行先は Opus 5.5（[[sources/platform-docs/2026-10-30-release-notes-2026-10-22-to-10-30]]）。
+- Claude Models on Google Cloud（Anthropic managed）でも Opus 5.5 の fast mode が使える（10-22）。なお価格ページ（10-22 取得）は、パートナーのクラウドでは使えないと記載しており、この提供形態は価格ページに反映されていない可能性がある（推測）（[[sources/platform-docs/2026-10-30-release-notes-2026-10-22-to-10-30]]、[[sources/pricing/2026-10-22-pricing]]）。
 
 ## 変更履歴
 
+- 2026-10-30 — Opus 4.8 の fast mode を非推奨、2026-11-30 に削除（platform-docs で確認）（[[sources/platform-docs/2026-10-30-release-notes-2026-10-22-to-10-30]]）
+- 2026-10-22 — Claude Models on Google Cloud（Anthropic managed）で Opus 5.5 の fast mode が使えるように（[[sources/platform-docs/2026-10-30-release-notes-2026-10-22-to-10-30]]）
+- 2026-10-31 — 2.1.316: Opus 4.8 の fast mode を非推奨（2026-10-30 付け）、削除は 2026-11-30 と発表（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）
 - 2026-10-22 出典の表記を整理（Lint）: 「（同）」「（同上）」1 件を直前の出典のリンクに展開、出典の無かった 1 行に出典を付与。内容の変更なし
 - 2026-10-22 — 価格ページが更新され、Opus 5.5 の fast mode が研究プレビューから外れた（Opus 5 と Opus 4.8 は研究プレビューのまま）。全コンテキストに fast mode の料金が掛かる旨も明記（[[sources/pricing/2026-10-22-pricing]]）
 - 2026-10-20 — 2.1.304: `/fast` ダイアログの Opus 5.5 から "(research preview)" を削除（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）
@@ -51,3 +59,4 @@ sources:
 
 - 解決済み（2026-10-22）: 価格ページ（2026-10-10 取得）は Opus 5.5 の fast mode を研究プレビューとしていたが、10-15 のリリースノートで脱していた。価格ページの 10-22 版が更新され、Opus 5.5 は研究プレビューから外れて食い違いは無くなった（[[sources/pricing/2026-10-10-pricing]]、[[sources/pricing/2026-10-22-pricing]]、[[sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20]]）。
 - 解決済み（2026-10-10）: 研究プレビューを終えたかどうか → 価格ページでは研究プレビューのまま（[[sources/pricing/2026-10-10-pricing]]）。
+- 解決済み（2026-11-02）: Opus 4.8 の fast mode の非推奨・削除は CHANGELOG のみの記載で、価格ページ（10-22 取得）は Opus 4.8 を研究プレビューの対象に載せたままだった。platform-docs のリリースノート 10-30 が非推奨と 2026-11-30 の削除を確認したため、platform-docs を正として閉じる。価格ページは 10-22 取得で 10-30 より前の版（時点の差）。次回の pricing 取り込みで Opus 4.8 の行が更新されるか確認する（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]、[[sources/pricing/2026-10-22-pricing]]、[[sources/platform-docs/2026-10-30-release-notes-2026-10-22-to-10-30]]）。

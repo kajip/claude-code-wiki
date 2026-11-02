@@ -1,7 +1,7 @@
 ---
 type: concept
 title: MCP（Model Context Protocol）
-updated: 2026-10-22
+updated: 2026-11-02
 sources:
   - sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296
   - sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301
@@ -9,6 +9,7 @@ sources:
   - sources/gh-changelog/2026-10-18-v2-1-302
   - sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305
   - sources/docs/2026-10-22-managed-mcp
+  - sources/anthropic-news/2026-10-22-donating-agent-skills-to-the-agentic-ai-foundation
 ---
 
 # MCP（Model Context Protocol）
@@ -35,9 +36,11 @@ Claude Code が外部のツールやデータにつなぐためのプロトコ�
 - cloud session や SDK の `setMcpServers` で渡した MCP サーバーが、後から自分の設定の同名サーバーに置き換えられる問題を修正（2.1.305）。MCP の同意ダイアログは、プロンプト向けの Enter を Accept と取りにくくした（2.1.305）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
 - cloud session の最初のターンは、claude.ai から同期したプラグインのローカル（stdio）MCP サーバーを待たない。サーバーが `alwaysLoad: true` を指定する場合を除く（2.1.304）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
 - カスタム `ANTHROPIC_BASE_URL` 配下では tool search が既定でオンになった（2.1.304）。ゲートウェイが拒否する環境で全リクエストが失敗する回帰が出て、tool search 抜きで再試行するよう 2.1.305 で修正した（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+- 組織・標準化: MCP は Agentic AI Foundation（AAIF）に寄贈済み。AAIF は Anthropic が Block と OpenAI と共に前年に共同設立した団体（記事の記述。設立の年月は記事に無い）（[[sources/anthropic-news/2026-10-22-donating-agent-skills-to-the-agentic-ai-foundation]]）。同じ AAIF に 2026-10-22 に Agent Skills の標準も寄贈された（[[concepts/skills]]）。寄贈の時期や管理体制の詳細は、この記事には書かれていない。
 
 ## 変更履歴
 
+- 2026-11-02 — AAIF への寄贈済みという記述を追記（[[sources/anthropic-news/2026-10-22-donating-agent-skills-to-the-agentic-ai-foundation]]）
 - 2026-10-22 出典の表記を整理（Lint）: 出典の無かった 1 行に出典を付与。内容の変更なし
 - 2026-10-22 — docs の managed-mcp ページを取り込み、`${VAR}` を使う managed サーバーは allowlist で検査される、という docs の規則を `## 現状` に採用。2.1.305 の CHANGELOG の記述は未解決に移した（[[sources/docs/2026-10-22-managed-mcp]]）
 - 2026-10-21 — 2.1.305: CHANGELOG によると `allowedMcpServers` が `managed-mcp.json` の stdio サーバー（`${VAR}` を `env` のみに使うもの）を絞り込まなくなった（docs と食い違い、未解決。allowlist 漏れが読み込まれうる）。`setMcpServers` のサーバーが置き換えられる問題を修正。2.1.304: stdio サーバーを待たない cloud session の最初のターン、tool search の既定オン（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）

@@ -1,11 +1,12 @@
 ---
 type: concept
 title: 長時間動くエージェントのハーネス
-updated: 2026-10-22
+updated: 2026-11-02
 sources:
   - sources/engineering/2026-02-05-building-a-c-compiler-with-parallel-claudes
   - sources/engineering/2026-03-24-harness-design-long-running-apps
   - sources/research/2026-10-01-claude-shaped-science
+  - sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop
 ---
 
 # 長時間動くエージェントのハーネス
@@ -40,6 +41,7 @@ sources:
 
 ## 変更履歴
 
+- 2026-10-22 — 単一エージェントループへ畳む設計指針が公開された（Claude Platform 向け）。モデルの進歩で harness の部品を外す、という 2026-03 の原則と同じ方向（[[sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop]]）
 - 2026-10-22 出典の表記を整理（Lint）: 「（同）」「（同上）」14 件を直前の出典のリンクに展開、出典の無かった 2 行に出典を付与。内容の変更なし
 - 2026-10-01 — Claude Code の複数セッションによる研究での実践例が公開された（[[sources/research/2026-10-01-claude-shaped-science]]）
 - 2026-03-24 — generator と evaluator の分離、planner を加えた3エージェント構成、モデル更新に伴う簡素化が公開された。モデル名と費用は公開時点の値（[[sources/engineering/2026-03-24-harness-design-long-running-apps]]）
@@ -47,6 +49,7 @@ sources:
 
 ## 未解決・矛盾
 
+- 2026-10-22 の記事は、ターンと費用の予算、書き込みの gate を harness に置き、計画は main モデルが自分のコンテキストに書いて更新する単一ループを勧める。2026-03 の planner／generator／evaluator 分離とは逆向きに見えるが、記事は検証用の subagent を残す条件に挙げている（[[sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop]]）。両者の使い分けの基準を直接比べた出典は無い。
 - 2026-03 の記事の「Opus 4.5 以降は reset が不要」「Opus 4.6 では sprint が不要」は当時のモデルについての観察。現行モデル（2026-10 時点）での再検証は取り込んでいない。
 - 2026-02 の方式（並列セッションとロックファイル、評価役なし）と 2026-03 の方式（役割分担の直列的な協調）の優劣は、どちらの記事も比較していない。題材も違う。
 - Claude Code の製品機能（サブエージェントなど）との関係は未確認。2026-03 の記事は Claude Agent SDK と Playwright MCP で組んだ自作ハーネスの話。

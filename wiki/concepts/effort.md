@@ -1,7 +1,7 @@
 ---
 type: concept
 title: effort（思考量の設定）
-updated: 2026-10-22
+updated: 2026-11-02
 sources:
   - sources/claude-blog/2026-08-14-maximizing-the-value-of-your-claude-code-sessions
   - sources/docs/2026-10-10-prompt-caching
@@ -13,6 +13,7 @@ sources:
   - sources/claude-blog/2026-09-24-opus-5-5-built-for-longer-coding-sessions
   - sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296
   - sources/engineering/2026-04-23-an-update-on-recent-claude-code-quality-reports
+  - sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316
 ---
 
 # effort
@@ -21,7 +22,7 @@ sources:
 
 タスクにどれだけ計算を使わせるかの目安。上げると、判断と検証を自分で進める度合いが増える（[[sources/claude-dev/2026-09-25-spending-your-effort]]）。
 
-## 現状（as of 2026-10-16）
+## 現状（as of 2026-11-02）
 
 - 段階: `low`、`medium`、`high`、`xhigh`、`max`（[[sources/claude-dev/2026-09-28-building-with-claude-sonnet-5-5]]）。
 - Claude Code での既定: Opus 5.5 は medium（[[sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5]]）、Sonnet 5.5 も medium（[[sources/anthropic-news/2026-09-28-introducing-claude-sonnet-5-5]]）。Claude API での Sonnet 5.5 の既定は high（[[sources/claude-dev/2026-09-28-building-with-claude-sonnet-5-5]]）。
@@ -31,9 +32,13 @@ sources:
 - キャッシュとの関係（**Claude API を直接使う場合**）: `output_config.effort` を変えると、messages のキャッシュは常に無効になる。tools と system への影響はモデルごと。effort を既定値に明示指定するのは省略と同じで、無効にならない。per-message effort に対応するモデルでは、`messages` 内の `role: "system"` メッセージで変えればキャッシュは保たれる（[[sources/platform-docs/2026-10-10-prompt-caching]]）。Sonnet 5.5 の記事も同じ内容（トップレベルの変更で無効、1ターンだけなら per-message effort（ベータ））（[[sources/claude-dev/2026-09-28-building-with-claude-sonnet-5-5]]）。
 - （公開時点 2026-08-14 の説明）thinking が出力トークンの多くを占め、その量を effort が決める。`/effort` の設定は次のセッションにも残るので、新しいセッションで `/model` と `/effort` を一度確認するとよい。`MAX_THINKING_TOKENS=0 claude` はそのセッションの thinking を切り、`/effort low` より下の段階（Fable 5 を除く）。途中の変更はキャッシュを壊すとされたが、現行は上の docs の記述が正（[[sources/claude-blog/2026-08-14-maximizing-the-value-of-your-claude-code-sessions]]）。
 - Haiku 5.5 も effort を調整できる（[[sources/anthropic-news/2026-10-07-introducing-claude-haiku-5-5]]）。
+- `CLAUDE_CODE_SUBAGENT_EFFORT` で、他に指定が無いときのサブエージェントの effort を決められる（セッションの effort を継承しない）（2.1.316）（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）。
+- `ultrathink`: 対話ターミナルで、Anthropic の API 経由の Opus 5.5、Sonnet 5.5、Haiku 5.5、Fable 5.1 では、そのターンを xhigh effort で実行する。作業中に打つと残りのターンで上がる（2.1.311）。VS Code も同様（2.1.316）。`CLAUDE_CODE_DISABLE_ULTRATHINK` で無効化できる（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）。
+- 管理者が effort の上限を設けた場合、Claude Code は effort を下げて再試行し、使うレベルを表示する（2.1.314）。表示される effort（スピナー、OpenTelemetry の `effort`、transcript）は、モデルが適用した後の値になった（2.1.312）（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）。
 
 ## 変更履歴
 
+- 2026-10-31 — 2.1.311〜2.1.316: `ultrathink` を xhigh effort のターンに変更、`CLAUDE_CODE_SUBAGENT_EFFORT` と `CLAUDE_CODE_DISABLE_ULTRATHINK` を追加、管理者の上限時の自動引き下げ（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）
 - 2026-10-22 出典の表記を整理（Lint）: 「現状」の as of を 2026-10-16 に更新。内容の変更なし
 - 2026-08-14 — （公開時点）effort の役割と `MAX_THINKING_TOKENS=0` を説明する記事が公開された（[[sources/claude-blog/2026-08-14-maximizing-the-value-of-your-claude-code-sessions]]）
 - 2026-04-07 — （公開時点の値）Claude Code の既定を medium（3/4 から）から戻し、Opus 4.7 は `xhigh`、ほかは `high` にした。製品側の既定値が API の `effort` として送られる。現在の既定は上の「現状」を参照（[[sources/engineering/2026-04-23-an-update-on-recent-claude-code-quality-reports]]、詳細は [[concepts/claude-code-quality-incidents]]）

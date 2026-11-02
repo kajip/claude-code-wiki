@@ -1,7 +1,7 @@
 ---
 type: concept
 title: Claude Managed Agents
-updated: 2026-10-22
+updated: 2026-11-02
 sources:
   - sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09
   - sources/claude-dev/2026-10-08-building-effective-agent-automations
@@ -9,6 +9,7 @@ sources:
   - sources/engineering/2026-04-08-scaling-managed-agents
   - sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20
   - sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305
+  - sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316
 ---
 
 # Claude Managed Agents
@@ -23,7 +24,7 @@ Anthropic の基盤で、サーバー側で動くエージェントを作る仕�
 - 認証情報は sandbox から到達できない vault などに置く。MCP 呼び出しは専用プロキシ経由で行い、harness は資格情報を扱わない（[[sources/engineering/2026-04-08-scaling-managed-agents]]）。
 - コンテナを必要時だけ起動する構成で、公開時点の p50 TTFT は約 60%、p95 は 90% 超短縮（[[sources/engineering/2026-04-08-scaling-managed-agents]]）。この値は公開時点のもので、現在の値は未確認。
 
-## 現状（as of 2026-10-21）
+## 現状（as of 2026-11-02）
 
 - **ベータ**（[[sources/claude-dev/2026-10-08-building-effective-agent-automations]]）。
 - 資源は `ant apply <file>` で作る。手動で動かすには `ant beta:deployments run --deployment-id <id>`（[[sources/claude-dev/2026-10-08-building-effective-agent-automations]]）。
@@ -36,9 +37,11 @@ Anthropic の基盤で、サーバー側で動くエージェントを作る仕�
 - scheduled deployments が Claude Platform on AWS で使える（10-14）（[[sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20]]）。
 - OpenTelemetry export（**ベータ**）で、Managed Agents のセッションを自前の観測基盤でトレースできる（10-14）（[[sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20]]）。
 - `/claude-api managed-agents-secure`（2.1.304）で、agent の設定を Anthropic 公開のセキュリティガイドと比較できる（変更はしない）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+- `/claude-api` スキルは Managed Agents の subagent チームを `multiagent_20261001`（dynamic workflows 既定オン）で作る。以前は `coordinator`（2.1.309）。workflow run を改善するために agent を変える前に、その run の workflow を読むか尋ねる（2.1.314）（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）。
 
 ## 変更履歴
 
+- 2026-10-23 — 2.1.309: `/claude-api` が Managed Agents の subagent チームを `coordinator` から `multiagent_20261001` に切り替え（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）
 - 2026-10-22 出典の表記を整理（Lint）: 「（同）」「（同上）」5 件を直前の出典のリンクに展開。内容の変更なし
 - 2026-10-20 — 2.1.304: `/claude-api managed-agents-secure` を追加（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）
 - 2026-10-14 — scheduled deployments が Claude Platform on AWS で利用可。OpenTelemetry export をベータで開始（[[sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20]]）

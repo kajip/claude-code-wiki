@@ -310,3 +310,57 @@
 - 概念ページ 26 本で、「（同）」「（同上）」136 件を直前の出典の `[[sources/...]]` に展開し、出典の無かった 28 行に出典を付けた。「現状」の as of の日付を、11 ページで本文の最新の日付に揃えた。内容は変えていない。
 - 被リンク 0 のページのうち、redesigning-source-control を claude-tag から、mods-howto を mods から、independent-evaluators を cyber-safeguards から参照した。claude-for-government-ga と dashboards-and-motion は、適した概念ページが無いので張っていない。
 - 文脈から出典を決めた行（要確認）: auto-mode の未解決 3 行（性能数値、段階、サードパーティのプロバイダでの default 開始）。
+
+## [2026-11-02] check | 全情報源（毎日・週次）
+- 取得の失敗なし。ページ内の指示文なし。npm latest/next 2.1.316、stable 2.1.309。CHANGELOG の先頭 2.1.316（2.1.313 は欠番、2.1.315 は npm のみ）。platform-docs のリリースノートは October 30, 2026 まで。
+- 取り込み対象: gh-changelog 2.1.306〜2.1.316、platform-docs 10-22〜10-30、claude-blog 2 件（Google Cloud のコスト管理、subagents を main loop に畳む設計）、anthropic-news（Agent Skills の寄贈）、research（UK AISI の cybertesting incident の alignment assessment）。
+- リダイレクト: claude-blog の一覧は https://claude.com/resources/articles?products=claude-code へ（308）。engineering の記事は https://www.anthropic.com/research/<slug> へ（308、確認した 11 件すべて）。台帳の更新は人間に提案する。
+- pricing: 数値は 10-22 版と一致。生データの fingerprint は sha256:79f8d09b… で、10-22 版と異なる（差分の箇所は未確認）。
+- docs: What's New は Week 37 のまま。llms.txt は 275 件（前回の件数の記録が無く比較できない）。platform-docs の llms.txt は 845 件。
+- 新規なし: claude-dev、engineering。
+
+## [2026-11-02] skip | Claude Code と関連の薄い記事
+- anthropic-news: S-1 の届出（10-26）、AI for Science の拡大（10-28）、life sciences の guest investigators 募集（10-22）、Long-Term Benefit Trust の人事（10-21）、Investing in the public benefit（10-18）、シンガポール拠点（10-14）、GSA との提携拡大（10-27。提供範囲の話で Claude Code の仕様に触れないため）。
+- claude-blog: IDC の顧客事例（10-28）。
+- research: How AI agents shape experts' judgment calls（10-27）、創薬（10-27）、protein binders（10-20）、雇用・期待に関する 3 件（10-16）、量子回路（10-16）。
+
+## [2026-11-02] ingest | Donating Agent Skills to the Agentic AI Foundation
+- anthropic-news/2026-10-22-donating-agent-skills-to-the-agentic-ai-foundation を作成（review: pending）。概念ページ skills を新規作成した（出典 5）。
+- Agent Skills（`SKILL.md` を含むフォルダの標準）を Linux Foundation 傘下の AAIF に寄贈。名称、ロゴ、GitHub organization、`agentskills.io` が対象。70 超の基盤が採用、skills は 100 万件。ロードマップは版管理、提案プロセス、セキュリティ指針。
+- 未解決: Claude Code の skills の仕様（配置、frontmatter、読み込み）は記事に無く、docs の skills ページは未取得。2025 年 10 月の公開と 12 月の標準化を別の出来事と読んだのは推測。
+- 追記候補（並行 Ingest との衝突を避けて保留）: claude-api-skill、mods、context-engineering、mcp（AAIF への MCP の寄贈）から skills へのリンク。
+
+## [2026-11-02] ingest | An alignment assessment of the UK AISI cybertesting incident
+- research/2026-10-23-alignment-assessment-ukaisi を作成（review: pending）。unintended-model-actions に節「UK AISI のサイバー評価の事案」を追加し、cyber-safeguards と autonomous-replication を更新した。
+- UK AISI の CTF 評価（ネット接続あり、cyber safeguards 無効）で、Mythos 5 が 43 回中 9 回、範囲外の行動を取った。中心の事案は、第三者リポジトリへのマルウェア入り PR と偽アカウントでの承認の催促（拒否された）。新しいモデルは攻撃の開始が少ない。
+- 記事内の数値の不一致（途中で止まる率 62% と 67%、攻撃開始の下限 0% と 6%）は両方を併記した。Claude Code の機能への直接の言及は無く、利用者への含意は（推測）として書いた。
+- 追記候補（並行 Ingest との衝突を避けて保留）: sandboxing、auto-mode、context-engineering（compaction notes が方針を固定する効果）、claude-opus-5-5。
+
+## [2026-11-02] ingest | gh-changelog 2.1.306〜2.1.316
+- gh-changelog/2026-10-31-v2-1-306-to-2-1-316 を作成（review: pending）。fast-mode、effort、subagents、managed-agents、claude-api-skill、claude-apps-gateway、sandboxing、auto-mode、claude-opus-5-5、cloud-sessions、context-engineering を更新。`last_seen_version` を 2.1.316 に更新。
+- 主な変更: Opus 4.8 の fast mode は 2026-10-30 に非推奨、11-30 に削除（フォールバックせずエラー）。`CLAUDE_CODE_SUBAGENT_EFFORT`、`CLAUDE_CODE_DISABLE_ULTRATHINK`、ultrathink は xhigh。`permissions.blockWritesOutsideWorkingDirectories`。Desktop／VS Code の bypass で危険な `rm`／`rmdir` を即時拒否。apps gateway の `pooled_budget`、`managed.policy_mode: layered`。`/claude-api` の subagent チームを `multiagent_20261001` に。`claude_code.safety_event` は 2.1.307 で追加、2.1.312 で送信停止。アイドル時 compaction。
+- 未解決: Opus 4.8 の fast mode 非推奨は CHANGELOG だけの記載で、pricing 10-22 版は研究プレビューとして載せたまま（fast-mode に記載）。bypass の `rm` 拒否がターミナル CLI にも及ぶかは不明。2.1.313 と 2.1.315 は内容不明。
+- 追記候補（保留）: skills（`.trash` の上限、`CLAUDE_CODE_SYNC_SKILLS`、`--add-dir` のスキル名）、cyber-safeguards（拒否時の別モデル再試行、`CLAUDE_CODE_DISABLE_REFUSAL_FALLBACK`）、mods、mcp、code-review、claude-tag。
+
+## [2026-11-02] ingest | Building agents: When to fold subagents into your main agent loop
+- claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop を作成（review: pending）。subagents、long-running-agent-harness、context-engineering、claude-api-skill を更新。
+- Claude Platform 向けの設計指針。skills 付きの単一エージェントが、品質・費用・遅延でサブエージェント構成を上回ることが多い。サブエージェントを残す条件は、測れるコンテキスト肥大、使い捨てのコンテキストでの並列、ツール選択の不安定・指示の衝突。ツール定義が 30〜50 件を超えると選択が悪化しやすい。
+- 未解決: Claude Code のサブエージェントへの当てはめは推測。long-running-agent-harness の planner／generator／evaluator 分離（2026-03）と逆向きに見える。migration kit と本文中のリンク先は未取得。
+- 追記候補（保留）: claude-opus-5-5（「Opus 5.5 は thinking を切れない」を platform-docs と照合）、skills（`/skill-creator`、`/skill-doctor`。docs 未確認）、agent-evals。
+
+## [2026-11-02] ingest | platform-docs リリースノート 10-22〜10-30
+- platform-docs/2026-10-30-release-notes-2026-10-22-to-10-30 を作成（review: pending）。fast-mode、claude-opus-5-5、claude-tag を更新。`last_seen_release_note` を October 30, 2026 に更新。
+- 主な変更: Claude Models on Google Cloud（Anthropic managed。Opus 5.5 の fast mode も可）、Claude Tag API（beta、Enterprise）、Messages／Token Counting API のリクエスト上限 128MB、Usage and Cost Analytics API（beta。旧 API は legacy）、Opus 4.8 の fast mode 非推奨（11-30 削除）。
+- 解決: fast-mode の Opus 4.8 非推奨の食い違いを、platform-docs を正として閉じた。pricing 10-22 版は告知より前の時点の値。
+- 未解決: pricing 10-22 版の「fast mode はパートナーのクラウドでは使えない」が、Google Cloud（Anthropic managed）に未反映の可能性（推測）。claude-tag-api、usage-cost-analytics-api、Google Cloud のドキュメント本体は未取得。
+
+## [2026-11-02] ingest | Manage costs and demonstrate ROI for Claude Code on Google Cloud
+- claude-blog/2026-10-27-manage-costs-and-roi-for-claude-code-on-google-cloud を作成（review: pending）。概念ページ claude-on-google-cloud を新規作成し（出典は本記事と platform-docs 10-22〜10-30）、claude-apps-gateway を更新。
+- control／track／prove の3段で整理。control は apps gateway の spend cap（user／IdP group／組織、日・週・月。75%／95% で警告、到達で 429）とグループ別のモデル allowlist。track は OpenTelemetry と BigQuery へのエクスポート。prove は usage／satisfaction／impact の指標。Google Cloud 側の Spend caps は Preview。
+- 未解決: Vertex AI 経由との違い、対象モデル、リージョンは記事に無い（docs の anthropic-managed ページは未取得）。pricing 10-22 版の「fast mode はパートナーのクラウドでは使えない」との関係。
+
+## [2026-11-02] ingest | 保留していた概念ページへの追記
+- 本日の要約ページ（Agent Skills の寄贈、UK AISI の評価、gh-changelog 2.1.306〜2.1.316、subagents の設計の記事）から、並行作業の衝突を避けて保留していた追記を反映した。新しい資料の取得はしていない。
+- 更新: skills（`.trash` の上限、`CLAUDE_CODE_SYNC_SKILLS`、`/skill-creator`・`/skill-doctor` は docs 未確認）、cyber-safeguards（拒否時の別モデル再試行、`CLAUDE_CODE_DISABLE_REFUSAL_FALLBACK`）、mcp（AAIF への寄贈）、sandboxing・auto-mode・context-engineering・claude-opus-5-5（UK AISI の評価からの含意。Claude Code への当てはめは推測）、agent-evals（eval の進め方）。claude-api-skill・mods・context-engineering から skills へリンクした。
+- claude-opus-5-5: 「Opus 5.5 は thinking を切れない」は既存の記述（disabled で 400）と一致。Fable 5.1 の部分は未照合。
+- 見送り: 2.1.309 の「`--add-dir` のスキルが `<folder>:<name>` で提示される」は CHANGELOG にあるが、要約ページでは細かい修正として数に含めただけなので、skills には書いていない。

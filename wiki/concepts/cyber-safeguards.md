@@ -1,7 +1,7 @@
 ---
 type: concept
 title: サイバー・安全策と Cyber Verification Program
-updated: 2026-10-22
+updated: 2026-11-02
 sources:
   - sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09
   - sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5
@@ -10,6 +10,8 @@ sources:
   - sources/anthropic-news/2026-10-06-expanding-the-cyber-verification-program
   - sources/anthropic-news/2026-10-08-introducing-the-anthropic-cyber-mission
   - sources/anthropic-news/2026-10-08-2026-usage-policy-update
+  - sources/research/2026-10-23-alignment-assessment-ukaisi
+  - sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316
   - sources/claude-dev/2026-09-22-getting-the-most-out-of-opus-5-5
   - sources/claude-dev/2026-09-28-building-with-claude-sonnet-5-5
   - sources/research/2026-09-29-glm-5-3-and-the-spread-of-advanced-cyber-capabilities
@@ -52,9 +54,12 @@ Claude 5.5 ファミリーには、サイバーと bio の安全策がある。�
 
 - 小型モデルの自律的な複製（IoT 機器への weight-based replication）の評価: GLM-5.2 級が簡略化した通しの複製に成功し、小型モデルは2026年末ごろ同水準に届く見込み。詳細は [[concepts/autonomous-replication]]（[[sources/research/2026-10-12-self-replicating-ai]]）。
 - 第三者評価の拡充（2026-10-15 の記事。モデルの安全性評価と説明責任に関する方針で、サイバー面への直接の言及は無い）: 非営利の評価機関 METR に社員に近いアクセスを与え、SecureBio、Accenture、Faculty も評価者として参加している（[[sources/anthropic-news/2026-10-15-an-update-on-independent-evaluators]]）。
+- フラグが付いた要求は、`ANTHROPIC_DEFAULT_OPUS_MODEL`、`availableModels`、`deniedModels` が古い Opus しか（または何も）残さないとき、拒否で終わらず別モデルで再試行する（2.1.314）。フラグが付いたメッセージ後の自動モデル切り替えは、認識できないモデル名（カスタムデプロイ名、inference profile ARN）にも及ぶようになり、止めるには `CLAUDE_CODE_DISABLE_REFUSAL_FALLBACK=1`（2.1.312）（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）。
 
 ## 変更履歴
 
+- 2026-11-02 — 2.1.312〜2.1.314: フラグが付いた要求の別モデルでの再試行、`CLAUDE_CODE_DISABLE_REFUSAL_FALLBACK` を追記（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）
+- 2026-10-23 — UK AISI のサイバー評価（インターネット接続あり、cyber safeguards 無効）での Mythos 5 の無許可行動の整合性評価を公開。Anthropic は、Fable 5 の cyber safeguards が有効なら即座に検知され、防げたと考えると述べる（取り込みは 2026-11-02）（[[sources/research/2026-10-23-alignment-assessment-ukaisi]]）
 - 2026-10-22 出典の表記を整理（Lint）: 「（同上）」1 件を展開、「現状」の as of を 2026-10-21 に更新。あわせて第三者評価の記事（2026-10-15）への関連リンクを追加（[[sources/anthropic-news/2026-10-15-an-update-on-independent-evaluators]]）
 - 2026-10-12 — 自律的な複製（AI ワーム）の評価を公開（取り込みは 2026-10-21）（[[sources/research/2026-10-12-self-replicating-ai]]）
 - 2026-10-12 — 蒸留攻撃への対策を公開（取り込みは 2026-10-21）（[[sources/anthropic-news/2026-10-12-distillation-defenses]]）

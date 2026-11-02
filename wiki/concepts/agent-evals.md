@@ -1,13 +1,14 @@
 ---
 type: concept
 title: エージェントの評価（evals）
-updated: 2026-10-10
+updated: 2026-11-02
 sources:
   - sources/engineering/2026-01-09-demystifying-evals-for-ai-agents
   - sources/claude-dev/2026-09-28-automating-eval-design-and-hillclimbing
   - sources/engineering/2026-02-05-infrastructure-noise
   - sources/engineering/2026-02-05-building-a-c-compiler-with-parallel-claudes
   - sources/engineering/2026-03-24-harness-design-long-running-apps
+  - sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop
 ---
 
 # エージェントの評価（evals）
@@ -16,7 +17,7 @@ sources:
 
 エージェントに入力を与え、採点ロジックで出力や環境の最終状態を測るテスト。ターンをまたいで状態を変えるエージェントは、単発の評価より難しい（[[sources/engineering/2026-01-09-demystifying-evals-for-ai-agents]]）。作り方の原則は上の記事に、Claude Code 上での自動化は `claude-api` スキルにある（[[sources/claude-dev/2026-09-28-automating-eval-design-and-hillclimbing]]）。
 
-## 現状（as of 2026-10-10）
+## 現状（as of 2026-11-02）
 
 - 用語: task、trial、grader、transcript、outcome、evaluation harness、agent harness、evaluation suite。評価の対象はモデル単体ではなく、harness とモデルの組（[[sources/engineering/2026-01-09-demystifying-evals-for-ai-agents]]、2026-01-09 時点）。
 - 採点器は code-based、model-based、human の3種類。決定的なものを優先し、経路ではなく成果物を採点する。部分点を入れる（[[sources/engineering/2026-01-09-demystifying-evals-for-ai-agents]]）。
@@ -28,9 +29,12 @@ sources:
 - Claude Code では `/claude-api build-eval`（ケースの収集、採点器の選択、ベースライン診断）と `/claude-api hillclimb`（train と test に分けて1回に1修正）が使える（[[sources/claude-dev/2026-09-28-automating-eval-design-and-hillclimbing]]）。
 - 自律エージェントでは、検証器がほぼ完全でないと、エージェントは誤った問題を解く。テストの出力は Claude が読む前提で設計する（2026-02-05 公開の事例）（[[sources/engineering/2026-02-05-building-a-c-compiler-with-parallel-claudes]]）。
 - 自律エージェントの自己評価は甘くなりやすい。作る役と評価する役を分け、評価役を懐疑的に調整する方が扱いやすい。評価役は Playwright MCP で実アプリを操作させ、判断が人とずれた例を見て調整した。それでも深い機能の見落としが残った（2026-03-24 公開、Sonnet 4.5〜Opus 4.6 の時点）（[[sources/engineering/2026-03-24-harness-design-long-running-apps]]）。
+- （2026-10-22 の記事、Claude Platform で作るエージェント向け）構成を変える前に小さな end-to-end の task-completion eval を作る。10 件の golden examples からでも始められ、同じタスクを複数回実行する（壊れ方が2回に1回しか出ない例があった）。サブエージェントを skills と MCP tools に畳むときは1つずつ変え、元の構成と比べて、持ちこたえたものを残す。局所的すぎる eval（各チームが自分の部分だけ測る）は大企業で起きがちな失敗として挙がる。体制は、システムプロンプトと全体の品質を持つ小さな中央チームと、skills／tools を持つ各チームの DRI とされる。skill ごとの eval を明示した記述は、取り込んだ要約には無い（記事本文は未再確認）。比較の具体的な測定値は記事に出ていない（[[sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop]]）。
+- 同記事のスキル: `/claude-api build-eval` で eval を作り、`/claude-api hillclimb` で畳んだ版が元のサブエージェントに並ぶか比べる（[[sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop]]）。
 
 ## 変更履歴
 
+- 2026-11-02 — 構成変更時の eval の進め方（task-completion eval、golden examples、skill ごとの eval）を追記（[[sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop]]）
 - 2026-03-24 — 評価役（evaluator）の分離と、主観品質を採点基準で採点可能にする手法が公開された。モデル名は公開時点（[[sources/engineering/2026-03-24-harness-design-long-running-apps]]）
 - 2026-09-28 — `/claude-api build-eval` と `hillclimb` による評価設計の自動化が示された（[[sources/claude-dev/2026-09-28-automating-eval-design-and-hillclimbing]]）
 - 2026-02-05 — インフラ設定（資源の割り当てと強制方法）が評価スコアに与えるノイズが定量化された。数値は公開時点（[[sources/engineering/2026-02-05-infrastructure-noise]]）

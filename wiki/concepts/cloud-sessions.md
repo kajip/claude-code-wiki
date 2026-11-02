@@ -1,7 +1,7 @@
 ---
 type: concept
 title: cloud sessions（Claude Code in the cloud）
-updated: 2026-10-22
+updated: 2026-11-02
 sources:
   - sources/docs/2026-10-16-routines-and-cloud-sessions
   - sources/claude-dev/2026-10-06-claude-code-in-the-cloud
@@ -11,6 +11,7 @@ sources:
   - sources/claude-blog/2026-08-06-run-claude-code-sessions-on-your-own-compute
   - sources/gh-changelog/2026-10-18-v2-1-302
   - sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305
+  - sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316
 ---
 
 # cloud sessions
@@ -19,7 +20,7 @@ sources:
 
 タスクごとに新しい VM で Claude Code を動かす仕組み。リポジトリを新しいブランチに clone して作業する（[[sources/claude-dev/2026-10-06-claude-code-in-the-cloud]]）。Anthropic の基盤で動かすか、self-hosted environment で組織のマシンで動かす（[[sources/claude-dev/2026-10-06-claude-code-in-the-cloud]]）。
 
-## 現状（as of 2026-10-21）
+## 現状（as of 2026-11-02）
 
 - 提供: Pro、Max、Team、Enterprise に追加料金なしで含まれる。Console の API キーとサードパーティのプロバイダーでは使えない。ZDR の組織では無効（[[sources/claude-dev/2026-10-06-claude-code-in-the-cloud]]）。
 - 起動: `claude --cloud`。ローカルに持ってくるには `claude --teleport`（[[sources/claude-dev/2026-10-06-claude-code-in-the-cloud]]）。
@@ -51,9 +52,11 @@ sources:
 - compaction で古いメッセージを要約から外したことを、cloud session とチームメイトが Claude に伝えない問題を修正（2.1.305）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
 - Cloud environments の管理画面が、既存環境の保存を "installs packages" エラーで誤って拒否する問題を修正。self-hosted environment の削除ダイアログは、妨げる要因と影響を示す（2.1.305）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
 - self-hosted runner の修正（2.1.305）: `TERM` 設定時に stdout だけ共有する起動スクリプトが失敗する問題（2.1.300 の回帰）、`GIT_CONFIG` で設定を読む git credential helper／askpass でリポジトリアクセスが失敗する問題（2.1.296 から）、背景に残る runner で spawn-runner フックがタイムアウト扱いになる問題（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+- 2.1.307〜2.1.316 の変更: 管理画面で Cloud sessions と Remote Control を Enterprise のカスタムロールで制御（2.1.310）、routine の model picker に effort（2.1.312）、MCP サーバーが求めるフォームのカード・network secrets を Enterprise メンバーが管理（2.1.316）、スケジュールタスクが claude.ai のアカウントで有効なプラグインを読み込む・セットアップスクリプトがエラー終了しても起動する（2.1.314）。`/autocompact` が cloud session の再起動で既定窓に戻る問題を修正（2.1.307）（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）。
 
 ## 変更履歴
 
+- 2026-10-31 — 2.1.307〜2.1.316: 上記の変更と、Changes ペイン、setup script エディタ、self-hosted runner の修正多数（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）
 - 2026-10-22 出典の表記を整理（Lint）: 「（同）」「（同上）」14 件を直前の出典のリンクに展開、「現状」の as of を 2026-10-21 に更新。内容の変更なし
 - 2026-10-21 — 2.1.305: `setMcpServers` のサーバー置き換え、compaction の通知、Cloud environments 管理画面、self-hosted runner の修正。2.1.304: 最初のターンが stdio サーバーを待たない（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）
 - 2026-10-17 — 2.1.302: cloud session の修正（費用の数え直し、Rewind、diff、エラー表示）と self-hosted runner の reftable 対応の修正（[[sources/gh-changelog/2026-10-18-v2-1-302]]）

@@ -1,7 +1,7 @@
 ---
 type: concept
 title: Claude Tag（Claude in Slack）
-updated: 2026-10-22
+updated: 2026-11-02
 sources:
   - sources/claude-blog/2026-09-14-agentic-coding-is-straining-ci
   - sources/claude-dev/2026-09-23-how-we-made-claude-ai-faster
@@ -10,6 +10,7 @@ sources:
   - sources/gh-changelog/2026-10-18-v2-1-302
   - sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305
   - sources/engineering/2026-10-13-redesigning-source-control
+  - sources/platform-docs/2026-10-30-release-notes-2026-10-22-to-10-30
 ---
 
 # Claude Tag（Claude in Slack）
@@ -18,7 +19,9 @@ sources:
 
 Slack から Claude を動かす機能。Claude Code そのものではないが、Claude Code の CHANGELOG に `[Claude Tag]` の項目として更新が載る（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）。
 
-## 現状（as of 2026-10-21）
+## 現状（as of 2026-11-02）
+
+- **Claude Tag API（ベータ、2026-10-23）**: Claude Enterprise 向け。ベータヘッダー `experimental-claude-tag-2026-10-21`、エンドポイント `/v1/organizations/claude_tag/`。Slack のチャンネルとワークスペースの Claude Tag 設定を読み書きし、チャンネルで有効な設定とその由来を確認し、Access bundles を付与できる。認証は、primary owner が claude.ai で作る Admin API キー（スコープ `read:claude_tag`／`write:claude_tag`）。Claude Platform（Console）の組織では使えない（[[sources/platform-docs/2026-10-30-release-notes-2026-10-22-to-10-30]]）。
 
 - Slack Connect チャンネルに対応（2.1.300）。Owner か Claude Tag admin が、他の組織と共有するチャンネルで Claude が答えるのを許可できる。既定はオフ。admin がチャンネルに付けた access bundle は、Slack Connect 化しても引き続き有効（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）。
 - コネクタ操作で承認が要るとき、Slack のスレッドに自分にだけ見える Allow once／Deny カードが出る。ほかの人には「待っている」ことだけが見える（2.1.300）。Slack の音声クリップは、Slack が文字起こしを持っていれば Claude が読む（2.1.300）（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）。
@@ -45,6 +48,7 @@ Slack から Claude を動かす機能。Claude Code そのものではないが
 
 ## 変更履歴
 
+- 2026-10-23 — Claude Tag API をベータで提供開始（Enterprise 向け）（[[sources/platform-docs/2026-10-30-release-notes-2026-10-22-to-10-30]]）
 - 2026-10-22 出典の表記を整理（Lint）: 「（同）」1 件を展開、出典の無かった 1 行に出典を付与、「現状」の as of を 2026-10-21 に更新。あわせて社内運用事例の記事（2026-10-13）へのリンクを追加（[[sources/engineering/2026-10-13-redesigning-source-control]]）
 - 2026-10-20〜10-21 — 2.1.304〜2.1.305: Enterprise Grid 共有時の沈黙、`!fork` の案内、管理画面の公開チャンネル検索、スレッド routine の投稿の修正（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）
 - 2026-10-17 — 2.1.302: 管理設定の 4 タブ化、コネクタのサーバー別表示、Slack の添付・DM・通知の修正（[[sources/gh-changelog/2026-10-18-v2-1-302]]）
@@ -55,4 +59,4 @@ Slack から Claude を動かす機能。Claude Code そのものではないが
 
 ## 未解決・矛盾
 
-- 提供の段階（ベータかどうか、どのプランか）を正式に書いた一次情報は、まだ取り込んでいない。
+- 提供の段階（ベータかどうか、どのプランか）を Claude Tag 本体について正式に書いた一次情報は、まだ取り込んでいない（Claude Tag API はベータと確認。本体は未確認）。Claude Tag のドキュメント（https://claude.com/docs/claude-tag/overview）は未取得。

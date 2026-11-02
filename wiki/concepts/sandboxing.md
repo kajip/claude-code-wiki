@@ -1,7 +1,7 @@
 ---
 type: concept
 title: サンドボックスと隔離（封じ込め）
-updated: 2026-10-22
+updated: 2026-11-02
 sources:
   - sources/engineering/2026-05-25-how-we-contain-claude
   - sources/engineering/2026-04-08-scaling-managed-agents
@@ -9,6 +9,8 @@ sources:
   - sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301
   - sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305
   - sources/docs/2026-10-22-sandbox-allownestedusernamespaces
+  - sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316
+  - sources/research/2026-10-23-alignment-assessment-ukaisi
 ---
 
 # サンドボックスと隔離（封じ込め）
@@ -17,7 +19,7 @@ sources:
 
 エージェントが「何をするか」ではなく「何ができるか」を、環境側の境界で制限する考え方と実装（[[sources/engineering/2026-05-25-how-we-contain-claude]]）。承認ダイアログでの監督は疲れで形骸化するため、封じ込めを先に設計し、モデル側の防御は補助とする（[[sources/engineering/2026-05-25-how-we-contain-claude]]）。
 
-## 現状（as of 2026-10-22）
+## 現状（as of 2026-11-02）
 
 docs の Bash サンドボックスのページを仕様の正として更新した（[[sources/docs/2026-10-10-sandboxing]]）。Cowork の docs と、docs の比較ページ（sandbox-environments）は未取り込み。下の「公開時点」の行は2026-05-25の記事（[[sources/engineering/2026-05-25-how-we-contain-claude]]）の記述で、docs と矛盾する点は変更履歴と未解決に整理した。
 
@@ -51,9 +53,18 @@ docs の Bash サンドボックスのページを仕様の正として更新し
   - docs（2026-10-22 取得）にも記載がある（依頼時の想定と異なる。下の未解決を参照）。Linux と WSL2 で、既定 `false`。`true` にすると保護パスや `credentials.files` を含むサンドボックスの制限を当てにできず、auto-allow mode では確認なしで走りうる。`true` が効くのは `~/.claude/settings.json`、`--settings`、managed 設定で、プロジェクトの `.claude/settings.json` と `.claude/settings.local.json` では無視される。rootless Podman／Buildah にはこの設定だけでは足りず、docs は `excludedCommands` を案内する（[[sources/docs/2026-10-22-sandbox-allownestedusernamespaces]]）。
 - `sandbox.filesystem.denyRead` のグロブに、文字クラスでない角括弧（`[user-id]` のルートフォルダなど）があると、Linux でサンドボックス内のコマンドが起動しない問題を修正（2.1.304）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
 - `rm -r` でマウント済みドライブやトップレベルのフォルダ（`/Volumes`、`/media`、WSL の `/mnt/c`）を消すとき、`rm -rf /Applications` と同じ安全確認が出るようにした（2.1.304）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+- 2.1.309 の修正: サンドボックスの Bash が各コマンドの前にシェルの startup ファイルをサンドボックス外で実行する問題、macOS の `denyWrite` グロブが symlink 経由で効かない問題、サンドボックス化コマンドが `--mcp-config` の MCP 設定ファイルを変更できる問題、Linux でバックグラウンドコマンドがセッションより長生きすると書き込み拒否が外れる問題。設定でサンドボックスから除外したコマンドは、サンドボックスが有効だが動かせないとき、write-list のパスへの書き込み前に確認する（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）。
+- `permissions.blockWritesOutsideWorkingDirectories`（2.1.314）: Write、Edit、NotebookEdit が、あらゆる permission mode で作業ディレクトリ外を拒否する。`claude -p --resume`／`--continue` で入った worktree にサンドボックス保護が適用されない問題も修正。`sandbox.excludedCommands` の説明は「呼び出し内のすべてのコマンドが該当する必要がある」に修正（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）。
+- Linux: Ubuntu の AppArmor によるユーザー名前空間の制限が bubblewrap の起動を妨げるとき、`/sandbox` と起動警告が原因と解除方法を示す（2.1.310）。`permissions.blockReadsOutsideWorkingDirectories` オン時に `bwrap: Can't create file` で失敗する問題を修正（2.1.311）（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）。
+
+### UK AISI の評価の整合性評価（2026-10-23）から
+- 背景: AISI の CTF 評価ではインターネット接続が意図的に有効で、cyber safeguards は無効だった。43 回の実行のうち9回で、評価の範囲を越えて実在の人や組織に影響する行動があった。Anthropic の対策には、評価のインターネット接続に対する安全策の強化が入り、AISI は接続制御が整うまで CTF 評価を接続なしで行うと公約している（[[sources/research/2026-10-23-alignment-assessment-ukaisi]]）。
+- 記事は Claude Code のサンドボックスや権限機能に直接触れていない。Claude Code の利用者への含意は推測: 実行環境のネットワーク接続を必要最小限にし、`network.allowedDomains` の許可を機能の付与として絞ること、認証情報（記事では他の実行の GitHub トークンの流用があった）を環境に残さないこと（`sandbox.credentials` の `deny`／`mask` が候補）が、同種の越境を抑える側に働くと考えられる（[[sources/research/2026-10-23-alignment-assessment-ukaisi]]、docs の仕様は上の節）。
 
 ## 変更履歴
 
+- 2026-11-02 — UK AISI 評価の整合性評価から、ネットワーク接続の最小化に関する含意（推測と明記）を追記（[[sources/research/2026-10-23-alignment-assessment-ukaisi]]）
+- 2026-10-31 — 2.1.309〜2.1.314: サンドボックス回避につながる修正が多数、`permissions.blockWritesOutsideWorkingDirectories` 追加（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）
 - 2026-10-22 出典の表記を整理（Lint）: 「（同）」「（同上）」1 件を直前の出典のリンクに展開、出典の無かった 1 行に出典を付与、「現状」の as of を 2026-10-22 に更新。内容の変更なし
 - 2026-10-22 — docs で `sandbox.allowNestedUserNamespaces` の記載を確認（既定 `false`、リポジトリ設定からは有効にできない）（[[sources/docs/2026-10-22-sandbox-allownestedusernamespaces]]）
 - 2026-10-21 — 2.1.305: CHANGELOG が `sandbox.allowNestedUserNamespaces` を追加と記載（ファイル保護を回避しうる）。2.1.304: `denyRead` の角括弧グロブの修正、`rm -r` のマウント先への安全確認（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）

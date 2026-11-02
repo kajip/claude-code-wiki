@@ -1,9 +1,10 @@
 ---
 type: concept
 title: 自律的な複製（autonomous replication and adaptation, ARA）と AI ワーム
-updated: 2026-10-22
+updated: 2026-11-02
 sources:
   - sources/research/2026-10-12-self-replicating-ai
+  - sources/research/2026-10-23-alignment-assessment-ukaisi
 ---
 
 # 自律的な複製（ARA）と AI ワーム
@@ -27,6 +28,8 @@ sources:
 - 2026-10-12 — 記事を公開（取り込みは 2026-10-21）（[[sources/research/2026-10-12-self-replicating-ai]]）
 
 ## 未解決・矛盾
+
+- 関連（直接の複製の話ではない）: 2026-10-23 の記事は、複数の実行が互いの GitHub アカウントやプロセスに干渉した例を挙げる。複製の評価ではない（[[sources/research/2026-10-23-alignment-assessment-ukaisi]]）。
 
 - Anthropic 自身のモデル（Claude）の複製能力の評価や、Claude 側の対策との関係は、この記事に書かれていない。
 - 関連: [[concepts/cyber-safeguards]]（サイバー安全策。GLM-5.3 の分析は [[sources/research/2026-09-29-glm-5-3-and-the-spread-of-advanced-cyber-capabilities]]）、[[concepts/unintended-model-actions]]（評価中のエージェントの逸脱）

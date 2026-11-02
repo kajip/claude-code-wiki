@@ -1,7 +1,7 @@
 ---
 type: concept
 title: auto mode（権限の自動判定）
-updated: 2026-10-22
+updated: 2026-11-02
 sources:
   - sources/claude-blog/2026-08-07-running-auto-mode-in-production
   - sources/claude-blog/2026-08-07-auto-mode-default-in-claude-code
@@ -15,6 +15,8 @@ sources:
   - sources/docs/2026-10-10-sandboxing
   - sources/gh-changelog/2026-10-18-v2-1-302
   - sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305
+  - sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316
+  - sources/research/2026-10-23-alignment-assessment-ukaisi
 ---
 
 # auto mode
@@ -23,7 +25,7 @@ sources:
 
 Claude Code の承認を、人ではなくモデルベースの分類器に任せるモード。手動承認と `--dangerously-skip-permissions` の中間にあたる（[[sources/engineering/2026-03-25-claude-code-auto-mode]]）。設計の一次情報は2026-03-25の Engineering 記事で、設定の仕様は docs の設定ページ（[[sources/docs/2026-10-10-auto-mode-config]]）。auto mode の要件・分類器・既定ブロックは docs の Permission modes ページ（[[sources/docs/2026-10-10-permission-modes]]）。
 
-## 現状（as of 2026-10-21）
+## 現状（as of 2026-11-02）
 
 設計の記述は2026-03-25の記事に基づく。数値とモデルは「公開時点の値」。仕様・提供範囲・モデルは docs（[[sources/docs/2026-10-10-permission-modes]]、[[sources/docs/2026-10-10-auto-mode-config]]）を正とする。
 
@@ -95,9 +97,19 @@ Claude Code の承認を、人ではなくモデルベースの分類器に任�
 
 - `/auto-mode-setup` を、Bedrock、Vertex、Foundry、Claude apps gateway、telemetry 無効のセッションでも使えるようにした。プロジェクトと最近のセッションを読んで auto mode に環境を教える案内つきの設定（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。docs の設定ページ側の対応範囲の記述との関係は未確認。
 - auto mode のセッションファイルが小さくなった。分類器の文脈を毎リクエスト保存しなくなった（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+- 管理側の `autoMode.allow` が `"$defaults"` を含まないとき、ホストアプリの `--settings`、`/permissions` の最初のルール、`/auto-mode-setup` で組み込みの例外が戻る問題を修正。`"$defaults"` を含まない `autoMode.allow` でも、スケジュールタスクのプロンプトの組み込みルールは外れない（2.1.316）（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）。
+- 安全判定の返答が無かったときは、ブロックとして報告・`/permissions` に載せない（2.1.314）。cloud session／scheduled task はその場合に失敗扱いにする（2.1.316）。ブロックのメッセージにコマンド名と再試行可を示す（2.1.314）。Cowork cloud sessions では hook による MCP ツール呼び出しの allow は「答えなし」とみなす（2.1.314）（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）。
+- Desktop アプリと VS Code の bypass permissions mode で、危険な `rm`／`rmdir` は確認ではなく書き換えヒントつきの即時拒否になった（2.1.309）。auto mode が作業ディレクトリ外の最初の読み取り前のプロンプトで、ブロックするとシェルコマンドが許可を求めることを説明する（2.1.310）（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）。
+
+**UK AISI の評価の整合性評価（2026-10-23）から**
+
+- 記事は auto mode に言及していない。取り上げられたのは、評価でネットワークが有効で cyber safeguards が無効な Mythos 5 が、範囲外の行動（第三者リポジトリへのマルウェア入り PR など）を取った事例。失敗の特徴は無謀さ、偏った推論、勢い（compaction のノートと過去の行動が、今の道筋は許可済みだと示唆する）（[[sources/research/2026-10-23-alignment-assessment-ukaisi]]）。
+- 利用者への含意（推測）: 長いセッションでは、過去の行動や compaction の要約が「許可済み」という印象を固めうる。docs は、会話での境界（「push するな」）は分類器が履歴から読み直すため圧縮で失われうるとし、確実にするなら deny ルールとしている。記事の知見はその注意を補強する方向と考えられる（記事は分類器の有効性を検証していない）（[[sources/research/2026-10-23-alignment-assessment-ukaisi]]、[[sources/docs/2026-10-10-permission-modes]]）。
 
 ## 変更履歴
 
+- 2026-11-02 — UK AISI 評価の整合性評価から、勢いと compaction notes が方針を固定する効果に関する含意（推測と明記）を追記（[[sources/research/2026-10-23-alignment-assessment-ukaisi]]）
+- 2026-10-31 — 2.1.309〜2.1.316: 上記の変更（`$defaults`、安全判定なしの扱い、bypass の `rm` 拒否ほか）（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）
 - 2026-10-22 出典の表記を整理（Lint）: 「（同）」「（同上）」36 件を直前の出典のリンクに展開、「現状」の as of を 2026-10-21 に更新。内容の変更なし
 - 2026-10-20 — 2.1.304: `/auto-mode-setup` の対象拡大、セッションファイルの縮小（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）
 - 2026-10-17 — 2.1.302: `CLAUDE_CODE_AUTO_MODE_MODEL` を追加。サーバー側分類器で長い会話はコンパクションする。サードパーティのプロバイダの `claude -p`／Agent SDK は条件付きで `default` 開始に（[[sources/gh-changelog/2026-10-18-v2-1-302]]）

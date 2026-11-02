@@ -1,7 +1,7 @@
 ---
 type: concept
 title: mods（Claude Code mods）
-updated: 2026-10-22
+updated: 2026-11-02
 sources:
   - sources/docs/2026-10-10-mods
   - sources/claude-blog/2026-10-01-customize-claude-code-with-mods
@@ -10,6 +10,7 @@ sources:
   - sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301
   - sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305
   - analysis/mods-howto
+  - sources/anthropic-news/2026-10-22-donating-agent-skills-to-the-agentic-ai-foundation
 ---
 
 # mods（Claude Code mods）
@@ -42,10 +43,12 @@ Claude Code の動きと見た目を変える、小さな TypeScript／JavaScrip
 - `settings.read` フックは各 settings 層を受け取り、マージ後の設定を書き換えられる（2.1.304）。managed な mod が組織の設定を上限にでき、保持期間の掃除が使う `cleanupPeriodDays` も対象（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
 - 先に走るプラグインが mod のフックを飛ばしたとき、transcript にイベントとプラグイン名の行が出る。mod のリロード失敗で前の版のツールとコマンドが消える問題、同ラベルでキーなしのボタンのクリックが失われる問題を修正。VS Code のチャットパネルで、Bedrock、Vertex、Foundry、LLM ゲートウェイ配下、テレメトリ無効のセッションでも mod を描画（2.1.304）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
 - `Image` が iTerm2 3.5 以降の fullscreen rendering で画像を描く。ドック領域は端末幅の 45% 以内（2.1.305）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+- プラグインの標準レイアウトにある `skills/` の skill は、オープン標準 Agent Skills（2026-10-22 に AAIF へ寄贈）の形式。skill 自体の説明は [[concepts/skills]]。標準側の記事は mods や plugin.json には触れていない（[[sources/anthropic-news/2026-10-22-donating-agent-skills-to-the-agentic-ai-foundation]]）。
 - 作り方の手順を質問形式でまとめた分析ページ: [[analysis/mods-howto]]（as of 2026-10-11、docs は v2.1.290 時点）。
 
 ## 変更履歴
 
+- 2026-11-02 — skills の標準の動向と [[concepts/skills]] へのリンクを追記（[[sources/anthropic-news/2026-10-22-donating-agent-skills-to-the-agentic-ai-foundation]]）
 - 2026-10-22 出典の表記を整理（Lint）: 「（同）」11 件を展開、「現状」の as of を 2026-10-21 に更新。あわせて手順のまとめ analysis/mods-howto へのリンクを追加（[[analysis/mods-howto]]）
 - 2026-10-20〜10-21 — 2.1.304〜2.1.305: `decider: "person"`、`e.isReadOnly`、`settings.read` の層別受け取りと書き換えなどを追加・変更（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）
 - 2026-10-14〜10-15 — 2.1.299〜2.1.301 で上記の API を追加・変更（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）

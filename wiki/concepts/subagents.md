@@ -1,7 +1,7 @@
 ---
 type: concept
 title: サブエージェント
-updated: 2026-10-22
+updated: 2026-11-02
 sources:
   - sources/claude-blog/2026-08-14-maximizing-the-value-of-your-claude-code-sessions
   - sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296
@@ -13,6 +13,8 @@ sources:
   - sources/research/2026-10-01-claude-shaped-science
   - sources/gh-changelog/2026-10-18-v2-1-302
   - sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305
+  - sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316
+  - sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop
 ---
 
 # サブエージェント
@@ -21,7 +23,7 @@ sources:
 
 メインの会話から作業を切り出して動かすエージェント。モデル、effort、スキル、compaction の設定を個別に持てる（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）。
 
-## 現状（as of 2026-10-21）
+## 現状（as of 2026-11-02）
 
 - モデル: `CLAUDE_CODE_SUBAGENT_MODEL` で全サブエージェントのモデルを決める。定義の `model:` の方が優先される（[[sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5]]）。workflow エージェントだけは `CLAUDE_CODE_WORKFLOW_SUBAGENT_MODEL` で一括指定できる（2.1.296）（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）。
 - effort: Agent ツールの `effort` パラメータ（2.1.292）（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）。
@@ -49,9 +51,21 @@ sources:
 - subagent が同時に多数動くときの応答性と throughput を改善（2.1.304）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
 - VS Code: background sub-agent は Agent カードの下に1行の状態表示で出る。全文は /tasks で見る（2.1.304）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
 - 出典は CHANGELOG のみ（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
+- `CLAUDE_CODE_SUBAGENT_EFFORT` でサブエージェントの既定 effort を設定できる（2.1.316）。親サブエージェントのモデルを継承したサブエージェントが、バックグラウンドの起床でメインのモデルへ移る問題を修正（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）。
+- prompt hook と agent hook は 1 セッション（サブエージェント込み）で同時 24 件まで（2.1.312）。サブエージェントの `autoCompactWindow` は `CLAUDE_CODE_AUTO_COMPACT_WINDOW` の窓を下げる方向にだけ効く（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）。
+
+**設計指針（2026-10-22 の記事。Claude Platform のエージェント向けで、Claude Code の仕様ではない）**
+
+- Applied AI チームの企業導入の比較では、skills 付きの単一エージェントが、サブエージェント構成より品質で上回ることが多く、費用と遅延も下がることが多かった（公開時点）（[[sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop]]）。
+- サブエージェントを残す条件: 単一ループでコンテキスト肥大による性能低下が測定できる／破棄できる新しいコンテキストで並列に進めたい／ツール選択が不安定、または指示が衝突している。検証、並列作業、権限の分離にも向くとされる（[[sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop]]）。
+- 領域別・チーム別に分けると組織図の複製になり、受け渡しで情報が落ちる。分けるなら「コンテキストで分ける」: 他から必要なものが少なく、短い結果を返す仕事（独立した調査経路、境界の明確な部品、ブラックボックスの検証）（[[sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop]]）。
+- 畳む順序: eval を作る → 結合の強い専門家を統合 → サブエージェントを tool として呼ぶ（ユーザーとの会話は main が持つ。完全な引き継ぎはユーザーと直接話す必要があるときだけ）→ 1つずつ skills と MCP tools に変えて比較する。タスクごとの反転を見て、複数回実行する（[[sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop]]）。
+- Claude Code への当てはめ（推測）: skills への切り出しと、サブエージェントを残す条件の判断に参照できる。Claude Code 自体の docs の推奨ではない。
 
 ## 変更履歴
 
+- 2026-10-22 — サブエージェントをいつ main loop に畳むかの設計指針の記事が公開された。Claude Platform 向け（[[sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop]]）
+- 2026-10-31 — 2.1.307〜2.1.316: fork subagent 同時起動時の自己認識の改善、`SubagentStop` hook の重複実行の修正、分離 worktree の早期削除の修正、`CLAUDE_CODE_SUBAGENT_EFFORT` 追加ほか（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）
 - 2026-10-22 出典の表記を整理（Lint）: 「（同）」「（同上）」2 件を直前の出典のリンクに展開、出典の無かった 2 行に出典を付与、「現状」の as of を 2026-10-21 に更新。内容の変更なし
 - 2026-10-21 — 2.1.305: 変更の無い subagent worktree の掃除漏れを修正。2.1.304: 多数時の応答性と throughput の改善、VS Code の background sub-agent の表示変更（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）
 - 2026-10-17 — 2.1.302: fork subagent を `claude -p`、Agent SDK、デスクトップアプリ、VS Code でも既定オンに。デスクトップアプリと VS Code はメイン会話のサブエージェントを常にバックグラウンド実行（[[sources/gh-changelog/2026-10-18-v2-1-302]]）
@@ -64,4 +78,4 @@ sources:
 
 ## 未解決・矛盾
 
-- （なし）
+- 2026-10-22 の記事（サブエージェントを減らす方向）と、Claude Code 側の機能追加・既定値の変更（fork subagent の既定オンなど）の関係は、どちらの出典も論じていない。記事は Claude Platform 向けで、Claude Code の推奨としての位置づけは未確認（[[sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop]]）。

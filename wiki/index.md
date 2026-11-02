@@ -1,6 +1,6 @@
 # Index
 
-最終更新: 2026-10-22（要約 69・概念 31）
+最終更新: 2026-11-02（要約 75・概念 33）
 
 ## 状態
 
@@ -12,12 +12,15 @@
 ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行要約（公開日）`
 
 ### gh-changelog
+- [[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]] — 2.1.306〜2.1.316。Opus 4.8 の fast mode 非推奨（11-30 削除）、`CLAUDE_CODE_SUBAGENT_EFFORT`、ultrathink を xhigh effort に、`permissions.blockWritesOutsideWorkingDirectories`、bypass の `rm` 即時拒否、Claude apps gateway の pooled budget ほか、アイドル時 compaction（2026-10-31）
 - [[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]] — 2.1.303〜2.1.305。`sandbox.allowNestedUserNamespaces`（ファイル保護を回避しうる）、`allowedMcpServers` が managed-mcp.json の一部 stdio サーバーを絞り込まなくなる変更、mods の `decider: "person"` ほか、Code Review の review levels（2026-10-21）
 - [[sources/gh-changelog/2026-10-18-v2-1-302]] — 2.1.302。`CLAUDE_CODE_AUTO_MODE_MODEL`、サードパーティのプロバイダの `claude -p` は条件付きで default 開始、fork subagent の既定化、デスクトップアプリと VS Code のサブエージェントは常にバックグラウンド、Claude Design 単体版は 2026-12-14 に終了（2026-10-17）
 - [[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]] — 2.1.299〜2.1.301。MCP の allow ルールの限定（非互換の可能性）、アイドル時のコンパクション、mods の `prompt.change` ほか API 追加、サンドボックス関連の修正（2026-10-15）
 - [[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]] — 2.1.290〜2.1.296。mods の API、Claude apps gateway、MCP 2026-07-28 の既定化、Haiku 5.5 の追加、セキュリティ修正（2026-10-10）
 
 ### claude-blog
+- [[sources/claude-blog/2026-10-27-manage-costs-and-roi-for-claude-code-on-google-cloud]] — Google Cloud 上の Claude Code のコスト管理と ROI（control／track／prove。gateway の spend cap、OTel、BigQuery、impact 指標）（2026-10-27）
+- [[sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop]] — サブエージェントをいつ main loop に畳むか（skills と tool search による段階的開示、移行手順）。Claude Platform 向け（2026-10-22）
 - [[sources/claude-blog/2026-10-15-code-review-is-now-generally-available]] — Code Review が研究プレビューから GA（Team／Enterprise、Quick／Standard／Deep、約3倍速）（2026-10-15）
 - [[sources/claude-blog/2026-10-08-dashboards-and-motion]] — Dashboards と Motion（ベータ）。Docs、Slides、Design の GA（2026-10-08）
 - [[sources/claude-blog/2026-10-01-customize-claude-code-with-mods]] — mods の発表。sec-default、管理者による制御（2026-10-01）
@@ -33,6 +36,7 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 - [[sources/claude-blog/2026-08-06-run-claude-code-sessions-on-your-own-compute]] — self-hosted environments が public beta（Team／Enterprise、runner は Fixed／On-demand）（2026-08-06）
 
 ### anthropic-news
+- [[sources/anthropic-news/2026-10-22-donating-agent-skills-to-the-agentic-ai-foundation]] — Agent Skills を AAIF に寄贈。70超の基盤が採用、skills 100万件、ロードマップ（版管理、提案プロセス、セキュリティ指針）（2026-10-22）
 - [[sources/anthropic-news/2026-10-15-an-update-on-independent-evaluators]] — 独立評価者の方針。METR に社員並みのアクセス、SecureBio・Accenture も参加、アクセスは3段階（2026-10-15）
 - [[sources/anthropic-news/2026-10-14-2026-us-midterms]] — 米中間選挙に向けた安全策。公式の投票情報、政治的中立性 99%、多段階の誤用向け classifier（2026-10-14）
 - [[sources/anthropic-news/2026-10-12-distillation-defenses]] — 蒸留攻撃への対策。preserved thinking、2段 classifier（誤検知率 0.1% 未満）、課金再開。抜き取られた推論トークンは 1/10〜1/100 以下に（2026-10-12）
@@ -81,6 +85,7 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 - [[sources/engineering/2026-01-09-demystifying-evals-for-ai-agents]] — エージェント評価の用語、3種の採点器、pass@k と pass^k、作り方の8段階（2026-01-09）
 
 ### research
+- [[sources/research/2026-10-23-alignment-assessment-ukaisi]] — UK AISI のサイバー評価で Mythos 5 が起こした無許可の行動（43 回中9回、偽アカウントでの圧力を含む）の整合性評価。新しいモデルは攻撃開始が少ない（2026-10-23）
 - [[sources/research/2026-10-12-self-replicating-ai]] — 小型モデルが IoT 機器（無名 Android TV ボックスなど）で自己複製できるようになる時期の見立て。GLM-5.2 が簡略化した通しの複製に成功し、2026年末ごろ小型モデルが追いつく見込み。防御策も整理（2026-10-12）
 - [[sources/research/2026-10-09-investigating-unintended-model-actions]] — 評価と社内利用で見つかった、Claude の意図しない行動の4分類と対策（ライブ接続の停止、自動遮断など）（2026-10-09）
 - [[sources/research/2026-10-08-launching-opt-in-vuln-finding-service-for-open-source]] — OSS Scanner の開始。OSS 向けに無償・opt-in で定期スキャンを提供。申し込みは GitHub の PR（2026-10-08）
@@ -88,6 +93,7 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 - [[sources/research/2026-09-29-glm-5-3-and-the-spread-of-advanced-cyber-capabilities]] — GLM-5.3 の分析。回避しやすい安全策と、Claude の API 側の対策、防御側へのアクセス方針（2026-09-29）
 
 ### platform-docs
+- [[sources/platform-docs/2026-10-30-release-notes-2026-10-22-to-10-30]] — Platform リリースノート 10-22〜10-30。Claude Models on Google Cloud（Anthropic managed）、Claude Tag API（beta）、リクエスト上限 128MB、Usage and Cost Analytics API（beta、旧 API は legacy）、Opus 4.8 の fast mode 非推奨（11-30 削除）（2026-10-30）
 - [[sources/platform-docs/2026-10-22-inference-hooks]] — Inference hooks: Enterprise 向けのサーバー側 allow／deny フック。Claude Code の hooks とは別の仕組み（公開日不明、取得 2026-10-22）
 - [[sources/platform-docs/2026-10-21-release-notes-2026-10-21]] — Platform リリースノート 10-21: API バージョン 2026-10-21、SDK 新版（Apache 2.0）、user profiles の enforcement フィールド（2026-10-21）
 - [[sources/platform-docs/2026-10-20-release-notes-2026-10-14-to-10-20]] — Claude Platform のリリースノート（10-14〜10-20）。Opus 5.5 の fast mode が研究プレビューを脱した、OpenTelemetry export（ベータ）、Inference hooks が Enterprise でベータ終了、Compliance API でユーザーの instructions を取得可、user profiles、organization webhooks（ベータ）（2026-10-20）
@@ -102,37 +108,39 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 
 形式: `- [[concepts/<slug>]] — 1行要約（出典数）`
 
-- [[concepts/agent-evals]] — エージェントの評価（evals）（出典 5）
-- [[concepts/auto-mode]] — auto mode（権限の自動判定）（出典 12）
-- [[concepts/autonomous-replication]] — 自律的な複製（ARA）と AI ワーム（出典 1）
-- [[concepts/claude-api-skill]] — claude-api スキル（出典 6）
-- [[concepts/claude-apps-gateway]] — Claude apps gateway（出典 2）
+- [[concepts/agent-evals]] — エージェントの評価（evals）（出典 6）
+- [[concepts/auto-mode]] — auto mode（権限の自動判定）（出典 14）
+- [[concepts/autonomous-replication]] — 自律的な複製（ARA）と AI ワーム（出典 2）
+- [[concepts/claude-api-skill]] — claude-api スキル（出典 9）
+- [[concepts/claude-apps-gateway]] — Claude apps gateway（出典 4）
 - [[concepts/claude-code-quality-incidents]] — Claude Code の品質低下の報告と原因（2026年3〜4月）（出典 1）
 - [[concepts/claude-haiku-5-5]] — Claude Haiku 5.5（出典 6）
-- [[concepts/claude-opus-5-5]] — Claude Opus 5.5（出典 12）
+- [[concepts/claude-on-google-cloud]] — Claude on Google Cloud（Anthropic managed の提供と Claude Code のコスト管理）（出典 2）
+- [[concepts/claude-opus-5-5]] — Claude Opus 5.5（出典 16）
 - [[concepts/claude-sonnet-5-5]] — Claude Sonnet 5.5（出典 7）
-- [[concepts/claude-tag]] — Claude Tag（Claude in Slack）（出典 7）
-- [[concepts/cloud-sessions]] — cloud sessions（Claude Code in the cloud）（出典 8）
+- [[concepts/claude-tag]] — Claude Tag（Claude in Slack）（出典 8）
+- [[concepts/cloud-sessions]] — cloud sessions（Claude Code in the cloud）（出典 9）
 - [[concepts/code-review]] — Code Review（GitHub App による PR の自動レビュー）（出典 6）
 - [[concepts/compliance-api]] — Compliance API の対象範囲と GA／ベータの状況（出典 3）
-- [[concepts/context-engineering]] — コンテキストエンジニアリング（Claude 5 世代）（出典 2）
-- [[concepts/cyber-safeguards]] — サイバー・安全策と Cyber Verification Program（出典 17）
+- [[concepts/context-engineering]] — コンテキストエンジニアリング（Claude 5 世代）（出典 6）
+- [[concepts/cyber-safeguards]] — サイバー・安全策と Cyber Verification Program（出典 19）
 - [[concepts/distillation-defenses]] — 蒸留攻撃への対策（preserved thinking、推論抽出の遮断）（出典 5）
-- [[concepts/effort]] — effort（思考量の設定）（出典 10）
+- [[concepts/effort]] — effort（思考量の設定）（出典 11）
 - [[concepts/enterprise-frontier-safeguards]] — Enterprise Frontier Safeguards（EFS。顧客管理ストレージ、CMEK、自動レビューの opt-in。Claude Code も対応先）（出典 1）
-- [[concepts/fast-mode]] — fast mode（出典 11）
+- [[concepts/fast-mode]] — fast mode（出典 13）
 - [[concepts/hooks]] — hooks（設定のフック）（出典 8）
-- [[concepts/long-running-agent-harness]] — 長時間動くエージェントのハーネス（ループ、ロックによる並列化、テストの設計）（出典 3）
-- [[concepts/managed-agents]] — Claude Managed Agents（出典 6）
-- [[concepts/mcp]] — MCP（Model Context Protocol）（出典 6）
-- [[concepts/mods]] — mods（Claude Code mods）（出典 7）
+- [[concepts/long-running-agent-harness]] — 長時間動くエージェントのハーネス（ループ、ロックによる並列化、テストの設計）（出典 4）
+- [[concepts/managed-agents]] — Claude Managed Agents（出典 7）
+- [[concepts/mcp]] — MCP（Model Context Protocol）（出典 7）
+- [[concepts/mods]] — mods（Claude Code mods）（出典 8）
 - [[concepts/oss-scanner]] — OSS Scanner（OSS 向けの無償・opt-in の脆弱性発見サービス）（出典 4）
 - [[concepts/projects]] — Projects（作り直された Projects）（出典 3）
 - [[concepts/prompt-caching]] — プロンプトキャッシュとセッションの費用（出典 12）
 - [[concepts/routines]] — routines（ルーティン）（出典 5）
-- [[concepts/sandboxing]] — サンドボックスと隔離（封じ込め）の設計と教訓（出典 6）
-- [[concepts/subagents]] — サブエージェント（出典 10）
-- [[concepts/unintended-model-actions]] — モデルの意図しない行動と、運用上の安全策（出典 1）
+- [[concepts/skills]] — Agent Skills（skills）（出典 7）
+- [[concepts/sandboxing]] — サンドボックスと隔離（封じ込め）の設計と教訓（出典 8）
+- [[concepts/subagents]] — サブエージェント（出典 12）
+- [[concepts/unintended-model-actions]] — モデルの意図しない行動と、運用上の安全策（出典 2）
 
 ## 分析（analysis）
 
