@@ -77,7 +77,9 @@
 ### 8. engineering — Anthropic Engineering　✅
 
 - URL: https://www.anthropic.com/engineering
-- 差分検知: 一覧の記事 URL が `wiki/sources/engineering/` に無ければ新規。
+  - 記事の URL は `https://www.anthropic.com/research/<slug>` の形。旧 URL の `/engineering/<slug>` は、ここに 308 でリダイレクトされる（2026-11-07 に確認）。
+- 差分検知: 一覧の記事の slug が `wiki/sources/engineering/` に無ければ新規。旧 URL で取り込んだページがあるので、URL 全体ではなく slug で比べる。
+- 注意: Engineering チームの記事は research（9）の一覧にも載る。source_id は engineering で1ページだけ作る。
 - 初期観測（2026-10-10）: 日付つきの最新は 2026-04-23「An update on recent Claude Code quality reports」。先頭の特集「How we contain Claude across products」は一覧に日付の表示がない（記事ページで 2026-05-25 と確認）。一覧は日付順ではなく特集枠が先頭に来る。一覧は 25 件。2026-10-10 に、2026 年の8件を Ingest した（2025 年以前の記事は未 Ingest）。更新の間隔は数か月おき。
 
 ### 9. research — Anthropic Research　✅
