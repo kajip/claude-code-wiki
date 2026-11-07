@@ -311,6 +311,11 @@
 - 被リンク 0 のページのうち、redesigning-source-control を claude-tag から、mods-howto を mods から、independent-evaluators を cyber-safeguards から参照した。claude-for-government-ga と dashboards-and-motion は、適した概念ページが無いので張っていない。
 - 文脈から出典を決めた行（要確認）: auto-mode の未解決 3 行（性能数値、段階、サードパーティのプロバイダでの default 開始）。
 
+## [2026-10-30] schema | 台帳の URL と llms.txt の数え方
+- claude-blog: 一覧の URL を `https://claude.com/resources/articles?products=claude-code` に変えた（旧 URL は 308 でリダイレクト）。2ページ目の URL も改めた。既存の要約ページは、もとから `/resources/articles/` の URL を使っており、差分検知への影響は無い。
+- platform-docs の llms.txt: 数え方をヘッダーの「English (en) - N pages」とし、2026-10-30 の値 826 を記した。過去の値（762、785）は数え方が分からず、比べられない。
+- docs の llms.txt: 数え方を `](https://code.claude.com/docs/en/` を含む行の数とし、2026-10-30 の値 264 を記した。
+
 ## [2026-11-02] check | 全情報源（毎日・週次）
 - 取得の失敗なし。ページ内の指示文なし。npm latest/next 2.1.316、stable 2.1.309。CHANGELOG の先頭 2.1.316（2.1.313 は欠番、2.1.315 は npm のみ）。platform-docs のリリースノートは October 30, 2026 まで。
 - 取り込み対象: gh-changelog 2.1.306〜2.1.316、platform-docs 10-22〜10-30、claude-blog 2 件（Google Cloud のコスト管理、subagents を main loop に畳む設計）、anthropic-news（Agent Skills の寄贈）、research（UK AISI の cybertesting incident の alignment assessment）。
