@@ -1,7 +1,7 @@
 ---
 type: concept
 title: Claude Opus 5.5
-updated: 2026-11-02
+updated: 2026-11-07
 sources:
   - sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09
   - sources/pricing/2026-10-10-pricing
@@ -19,6 +19,7 @@ sources:
   - sources/platform-docs/2026-10-30-release-notes-2026-10-22-to-10-30
   - sources/research/2026-10-23-alignment-assessment-ukaisi
   - sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop
+  - sources/anthropic-news/2026-09-15-introducing-claude-fable-5-1-and-mythos-5-1
 ---
 
 # Claude Opus 5.5
@@ -49,6 +50,7 @@ Claude 5.5 ファミリーの最初のモデル。2026-09-22 に発表された�
 
 ## 変更履歴
 
+- 2026-11-07 — Fable 5.1 の発表の原典を取り込み、Fable 5.1 の記述を照合。→ [[concepts/claude-fable-5-1]]（[[sources/anthropic-news/2026-09-15-introducing-claude-fable-5-1-and-mythos-5-1]]）
 - 2026-11-02 — UK AISI 評価の整合性評価での Opus 5.5 の数値を追記。2026-10-22 の記事の「thinking を切れない」を未解決に記録（[[sources/research/2026-10-23-alignment-assessment-ukaisi]]、[[sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop]]）
 - 2026-10-30 — Opus 4.8 の fast mode の削除（11-30）に伴い、移行先として Opus 5.5 が案内された（platform-docs）。10-22: Claude Models on Google Cloud（Anthropic managed）でも fast mode が使える（[[sources/platform-docs/2026-10-30-release-notes-2026-10-22-to-10-30]]）
 - 2026-10-31 — 2.1.316: Opus 4.8 の fast mode 非推奨に伴い、Opus 5.5 への移行を案内（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）
@@ -59,6 +61,6 @@ Claude 5.5 ファミリーの最初のモデル。2026-09-22 に発表された�
 
 ## 未解決・矛盾
 
-- 2026-10-22 の記事（Claude Platform 向け）は「Opus 5.5 と Fable 5.1 は thinking を切れない」と述べる（記事の主張）（[[sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop]]）。Opus 5.5 については、現状の記述（発表文と、API で `thinking: {"type": "disabled"}` が 400 になるというリリースノート）と方向が一致する。Fable 5.1 の部分は platform-docs と未照合で、モデル仕様の正は docs／platform-docs（[[sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop]]、[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。
+- 2026-10-22 の記事（Claude Platform 向け）は「Opus 5.5 と Fable 5.1 は thinking を切れない」と述べる（記事の主張）（[[sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop]]）。Opus 5.5 については、現状の記述（発表文と、API で `thinking: {"type": "disabled"}` が 400 になるというリリースノート）と方向が一致する。Fable 5.1 の部分は、発表記事（2026-09-15）に thinking を切れるかの記載が無く（2026-11-07 に確認）、platform-docs とも未照合で、モデル仕様の正は docs／platform-docs（[[sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop]]、[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。
 - UK AISI の整合性評価の数値の不一致: 本文の比較では Opus 5.5 の引き返しは 10% だが、記事内で社内研究モデルの値が 62% と 67% の2通りあり、取り違えの可能性がある。Opus 5.5 の 10% 自体は両方で一致（[[sources/research/2026-10-23-alignment-assessment-ukaisi]]）。
 - 解決済み（2026-10-10）: コンテキスト長と最大出力は、リリースノートで 1M と 128k と確認した（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。

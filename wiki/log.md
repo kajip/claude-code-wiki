@@ -364,3 +364,26 @@
 - 更新: skills（`.trash` の上限、`CLAUDE_CODE_SYNC_SKILLS`、`/skill-creator`・`/skill-doctor` は docs 未確認）、cyber-safeguards（拒否時の別モデル再試行、`CLAUDE_CODE_DISABLE_REFUSAL_FALLBACK`）、mcp（AAIF への寄贈）、sandboxing・auto-mode・context-engineering・claude-opus-5-5（UK AISI の評価からの含意。Claude Code への当てはめは推測）、agent-evals（eval の進め方）。claude-api-skill・mods・context-engineering から skills へリンクした。
 - claude-opus-5-5: 「Opus 5.5 は thinking を切れない」は既存の記述（disabled で 400）と一致。Fable 5.1 の部分は未照合。
 - 見送り: 2.1.309 の「`--add-dir` のスキルが `<folder>:<name>` で提示される」は CHANGELOG にあるが、要約ページでは細かい修正として数に含めただけなので、skills には書いていない。
+
+## [2026-11-07] check | 毎日チェック 1〜6
+- 取得の失敗なし。ページ内の指示文なし。npm latest/next 2.1.319、stable 2.1.311。CHANGELOG の先頭と GitHub Releases の最新も 2.1.319。
+- 取り込み対象: gh-changelog 2.1.317〜2.1.319。11-02 以降の日付の記事は、どのブログ系の一覧にも無かった。新規なし: claude-dev。
+- anthropic-news の一覧の先頭に日付見出し「November 7, 2026」があるが、その下の記事は Opus 5.5（2026-09-22）で、新しい URL は無かった。
+- 未判断（人間に提案）: 「Introducing Claude Mythos and Fable 5.1」（2026-09-15）と「The making of Claude Code」（2026-02-23）は、取り込みも skip の記録も無い。
+
+## [2026-11-07] skip | Claude Code と関連の薄い記事（未記録だった古い分）
+- anthropic-news: Genesis Mission への取り組み（10-08）、Project Deal（04-21）、The first AI-planned drive on Mars（01-24）。
+
+## [2026-11-07] ingest | gh-changelog 2.1.317〜2.1.319
+- gh-changelog/2026-11-06-v2-1-317-to-2-1-319 を作成（review: pending）。概念ページを更新: auto-mode、claude-apps-gateway、mcp、subagents、cloud-sessions。
+- 未解決: auto mode の「サーバーが確認できない呼び出しは尋ねるか拒否」と docs の既存要約（2026-10-10 取得）の「無判定は拒否」の関係。docs に `CLAUDE_CODE_AUTO_MODE_SERVER` の記載が無く、再取得が必要。
+- 推測を含む: 2.1.317 の `CLAUDE_CODE_DISABLE_NESTED_SESSION_ID` の説明。
+
+## [2026-11-07] ingest | Introducing Claude Fable 5.1 and Claude Mythos 5.1
+- anthropic-news/2026-09-15-introducing-claude-fable-5-1-and-mythos-5-1 を作成（review: pending）。concepts/claude-fable-5-1 を新規作成。更新: claude-opus-5-5、effort、prompt-caching、cyber-safeguards、enterprise-frontier-safeguards、distillation-defenses。
+- 照合: 価格（入力 $10、出力 $50、キャッシュヒット $0.25）は pricing 2026-10-22 と一致。EFS と ZDR の記述も既存と一致。
+- 未解決: 蒸留対策の対象アカウントの日付（記事は「発表日以降」、既存は 2026-08-31 以降）。Fable 5.1 で thinking を切れるかは記事に記載なし。公開日の「15日」は一覧の表示で、記事ページには「September 2026」とだけある。
+
+## [2026-11-07] ingest | The Making of Claude Code
+- anthropic-news/2026-02-23-making-of-claude-code を作成（review: pending）。回想・談話中心で現行仕様との食い違いも無いため、概念ページは更新していない。
+- 公開日は一覧の表示で、記事ページには日付が無い。本文は埋め込みデータから抽出したため、リンクや画像の部分が欠け、固有名詞が空に見える箇所と文字化けがある。

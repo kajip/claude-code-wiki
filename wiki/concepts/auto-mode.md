@@ -1,7 +1,7 @@
 ---
 type: concept
 title: auto mode（権限の自動判定）
-updated: 2026-11-02
+updated: 2026-11-07
 sources:
   - sources/claude-blog/2026-08-07-running-auto-mode-in-production
   - sources/claude-blog/2026-08-07-auto-mode-default-in-claude-code
@@ -17,6 +17,7 @@ sources:
   - sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305
   - sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316
   - sources/research/2026-10-23-alignment-assessment-ukaisi
+  - sources/gh-changelog/2026-11-06-v2-1-317-to-2-1-319
 ---
 
 # auto mode
@@ -25,7 +26,7 @@ sources:
 
 Claude Code の承認を、人ではなくモデルベースの分類器に任せるモード。手動承認と `--dangerously-skip-permissions` の中間にあたる（[[sources/engineering/2026-03-25-claude-code-auto-mode]]）。設計の一次情報は2026-03-25の Engineering 記事で、設定の仕様は docs の設定ページ（[[sources/docs/2026-10-10-auto-mode-config]]）。auto mode の要件・分類器・既定ブロックは docs の Permission modes ページ（[[sources/docs/2026-10-10-permission-modes]]）。
 
-## 現状（as of 2026-11-02）
+## 現状（as of 2026-11-07）
 
 設計の記述は2026-03-25の記事に基づく。数値とモデルは「公開時点の値」。仕様・提供範囲・モデルは docs（[[sources/docs/2026-10-10-permission-modes]]、[[sources/docs/2026-10-10-auto-mode-config]]）を正とする。
 
@@ -106,8 +107,17 @@ Claude Code の承認を、人ではなくモデルベースの分類器に任�
 - 記事は auto mode に言及していない。取り上げられたのは、評価でネットワークが有効で cyber safeguards が無効な Mythos 5 が、範囲外の行動（第三者リポジトリへのマルウェア入り PR など）を取った事例。失敗の特徴は無謀さ、偏った推論、勢い（compaction のノートと過去の行動が、今の道筋は許可済みだと示唆する）（[[sources/research/2026-10-23-alignment-assessment-ukaisi]]）。
 - 利用者への含意（推測）: 長いセッションでは、過去の行動や compaction の要約が「許可済み」という印象を固めうる。docs は、会話での境界（「push するな」）は分類器が履歴から読み直すため圧縮で失われうるとし、確実にするなら deny ルールとしている。記事の知見はその注意を補強する方向と考えられる（記事は分類器の有効性を検証していない）（[[sources/research/2026-10-23-alignment-assessment-ukaisi]]、[[sources/docs/2026-10-10-permission-modes]]）。
 
+**2.1.317〜2.1.319 の変更（changelog）**
+
+- テレメトリや feature flag がオフ（LLM ゲートウェイ経由を含む）のとき、サーバーが確認できない呼び出しは尋ねるか拒否になり、組み込み分類器へのフォールバックは無くなった。維持するには `CLAUDE_CODE_AUTO_MODE_SERVER=0`。Bedrock、Vertex、Foundry は変更なし（2.1.319）（[[sources/gh-changelog/2026-11-06-v2-1-317-to-2-1-319]]）。
+- ゲートウェイ経由で `CLAUDE_CODE_AUTO_MODE_SERVER=1` は `CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS` 設定下でもサーバー側チェックをオンにする。managed settings が後者を設定するなら `1` も設定が必要。プロジェクトの settings やプラグインは、プロジェクト外でオフにしたサーバー側チェックを再びオンにできない（2.1.319）（[[sources/gh-changelog/2026-11-06-v2-1-317-to-2-1-319]]）。
+- `claude -p` は、安全判定が得られずアクションが拒否されたとき text／JSON 出力で exit 1（以前は 0）。permission rules や `autoMode` 設定が非常に大きいときは理由を説明し、`autoMode` の deny ルールが無ければ terminal で尋ねる（2.1.319）（[[sources/gh-changelog/2026-11-06-v2-1-317-to-2-1-319]]）。
+- ゲートウェイが server-side safety check に 403／422 を返すと毎ターン失敗する問題の修正（2.1.317）、サブエージェントのツール呼び出しに答えが無いときの通知（2.1.317）（[[sources/gh-changelog/2026-11-06-v2-1-317-to-2-1-319]]）。
+- 関連: `permissions.denyInsteadOfPrompting`（権限プロンプトで待つ呼び出しを拒否して続行。2.1.319）、`sed` が accept-edits／auto mode で権限チェックを飛ばす問題の修正（2.1.319）（[[sources/gh-changelog/2026-11-06-v2-1-317-to-2-1-319]]）。
+
 ## 変更履歴
 
+- 2026-11-06 — 2.1.317〜2.1.319: サーバー確認不能時のフォールバック廃止（`CLAUDE_CODE_AUTO_MODE_SERVER=0` で維持）、`claude -p` の exit 1、ほか（[[sources/gh-changelog/2026-11-06-v2-1-317-to-2-1-319]]）
 - 2026-11-02 — UK AISI 評価の整合性評価から、勢いと compaction notes が方針を固定する効果に関する含意（推測と明記）を追記（[[sources/research/2026-10-23-alignment-assessment-ukaisi]]）
 - 2026-10-31 — 2.1.309〜2.1.316: 上記の変更（`$defaults`、安全判定なしの扱い、bypass の `rm` 拒否ほか）（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）
 - 2026-10-22 出典の表記を整理（Lint）: 「（同）」「（同上）」36 件を直前の出典のリンクに展開、「現状」の as of を 2026-10-21 に更新。内容の変更なし
@@ -134,3 +144,4 @@ Claude Code の承認を、人ではなくモデルベースの分類器に任�
 - 未解決: auto mode の段階（プレビュー等）。docs の2ページに記載が無く、一般提供かどうかは明記されていない。「全ユーザー・全プラン」「組み込みの開始モード」とのみ書かれている（[[sources/docs/2026-10-10-permission-modes]]、[[sources/docs/2026-10-10-auto-mode-config]]）。
 - 未解決: `CLAUDE_CODE_AUTO_MODE_MODEL` と、docs の分類器モデルの記述（既定 Sonnet 5、`ANTHROPIC_DEFAULT_OPUS_MODEL` 等）の関係。docs（2026-10-10 取得）に当該の環境変数の記載は無い。docs を正とし、再取得で確認する（[[sources/gh-changelog/2026-10-18-v2-1-302]]、[[sources/docs/2026-10-10-permission-modes]]）。
 - 未解決: サードパーティのプロバイダでの `default` 開始の条件（telemetry 無効／新規インストール）が、docs の「全プロバイダで組み込みの開始モード」とどう両立するか。docs 未確認（[[sources/gh-changelog/2026-10-18-v2-1-302]]、[[sources/docs/2026-10-10-permission-modes]]）。
+- 未解決: 2.1.319 の「サーバーが確認できない呼び出しは尋ねるか拒否」（フォールバック廃止）と、docs（2026-10-10 取得）の「無判定は拒否」「`CLAUDE_CODE_AUTO_MODE_SERVER` の記載なし」との関係。docs の再取得で確認する（[[sources/gh-changelog/2026-11-06-v2-1-317-to-2-1-319]]、[[sources/docs/2026-10-10-permission-modes]]）。

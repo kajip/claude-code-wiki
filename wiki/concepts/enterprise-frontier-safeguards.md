@@ -1,8 +1,9 @@
 ---
 type: concept
 title: Enterprise Frontier Safeguards（EFS）
-updated: 2026-10-22
+updated: 2026-11-07
 sources:
+  - sources/anthropic-news/2026-09-15-introducing-claude-fable-5-1-and-mythos-5-1
   - sources/anthropic-news/2026-09-01-enterprise-frontier-safeguards
 ---
 
@@ -15,6 +16,7 @@ ZDR のプライバシーと、誤用検知の安全策を両立させる企業�
 ## 現状（as of 2026-10-11）
 
 - 段階的に展開中。開始は「この秋の後半」で、広く使える状態にするのが目標。それまで、対象の顧客は Fable 5 と Fable 5.1 で ZDR を受ける（[[sources/anthropic-news/2026-09-01-enterprise-frontier-safeguards]]）。
+- Fable 5.1 の発表（2026-09-15）も同じ内容: 今秋から段階展開、EFS が使えるまで対象の顧客は Fable 5.1 と Fable 5 を ZDR で使える。100社超の顧客、AWS、Google Cloud、Microsoft Azure と共同開発。人によるレビューは既定で顧客自身が行う（[[sources/anthropic-news/2026-09-15-introducing-claude-fable-5-1-and-mythos-5-1]]）。
 - 対応先: Claude Code、Claude Enterprise、Claude Platform、Amazon Bedrock、Claude Platform on AWS、Google の Agent Platform、Microsoft Foundry（[[sources/anthropic-news/2026-09-01-enterprise-frontier-safeguards]]）。
 - 構成: 顧客所有のストレージ、Customer-Managed Encryption Keys、完全自動のレビューは、いずれも opt-in。モデルの挙動、API 価格、レート制限は変わらない（[[sources/anthropic-news/2026-09-01-enterprise-frontier-safeguards]]）。
 - 自動監視は、攻撃的なサイバー・生物能力の開発の試みや、認証情報の盗難・漏えいの兆候を探す。フラグは顧客に直接送られ、Anthropic の人によるレビューは要らない（[[sources/anthropic-news/2026-09-01-enterprise-frontier-safeguards]]）。
@@ -23,6 +25,7 @@ ZDR のプライバシーと、誤用検知の安全策を両立させる企業�
 
 ## 変更履歴
 
+- 2026-11-07 — Fable 5.1 の発表記事（2026-09-15）を取り込み、関連の記述を追記（[[sources/anthropic-news/2026-09-15-introducing-claude-fable-5-1-and-mythos-5-1]]）
 - 2026-10-22 出典の表記を整理（Lint）: 「（同）」「（同上）」6 件を直前の出典のリンクに展開。内容の変更なし
 - 2026-09-01 — EFS を発表（[[sources/anthropic-news/2026-09-01-enterprise-frontier-safeguards]]）
 

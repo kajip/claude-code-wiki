@@ -1,7 +1,7 @@
 ---
 type: concept
 title: サブエージェント
-updated: 2026-11-02
+updated: 2026-11-07
 sources:
   - sources/claude-blog/2026-08-14-maximizing-the-value-of-your-claude-code-sessions
   - sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296
@@ -15,6 +15,7 @@ sources:
   - sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305
   - sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316
   - sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop
+  - sources/gh-changelog/2026-11-06-v2-1-317-to-2-1-319
 ---
 
 # サブエージェント
@@ -23,7 +24,7 @@ sources:
 
 メインの会話から作業を切り出して動かすエージェント。モデル、effort、スキル、compaction の設定を個別に持てる（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）。
 
-## 現状（as of 2026-11-02）
+## 現状（as of 2026-11-07）
 
 - モデル: `CLAUDE_CODE_SUBAGENT_MODEL` で全サブエージェントのモデルを決める。定義の `model:` の方が優先される（[[sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5]]）。workflow エージェントだけは `CLAUDE_CODE_WORKFLOW_SUBAGENT_MODEL` で一括指定できる（2.1.296）（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）。
 - effort: Agent ツールの `effort` パラメータ（2.1.292）（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）。
@@ -61,9 +62,11 @@ sources:
 - 領域別・チーム別に分けると組織図の複製になり、受け渡しで情報が落ちる。分けるなら「コンテキストで分ける」: 他から必要なものが少なく、短い結果を返す仕事（独立した調査経路、境界の明確な部品、ブラックボックスの検証）（[[sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop]]）。
 - 畳む順序: eval を作る → 結合の強い専門家を統合 → サブエージェントを tool として呼ぶ（ユーザーとの会話は main が持つ。完全な引き継ぎはユーザーと直接話す必要があるときだけ）→ 1つずつ skills と MCP tools に変えて比較する。タスクごとの反転を見て、複数回実行する（[[sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop]]）。
 - Claude Code への当てはめ（推測）: skills への切り出しと、サブエージェントを残す条件の判断に参照できる。Claude Code 自体の docs の推奨ではない。
+- 2.1.317〜2.1.319: メインと異なるモデルのサブエージェント／チームメイトは、保存済み effort か既定を使う（2.1.317）。SendMessage は実行中のバックグラウンドエージェントへ、実行中コマンドを止めずバックグラウンドへ移して早く届ける（2.1.317）。バックグラウンドのサブエージェントは全プロバイダでシェルコマンドを3分後にバックグラウンドへ移す。"Switch models when a message is flagged" が "Ask each time" ならモデルを切り替えず停止（2.1.318）。`/tasks` に終了済みサブエージェントの "Earlier in this session" 行（2.1.319）。safeguards で止まったサブエージェント後の Claude への指示は「狭いプロンプトで再試行するか、ユーザーに伝える」（2.1.319）（[[sources/gh-changelog/2026-11-06-v2-1-317-to-2-1-319]]）。
 
 ## 変更履歴
 
+- 2026-11-06 — 2.1.317〜2.1.319: effort の継承、SendMessage の届き方、3分後のバックグラウンド化ほか（[[sources/gh-changelog/2026-11-06-v2-1-317-to-2-1-319]]）
 - 2026-10-22 — サブエージェントをいつ main loop に畳むかの設計指針の記事が公開された。Claude Platform 向け（[[sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop]]）
 - 2026-10-31 — 2.1.307〜2.1.316: fork subagent 同時起動時の自己認識の改善、`SubagentStop` hook の重複実行の修正、分離 worktree の早期削除の修正、`CLAUDE_CODE_SUBAGENT_EFFORT` 追加ほか（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）
 - 2026-10-22 出典の表記を整理（Lint）: 「（同）」「（同上）」2 件を直前の出典のリンクに展開、出典の無かった 2 行に出典を付与、「現状」の as of を 2026-10-21 に更新。内容の変更なし

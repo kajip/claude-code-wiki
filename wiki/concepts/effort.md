@@ -1,8 +1,9 @@
 ---
 type: concept
 title: effort（思考量の設定）
-updated: 2026-11-02
+updated: 2026-11-07
 sources:
+  - sources/anthropic-news/2026-09-15-introducing-claude-fable-5-1-and-mythos-5-1
   - sources/claude-blog/2026-08-14-maximizing-the-value-of-your-claude-code-sessions
   - sources/docs/2026-10-10-prompt-caching
   - sources/platform-docs/2026-10-10-prompt-caching
@@ -26,6 +27,7 @@ sources:
 
 - 段階: `low`、`medium`、`high`、`xhigh`、`max`（[[sources/claude-dev/2026-09-28-building-with-claude-sonnet-5-5]]）。
 - Claude Code での既定: Opus 5.5 は medium（[[sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5]]）、Sonnet 5.5 も medium（[[sources/anthropic-news/2026-09-28-introducing-claude-sonnet-5-5]]）。Claude API での Sonnet 5.5 の既定は high（[[sources/claude-dev/2026-09-28-building-with-claude-sonnet-5-5]]）。
+- Fable 5.1 の既定は Claude Code で High、Claude Cowork と Claude.ai で Medium（発表時点）。Low／Medium でも Fable 5 と同等以上を低コストで出すと主張（[[sources/anthropic-news/2026-09-15-introducing-claude-fable-5-1-and-mythos-5-1]]）。→ [[concepts/claude-fable-5-1]]
 - 変え方: `/effort`（会話の途中でも可）（[[sources/claude-dev/2026-09-25-spending-your-effort]]）、`/effort status`（[[sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5]]）。
 - 2.1.292 で、Agent ツールに `effort` パラメータが追加され、サブエージェントの effort を指定できる（[[sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296]]）。
 - キャッシュとの関係（**Claude Code の場合**）: Opus 5.5、Sonnet 5.5、Haiku 5.5、Fable 5.1 を API キーかサブスクリプションで使う場合は、effort を変えてもキャッシュが残り、確認なしで適用される。ほかのモデルでは、キャッシュが温かいうちは変更の前に確認を求める。Bedrock、Google Cloud's Agent Platform、Claude apps gateway、`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS` を設定した場合、HIPAA の構成では、5.5 世代でもキャッシュが消える（[[sources/docs/2026-10-10-prompt-caching]]）。
@@ -38,6 +40,7 @@ sources:
 
 ## 変更履歴
 
+- 2026-11-07 — Fable 5.1 の既定 effort（発表記事）を追記（[[sources/anthropic-news/2026-09-15-introducing-claude-fable-5-1-and-mythos-5-1]]）
 - 2026-10-31 — 2.1.311〜2.1.316: `ultrathink` を xhigh effort のターンに変更、`CLAUDE_CODE_SUBAGENT_EFFORT` と `CLAUDE_CODE_DISABLE_ULTRATHINK` を追加、管理者の上限時の自動引き下げ（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）
 - 2026-10-22 出典の表記を整理（Lint）: 「現状」の as of を 2026-10-16 に更新。内容の変更なし
 - 2026-08-14 — （公開時点）effort の役割と `MAX_THINKING_TOKENS=0` を説明する記事が公開された（[[sources/claude-blog/2026-08-14-maximizing-the-value-of-your-claude-code-sessions]]）

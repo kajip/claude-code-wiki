@@ -1,8 +1,9 @@
 ---
 type: concept
 title: プロンプトキャッシュとセッションの費用
-updated: 2026-10-22
+updated: 2026-11-07
 sources:
+  - sources/anthropic-news/2026-09-15-introducing-claude-fable-5-1-and-mythos-5-1
   - sources/claude-blog/2026-08-14-maximizing-the-value-of-your-claude-code-sessions
   - sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09
   - sources/pricing/2026-10-10-pricing
@@ -31,6 +32,7 @@ Claude Code のセッションは長くなり、1回のリクエストのコン�
 - LLM gateway が要求と別のモデル名で応答するために会話が繰り返し圧縮される問題を修正（2.1.301）。gateway 固有のモデル名で 200K 付近に "Prompt is too long · automatic compaction failed" になる問題も修正（2.1.299）（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）。
 
 - キャッシュヒットの単価（100万トークンあたり）: Opus 5.5 は $0.20、Sonnet 5.5 は $0.10、Haiku 5.5 は $0.01（100K 以下）、Fable 5.1 は $0.25（[[sources/pricing/2026-10-10-pricing]]）。
+- Fable 5.1 のキャッシュ読み取りは Fable 5 から75%値下げされ $0.25。発表は、これで一般的な作業が約25%、エージェント的な作業が最大約45%安くなると推計（2026年8月の実利用）。価格ページの値と一致（[[sources/anthropic-news/2026-09-15-introducing-claude-fable-5-1-and-mythos-5-1]]）。→ [[concepts/claude-fable-5-1]]
 - キャッシュヒットの倍率は入力単価の0.1倍が標準。Opus 5.5 と Sonnet 5.5 は0.05倍、Fable 5.1 と Mythos 5.1 は0.025倍（[[sources/pricing/2026-10-10-pricing]]）。
 - キャッシュ書き込みは、5分キャッシュで入力の1.25倍、1時間キャッシュで2倍（[[sources/pricing/2026-10-10-pricing]]、[[sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5]]）。
 - effort の変更（**Claude Code の場合**）: 多くのモデルでは、effort の段階ごとに別のキャッシュを持つ。Opus 5.5、Sonnet 5.5、Haiku 5.5、Fable 5.1 を API キーかサブスクリプションで使う場合は、effort を変えてもキャッシュが残る。Bedrock、Google Cloud's Agent Platform、Claude apps gateway、`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS` を設定した場合、HIPAA の構成では残らない（[[sources/docs/2026-10-10-prompt-caching]]）。
@@ -46,6 +48,7 @@ Claude Code のセッションは長くなり、1回のリクエストのコン�
 
 ## 変更履歴
 
+- 2026-11-07 — Fable 5.1 の発表記事（2026-09-15）を取り込み、関連の記述を追記（[[sources/anthropic-news/2026-09-15-introducing-claude-fable-5-1-and-mythos-5-1]]）
 - 2026-10-22 出典の表記を整理（Lint）: 「（同）」「（同上）」2 件を直前の出典のリンクに展開。内容の変更なし
 - 2026-10-14〜10-15 — 2.1.299 でアイドル時のコンパクション、2.1.300 で `api_request` の寿命別キャッシュ書き込み、2.1.301 でモデル切り替え時の要約の仕様変更（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）
 - 2026-10-10 — effort 変更時の挙動を、Claude Code と Claude API に分けて書いた（[[sources/platform-docs/2026-10-10-prompt-caching]]）

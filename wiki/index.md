@@ -1,6 +1,6 @@
 # Index
 
-最終更新: 2026-11-02（要約 75・概念 33）
+最終更新: 2026-11-07（要約 78・概念 34）
 
 ## 状態
 
@@ -12,6 +12,7 @@
 ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行要約（公開日）`
 
 ### gh-changelog
+- [[sources/gh-changelog/2026-11-06-v2-1-317-to-2-1-319]] — 2.1.317〜2.1.319。auto mode はサーバーが確認できない呼び出しを尋ねるか拒否に変更（組み込み分類器へのフォールバック廃止）、`permissions.denyInsteadOfPrompting`、MCP tasks のターミナル対応、gateway のコストレポート API、Bash 権限バイパスやサンドボックス脱出の修正（2026-11-06）
 - [[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]] — 2.1.306〜2.1.316。Opus 4.8 の fast mode 非推奨（11-30 削除）、`CLAUDE_CODE_SUBAGENT_EFFORT`、ultrathink を xhigh effort に、`permissions.blockWritesOutsideWorkingDirectories`、bypass の `rm` 即時拒否、Claude apps gateway の pooled budget ほか、アイドル時 compaction（2026-10-31）
 - [[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]] — 2.1.303〜2.1.305。`sandbox.allowNestedUserNamespaces`（ファイル保護を回避しうる）、`allowedMcpServers` が managed-mcp.json の一部 stdio サーバーを絞り込まなくなる変更、mods の `decider: "person"` ほか、Code Review の review levels（2026-10-21）
 - [[sources/gh-changelog/2026-10-18-v2-1-302]] — 2.1.302。`CLAUDE_CODE_AUTO_MODE_MODEL`、サードパーティのプロバイダの `claude -p` は条件付きで default 開始、fork subagent の既定化、デスクトップアプリと VS Code のサブエージェントは常にバックグラウンド、Claude Design 単体版は 2026-12-14 に終了（2026-10-17）
@@ -46,7 +47,9 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 - [[sources/anthropic-news/2026-10-06-expanding-the-cyber-verification-program]] — CVP の拡大。3段階のアクセス、Glasswing を統合（2026-10-06）
 - [[sources/anthropic-news/2026-09-28-introducing-claude-sonnet-5-5]] — Sonnet 5.5 の発表。30%以上速く、最大30%安い（2026-09-28）
 - [[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]] — Opus 5.5 の発表。Fable 5.1 と同程度の性能で、運用コストは Opus 5 より約40%安い（発表文。単価は20%安）（2026-09-22）
+- [[sources/anthropic-news/2026-09-15-introducing-claude-fable-5-1-and-mythos-5-1]] — Fable 5.1 と Mythos 5.1 の発表。同一モデルで安全策が違う。キャッシュ読み取り75%減で約25〜45%安い。EFS、サイバー介入約60%減、蒸留対策（2026-09-15、日は一覧の表示）
 - [[sources/anthropic-news/2026-09-01-enterprise-frontier-safeguards]] — Enterprise Frontier Safeguards。ZDR と誤用検知の両立、データは顧客のクラウドに保存、今秋に段階展開（2026-09-01）
+- [[sources/anthropic-news/2026-02-23-making-of-claude-code]] — 特集「The Making of Claude Code」。clide から Claude CLI、2025-02 の research preview 公開までの開発経緯の証言集（2026-02-23、日は一覧の表示）
 
 ### claude-dev
 - [[sources/claude-dev/2026-10-15-how-the-claude-code-team-does-code-review]] — Claude Code チームのコードレビュー運用（AI レビュー、リスク別承認、収束対策、社内の数値）（2026-10-15）
@@ -109,37 +112,38 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 形式: `- [[concepts/<slug>]] — 1行要約（出典数）`
 
 - [[concepts/agent-evals]] — エージェントの評価（evals）（出典 6）
-- [[concepts/auto-mode]] — auto mode（権限の自動判定）（出典 14）
+- [[concepts/auto-mode]] — auto mode（権限の自動判定）（出典 15）
 - [[concepts/autonomous-replication]] — 自律的な複製（ARA）と AI ワーム（出典 2）
 - [[concepts/claude-api-skill]] — claude-api スキル（出典 9）
-- [[concepts/claude-apps-gateway]] — Claude apps gateway（出典 4）
+- [[concepts/claude-apps-gateway]] — Claude apps gateway（出典 5）
 - [[concepts/claude-code-quality-incidents]] — Claude Code の品質低下の報告と原因（2026年3〜4月）（出典 1）
+- [[concepts/claude-fable-5-1]] — Fable 5.1 と Mythos 5.1（価格、effort の既定、安全策、アクセス）（出典 2）
 - [[concepts/claude-haiku-5-5]] — Claude Haiku 5.5（出典 6）
 - [[concepts/claude-on-google-cloud]] — Claude on Google Cloud（Anthropic managed の提供と Claude Code のコスト管理）（出典 2）
-- [[concepts/claude-opus-5-5]] — Claude Opus 5.5（出典 16）
+- [[concepts/claude-opus-5-5]] — Claude Opus 5.5（出典 17）
 - [[concepts/claude-sonnet-5-5]] — Claude Sonnet 5.5（出典 7）
 - [[concepts/claude-tag]] — Claude Tag（Claude in Slack）（出典 8）
-- [[concepts/cloud-sessions]] — cloud sessions（Claude Code in the cloud）（出典 9）
+- [[concepts/cloud-sessions]] — cloud sessions（Claude Code in the cloud）（出典 10）
 - [[concepts/code-review]] — Code Review（GitHub App による PR の自動レビュー）（出典 6）
 - [[concepts/compliance-api]] — Compliance API の対象範囲と GA／ベータの状況（出典 3）
 - [[concepts/context-engineering]] — コンテキストエンジニアリング（Claude 5 世代）（出典 6）
-- [[concepts/cyber-safeguards]] — サイバー・安全策と Cyber Verification Program（出典 19）
-- [[concepts/distillation-defenses]] — 蒸留攻撃への対策（preserved thinking、推論抽出の遮断）（出典 5）
-- [[concepts/effort]] — effort（思考量の設定）（出典 11）
-- [[concepts/enterprise-frontier-safeguards]] — Enterprise Frontier Safeguards（EFS。顧客管理ストレージ、CMEK、自動レビューの opt-in。Claude Code も対応先）（出典 1）
+- [[concepts/cyber-safeguards]] — サイバー・安全策と Cyber Verification Program（出典 20）
+- [[concepts/distillation-defenses]] — 蒸留攻撃への対策（preserved thinking、推論抽出の遮断）（出典 6）
+- [[concepts/effort]] — effort（思考量の設定）（出典 12）
+- [[concepts/enterprise-frontier-safeguards]] — Enterprise Frontier Safeguards（EFS。顧客管理ストレージ、CMEK、自動レビューの opt-in。Claude Code も対応先）（出典 2）
 - [[concepts/fast-mode]] — fast mode（出典 13）
 - [[concepts/hooks]] — hooks（設定のフック）（出典 8）
 - [[concepts/long-running-agent-harness]] — 長時間動くエージェントのハーネス（ループ、ロックによる並列化、テストの設計）（出典 4）
 - [[concepts/managed-agents]] — Claude Managed Agents（出典 7）
-- [[concepts/mcp]] — MCP（Model Context Protocol）（出典 7）
+- [[concepts/mcp]] — MCP（Model Context Protocol）（出典 8）
 - [[concepts/mods]] — mods（Claude Code mods）（出典 8）
 - [[concepts/oss-scanner]] — OSS Scanner（OSS 向けの無償・opt-in の脆弱性発見サービス）（出典 4）
 - [[concepts/projects]] — Projects（作り直された Projects）（出典 3）
-- [[concepts/prompt-caching]] — プロンプトキャッシュとセッションの費用（出典 12）
+- [[concepts/prompt-caching]] — プロンプトキャッシュとセッションの費用（出典 13）
 - [[concepts/routines]] — routines（ルーティン）（出典 5）
 - [[concepts/skills]] — Agent Skills（skills）（出典 7）
 - [[concepts/sandboxing]] — サンドボックスと隔離（封じ込め）の設計と教訓（出典 8）
-- [[concepts/subagents]] — サブエージェント（出典 12）
+- [[concepts/subagents]] — サブエージェント（出典 13）
 - [[concepts/unintended-model-actions]] — モデルの意図しない行動と、運用上の安全策（出典 2）
 
 ## 分析（analysis）

@@ -1,8 +1,9 @@
 ---
 type: concept
 title: サイバー・安全策と Cyber Verification Program
-updated: 2026-11-02
+updated: 2026-11-07
 sources:
+  - sources/anthropic-news/2026-09-15-introducing-claude-fable-5-1-and-mythos-5-1
   - sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09
   - sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5
   - sources/anthropic-news/2026-09-28-introducing-claude-sonnet-5-5
@@ -47,6 +48,7 @@ Claude 5.5 ファミリーには、サイバーと bio の安全策がある。�
 - 防御側への方針: 防御者は敵対者と同等以上のモデルを使えるべきだとして、Claude のサイバー能力を安全に広げられる範囲でより多くの防御者へ開く作業を進めている。審査済みの防御者は trusted access programs 経由でより高性能なモデルを使える（[[sources/research/2026-09-29-glm-5-3-and-the-spread-of-advanced-cyber-capabilities]]）。
 
 - 夏のサイバー評価インシデント（7月30日・9月9日報告）に続き、評価・社内利用での意図しない行動（injection によるコマンド実行など）が報告され、Anthropic は全社内評価でライブのインターネット接続を止め、web fetch tool のガードレールを強化した。詳細は [[concepts/unintended-model-actions]]（[[sources/research/2026-10-09-investigating-unintended-model-actions]]）。
+- Fable 5.1（2026-09-15）: サイバー安全策を精緻化し、Claude Code で1セッションの介入が Fable 5 比で平均約60%減（導入部では誤検知60%減）。脆弱性の発見は許可、penetration testing、exploit generation、binary-based vulnerability scanning は Opus に回される。生物は初歩的な質問への反応が85%減で、ライフサイエンスの R&D は Opus に回される。Mythos 5.1 は同一モデルで安全策が緩く、CVP と LSVP 経由（米国の組織に限る）。Fable 5.1 のサイバー安全策に critical-severity の jailbreak は見つかっていない（[[sources/anthropic-news/2026-09-15-introducing-claude-fable-5-1-and-mythos-5-1]]）。→ [[concepts/claude-fable-5-1]]
 - 企業向けには、データを顧客のクラウドに置いたまま誤用を検知する Enterprise Frontier Safeguards（秋に段階展開）がある。Fable 5 から30日のデータ保持を導入した背景として、複数セッション・アカウントにまたがる誤用の検知を挙げている。詳細は [[concepts/enterprise-frontier-safeguards]]（[[sources/anthropic-news/2026-09-01-enterprise-frontier-safeguards]]）。
 - 選挙の誤用対策（Claude.ai 中心、Claude Code 固有の記述なし）: 多段階の誤用（偽 SNS アカウント、偽ニュースサイト、金銭目的の選挙詐欺）向けの新しい classifier、外国の国家主体の検知、選挙インフラ・陣営向けのサイバー防御を追加。ISD と McCain Institute の試験で、分割された依頼による組織的キャンペーンの見逃しが課題と判明した。偽ニュースサイト運営者などのアカウントを停止（[[sources/anthropic-news/2026-10-14-2026-us-midterms]]）。
 
@@ -58,6 +60,7 @@ Claude 5.5 ファミリーには、サイバーと bio の安全策がある。�
 
 ## 変更履歴
 
+- 2026-11-07 — Fable 5.1 の発表記事（2026-09-15）を取り込み、関連の記述を追記（[[sources/anthropic-news/2026-09-15-introducing-claude-fable-5-1-and-mythos-5-1]]）
 - 2026-11-02 — 2.1.312〜2.1.314: フラグが付いた要求の別モデルでの再試行、`CLAUDE_CODE_DISABLE_REFUSAL_FALLBACK` を追記（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）
 - 2026-10-23 — UK AISI のサイバー評価（インターネット接続あり、cyber safeguards 無効）での Mythos 5 の無許可行動の整合性評価を公開。Anthropic は、Fable 5 の cyber safeguards が有効なら即座に検知され、防げたと考えると述べる（取り込みは 2026-11-02）（[[sources/research/2026-10-23-alignment-assessment-ukaisi]]）
 - 2026-10-22 出典の表記を整理（Lint）: 「（同上）」1 件を展開、「現状」の as of を 2026-10-21 に更新。あわせて第三者評価の記事（2026-10-15）への関連リンクを追加（[[sources/anthropic-news/2026-10-15-an-update-on-independent-evaluators]]）
