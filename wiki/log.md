@@ -310,3 +310,8 @@
 - 概念ページ 26 本で、「（同）」「（同上）」136 件を直前の出典の `[[sources/...]]` に展開し、出典の無かった 28 行に出典を付けた。「現状」の as of の日付を、11 ページで本文の最新の日付に揃えた。内容は変えていない。
 - 被リンク 0 のページのうち、redesigning-source-control を claude-tag から、mods-howto を mods から、independent-evaluators を cyber-safeguards から参照した。claude-for-government-ga と dashboards-and-motion は、適した概念ページが無いので張っていない。
 - 文脈から出典を決めた行（要確認）: auto-mode の未解決 3 行（性能数値、段階、サードパーティのプロバイダでの default 開始）。
+
+## [2026-10-30] schema | 台帳の URL と llms.txt の数え方
+- claude-blog: 一覧の URL を `https://claude.com/resources/articles?products=claude-code` に変えた（旧 URL は 308 でリダイレクト）。2ページ目の URL も改めた。既存の要約ページは、もとから `/resources/articles/` の URL を使っており、差分検知への影響は無い。
+- platform-docs の llms.txt: 数え方をヘッダーの「English (en) - N pages」とし、2026-10-30 の値 826 を記した。過去の値（762、785）は数え方が分からず、比べられない。
+- docs の llms.txt: 数え方を `](https://code.claude.com/docs/en/` を含む行の数とし、2026-10-30 の値 264 を記した。
