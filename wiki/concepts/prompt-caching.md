@@ -24,7 +24,7 @@ sources:
 
 Claude Code のセッションは長くなり、1回のリクエストのコンテキストも大きくなったため、費用の大部分をキャッシュ読み取りが占める（[[sources/claude-blog/2026-09-24-opus-5-5-built-for-longer-coding-sessions]]、[[sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5]]）。
 
-## 現状（as of 2026-10-16）
+## 現状（as of 2026-11-07）
 
 - **アイドル時のコンパクション（ターミナル、2.1.299）**: 200K トークン以上の会話を約54分放置すると、1時間のプロンプトキャッシュが切れる前に圧縮する。次のメッセージで全体を処理し直さずに済む。下限は `CLAUDE_CODE_IDLE_COMPACT_MIN_TOKENS` で変更、settings.json の `"idleCompaction": false` で無効。どちらも v2.1.290 以降が必要（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）。
 - OpenTelemetry の `api_request` イベントに `cache_creation_5m_tokens` と `cache_creation_1h_tokens` が加わり、キャッシュ書き込みを寿命別に見られる（2.1.300）（[[sources/gh-changelog/2026-10-16-v2-1-299-to-2-1-301]]）。

@@ -1,8 +1,9 @@
 ---
 type: concept
 title: Projects（作り直された Projects）
-updated: 2026-10-10
+updated: 2026-11-07
 sources:
+  - sources/docs/2026-11-07-claude-projects
   - sources/docs/2026-10-10-claude-projects
   - sources/claude-blog/2026-09-17-projects-redesigned
   - sources/claude-dev/2026-10-06-claude-code-in-the-cloud
@@ -14,10 +15,10 @@ sources:
 
 コーディネーターのチャットが作業をスレッドに振り分け、各スレッドが作業を進める仕組み。各スレッドは、専用のブランチを持つ Claude Code の cloud session として動く（[[sources/claude-blog/2026-09-17-projects-redesigned]]）。
 
-## 現状（as of 2026-10-10）
+## 現状（as of 2026-11-07）
 
-- **Pro と Max でパブリックベータ**。少しずつ広げており、cloud sessions を使ったことがあって既存の project が無いアカウントから始めている。**Team と Enterprise ではまだ使えない**（[[sources/docs/2026-10-10-claude-projects]]）。
-- 新しいスレッドは、すべての project の合計で1日200まで（[[sources/docs/2026-10-10-claude-projects]]、[[sources/claude-dev/2026-10-06-claude-code-in-the-cloud]]）。
+- **Pro、Max、Ultra でパブリックベータ**（2026-11-07 再取得の docs。2026-10-10 の要約は Ultra を落としていた）。少しずつ広げており、cloud sessions を使ったことがあって既存の project が無いアカウントから始めている。**Team と Enterprise ではまだ使えない**。サイドバーに無ければ More の下を探し、無ければ未到達で waitlist がある（[[sources/docs/2026-11-07-claude-projects]]、[[sources/docs/2026-10-10-claude-projects]]）。
+- 新しいスレッドは、すべての project の合計で1日200まで（2026-10-10 取得の docs と claude-dev の記述。2026-11-07 の再取得では、この上限を示す記述を検索で見つけられなかった。同時に走るスレッド数は「固定の数は無い」とある）（[[sources/docs/2026-10-10-claude-projects]]、[[sources/claude-dev/2026-10-06-claude-code-in-the-cloud]]、[[sources/docs/2026-11-07-claude-projects]]）。
 - スレッドは通常は cloud session。Remote Control を通じて自分のコンピューターでも動かせる。そのコンピューターには v2.1.280 以降が必要（[[sources/docs/2026-10-10-claude-projects]]）。
 - project は1人の利用者のもので、共有できない。ベータの間は組織単位の制御は無い（[[sources/docs/2026-10-10-claude-projects]]）。
 - 使うには Claude GitHub App が必要（[[sources/claude-dev/2026-10-06-claude-code-in-the-cloud]]）。docs では、コードを扱う project の前提として github.com 上のリポジトリ、push 権限、Claude GitHub App を挙げている。`/web-setup` のトークンだけでは足りない（[[sources/docs/2026-10-10-claude-projects]]）。
@@ -27,11 +28,12 @@ sources:
 
 ## 変更履歴
 
+- 2026-11-07 — docs を再取得（Lint の指摘対応）。提供プランは Pro、Max、**Ultra**（以前の要約は Ultra が抜けていた）。段階は引き続き public beta、Team／Enterprise は未提供。1日200スレッドの記述は再取得分で見つからず、未解決に記録した（[[sources/docs/2026-11-07-claude-projects]]）
 - 2026-10-10 — docs を取り込み直した（fingerprint が 30af5d… から 7d4a17… に変わった）。提供範囲（Pro／Max でパブリックベータ、Team／Enterprise は未提供）や上限値に、記述の変更は見つからなかった。取り込みの範囲を全文に広げ、現状に提供面・既定モデル・instructions の上限などを追加した（[[sources/docs/2026-10-10-claude-projects]]）
 - 2026-10-10 時点 — ドキュメントでは、Remote Control を通じた自分のコンピューターでのスレッド実行が記載されている（09-17 の発表では「近日」）（[[sources/docs/2026-10-10-claude-projects]]）。いつ提供が始まったかは不明
 - 2026-09-17 — 作り直した Projects をベータで提供開始（[[sources/claude-blog/2026-09-17-projects-redesigned]]）。ブログの予定は、最初は一部の Pro／Max、翌週に Pro／Max の利用者へ、その後 Team／Enterprise を含む全プランへ拡大というものだった。2026-10-10 時点の docs では、提供はまだ Pro と Max で、順次展開中、Team と Enterprise は未提供のまま（[[sources/docs/2026-10-10-claude-projects]]）。「全プランへ」はまだ実現しておらず、「翌週」の Pro／Max 全体への拡大が済んだかどうかは docs からは分からない（waitlist があり、段階的展開と書かれている）。提供範囲は docs を正とする
 
 ## 未解決・矛盾
 
-- （なし）
+- 未解決: 「新しいスレッドは1日200まで」が現行の docs に残っているか。2026-10-10 の docs 要約にあったが、2026-11-07 の再取得（検索）では見つからなかった。削除されたのか表現が変わったのかは未確認（[[sources/docs/2026-10-10-claude-projects]]、[[sources/docs/2026-11-07-claude-projects]]）。
 - 解決済み（2026-10-10）: 提供範囲の表現が、09-17 の記事（[[sources/claude-blog/2026-09-17-projects-redesigned]]）と 10-06 の記事（[[sources/claude-dev/2026-10-06-claude-code-in-the-cloud]]）で違っていた。ドキュメントの記述（Pro／Max でパブリックベータ、順次展開、Team／Enterprise は未提供）を採用した（[[sources/docs/2026-10-10-claude-projects]]）。

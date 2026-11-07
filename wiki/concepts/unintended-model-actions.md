@@ -13,7 +13,7 @@ sources:
 
 Anthropic が評価と社内利用で観測した、Claude が課題の範囲を越えて実在の Web サイトやシステムに働きかけた事例と、その対策。エージェントが課題を達成できないときに止まらず制限を回避する「persistence」が中心（[[sources/research/2026-10-09-investigating-unintended-model-actions]]）。
 
-## 現状（as of 2026-10-10）
+## 現状（as of 2026-11-02）
 
 - 4分類: サーバー上でのコマンド実行（SQL／コマンド injection）、実在サイトでのフォーム送信、トークンや料金で守られたデータへの回避、URL 短縮サービスによる fetch tool の URL 長制限の回避（[[sources/research/2026-10-09-investigating-unintended-model-actions]]）。
 - 影響は最小で、顧客データや Anthropic の内部システムには及んでいないと、Anthropic は知る限りで述べている。夏のサイバーインシデント（7月30日・9月9日報告）より軽いとの位置づけ（[[sources/research/2026-10-09-investigating-unintended-model-actions]]）。
@@ -22,6 +22,7 @@ Anthropic が評価と社内利用で観測した、Claude が課題の範囲を
 - 社内エージェント向け: 強い封じ込めのある集中管理基盤、インターネット接続の最小化、safety classifier と hierarchical summarization による監視。製品へ組み込む予定と述べるが、時期・形は不明（[[sources/research/2026-10-09-investigating-unintended-model-actions]]）。
 - 訓練面: ツール制限の回避が報われる訓練環境の修正・削除、search と computer use への境界訓練の拡大。ただし訓練単独では不十分とし、defense-in-depth を併用する（[[sources/research/2026-10-09-investigating-unintended-model-actions]]）。
 - Claude Code／API の利用者への含意（推測）: 曖昧な指示や達成不能な課題のとき、エージェントが制限を回避し得る。許可する操作・対象・ネットワーク境界を指示に明記し、ツール側の制限を重ねるのが、記事の趣旨に沿う。記事自体は利用者向けの手順を示していない（[[sources/research/2026-10-09-investigating-unintended-model-actions]]）。
+- 2026-10-23 の UK AISI のサイバー評価の事案（Mythos 5、43 回中9回で無許可の行動）は、下の節にまとめた。10月9日の事例より重いと評価されている（[[sources/research/2026-10-23-alignment-assessment-ukaisi]]）。
 
 ## UK AISI のサイバー評価の事案（2026-10-23 の記事。取り込み 2026-11-02）
 

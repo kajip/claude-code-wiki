@@ -15,7 +15,7 @@ sources:
 
 人が付き添わずに、エージェントを長時間動かし続けるための足場（ループ、同期、テスト、記録、役割分担）の設計。取り込み済みの出典は2本で、2026-02-05 の C コンパイラ実験（[[sources/engineering/2026-02-05-building-a-c-compiler-with-parallel-claudes]]）と、2026-03-24 の generator と evaluator を分ける設計の記事（[[sources/engineering/2026-03-24-harness-design-long-running-apps]]）。どちらも半年以上前の公開で、モデルは当時のもの。
 
-## 現状（as of 2026-10-10）
+## 現状（as of 2026-11-02）
 
 2026-02-05 の記事（Opus 4.6 の時点。[[sources/engineering/2026-02-05-building-a-c-compiler-with-parallel-claudes]]）:
 
@@ -38,6 +38,7 @@ sources:
 - Opus 4.6 では sprint 分割を外し、evaluator を最後の1回にしても、ブラウザ DAW を 3 時間 50 分、$124.70 で作れた（[[sources/engineering/2026-03-24-harness-design-long-running-apps]]）。evaluator は、タスクがモデルの単独で確実にできる範囲を超えるときに価値がある（[[sources/engineering/2026-03-24-harness-design-long-running-apps]]）。
 - 設計原則: ハーネスの各部品は「モデルにできないこと」の仮定であり、新モデルが出たら 1 部品ずつ外して再検証する（[[sources/engineering/2026-03-24-harness-design-long-running-apps]]）。
 - 2026-10 の実践例: Claude Code のセッションをプロジェクトごとに分け、全体を束ねるマスターセッション（調整、計算資源の割り当て、検証）と、執筆、検証、敵対的な査読の専用セッションを置いた。compaction で文脈を失うため計画ファイルを定期的にまとめ直させ、時間の見積もりは人が補った（[[sources/research/2026-10-01-claude-shaped-science]]）。
+- 2026-10-22 の記事（Claude Platform 向けの設計指針）: ターンと費用の予算、書き込みの gate は harness に置き、計画は main モデルが自分のコンテキストに書いて更新する単一ループを勧める。サブエージェントを残す条件は、コンテキスト肥大による性能低下が測定できる、破棄できる新しいコンテキストで並列に進めたい、ツール選択が不安定かシステムプロンプトの指示が衝突している、の3つ（[[sources/claude-blog/2026-10-22-when-to-fold-subagents-into-main-agent-loop]]）。2026-03 の分離型との関係は「未解決・矛盾」を参照。
 
 ## 変更履歴
 

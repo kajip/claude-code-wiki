@@ -13,7 +13,7 @@ sources:
 
 ZDR のプライバシーと、誤用検知の安全策を両立させる企業向けの仕組み。監視用の活動データは顧客が管理するクラウドに保存し、自動監視のフラグは顧客に直接届く（[[sources/anthropic-news/2026-09-01-enterprise-frontier-safeguards]]）。Claude Code も対応先に挙がっている（[[sources/anthropic-news/2026-09-01-enterprise-frontier-safeguards]]）。
 
-## 現状（as of 2026-10-11）
+## 現状（as of 2026-11-07）
 
 - 段階的に展開中。開始は「この秋の後半」で、広く使える状態にするのが目標。それまで、対象の顧客は Fable 5 と Fable 5.1 で ZDR を受ける（[[sources/anthropic-news/2026-09-01-enterprise-frontier-safeguards]]）。
 - Fable 5.1 の発表（2026-09-15）も同じ内容: 今秋から段階展開、EFS が使えるまで対象の顧客は Fable 5.1 と Fable 5 を ZDR で使える。100社超の顧客、AWS、Google Cloud、Microsoft Azure と共同開発。人によるレビューは既定で顧客自身が行う（[[sources/anthropic-news/2026-09-15-introducing-claude-fable-5-1-and-mythos-5-1]]）。

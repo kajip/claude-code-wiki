@@ -1,8 +1,9 @@
 ---
 type: concept
 title: routines（ルーティン）
-updated: 2026-10-22
+updated: 2026-11-07
 sources:
+  - sources/docs/2026-11-07-routines
   - sources/claude-dev/2026-10-06-claude-code-in-the-cloud
   - sources/gh-changelog/2026-10-10-v2-1-290-to-2-1-296
   - sources/docs/2026-10-16-routines-and-cloud-sessions
@@ -12,16 +13,19 @@ sources:
 
 # routines
 
+（ページのスラッグは `routines` のまま。現在の docs での名称は scheduled tasks で、routines は旧称（[[sources/docs/2026-11-07-routines]]）。）
+
 ## 概要
 
 プロンプト、リポジトリ、コネクタ、環境を保存しておき、トリガーで cloud session として動かす仕組み。トリガーは、スケジュール、HTTP 呼び出し（API）、GitHub のイベントのどれか。1つの routine に複数を組み合わせられる（[[sources/docs/2026-10-16-routines-and-cloud-sessions]]、[[sources/claude-dev/2026-10-06-claude-code-in-the-cloud]]）。
 
-## 現状（as of 2026-10-18）
+## 現状（as of 2026-11-07）
 
-出典は特記が無い限り docs（[[sources/docs/2026-10-16-routines-and-cloud-sessions]]）。
+出典は特記が無い限り docs（[[sources/docs/2026-10-16-routines-and-cloud-sessions]]）。以下の名称、段階、提供プラン、`/schedule` の別名は 2026-11-07 の再取得による（[[sources/docs/2026-11-07-routines]]）。
 
-- **研究プレビュー**。docs は「挙動、上限、API の形が変わりうる」と明記。`/fire` は beta ヘッダー `experimental-cc-routine-2026-04-01` の下にある（[[sources/docs/2026-10-16-routines-and-cloud-sessions]]）。
-- 提供: Pro、Max、Team、Enterprise。Team／Enterprise の Owner は Routines トグルで組織全体を無効にできる。作り方は claude.ai/code/routines、Desktop（Cloud を選ぶ）、`/schedule`（別名 `/routines`）。`/schedule` は claude.ai のサブスクリプションログインが必要で、Console API キーやクラウドプロバイダー経由では使えない（[[sources/docs/2026-10-16-routines-and-cloud-sessions]]）。
+- **名称**: docs の呼称は「scheduled tasks」で、routines は旧称（原文: formerly routines）。旧称は URL `claude.ai/code/routines`、CLI の `/routines`、API の `/fire` パスと beta ヘッダー、組織設定のトグル（「Scheduled tasks (Was Routines)」または「Routines」）、一部アカウントのアプリ表示（New routine）に残る（[[sources/docs/2026-11-07-routines]]）。
+- **研究プレビュー**（2026-11-07 の docs でも表示あり。"Scheduled tasks are in research preview"）。docs は「挙動、上限、API の形が変わりうる」と明記。`/fire` は beta ヘッダー `experimental-cc-routine-2026-04-01` の下にある（[[sources/docs/2026-10-16-routines-and-cloud-sessions]]）。
+- 提供: **Pro、Max、Ultra、Team、Enterprise**（2026-10-16 の要約は Ultra が抜けていた）。Team／Enterprise の Owner は「Scheduled tasks (Was Routines)」または「Routines」のトグルで組織全体を無効にできる（Enterprise のカスタムロールでは scheduled tasks の権限も必要）。作り方は claude.ai/code/routines、Desktop（Cloud を選ぶ）、`/schedule`。`/routines` は `/schedule` の別名として残る（[[sources/docs/2026-11-07-routines]]）。`/schedule` は claude.ai のサブスクリプションログインが必要（この条件は 2026-10-16 取得分）で、Console API キーやクラウドプロバイダー経由では使えない（[[sources/docs/2026-10-16-routines-and-cloud-sessions]]）。
 - **料金と利用枠**: 実行は対話セッションと同じようにサブスクリプションの利用枠を消費する。VM への別料金の記載は無い（cloud session 全般が「別料金なし」）。枠を超えたとき、usage credits が有効な組織は従量の超過分で続行でき、無効なら枠のリセットまで追加実行は拒否される。API の従量課金ではない（[[sources/docs/2026-10-16-routines-and-cloud-sessions]]）。
 - **1時間あたりの上限**（どれも overage なし）: スケジュール実行は100回／アカウント。Run now、API fire、1回きり routine の再設定は30回／routine（3つで1つの数）。Run now と1回きりの再設定は100回／アカウント、API fire は100回／アカウント（別カウント）。GitHub イベントにも routine 単位・アカウント単位の上限があるが数値は docs に記載なし。超えたイベントは破棄される（[[sources/docs/2026-10-16-routines-and-cloud-sessions]]）。
 - スケジュールの最短は1時間間隔（短い cron は拒否）。ちょうど毎時0分は数分遅れることがある（[[sources/docs/2026-10-16-routines-and-cloud-sessions]]）。
@@ -44,6 +48,7 @@ sources:
 
 ## 変更履歴
 
+- 2026-11-07 — docs を再取得（Lint の指摘対応）。呼称が scheduled tasks（旧称 routines）に、提供プランに Ultra が加わっていた。研究プレビューの表示は継続。`/routines` が `/schedule` の別名であることを確認。1時間あたりの上限（スケジュール 100、Run now／API／再設定 30／タスクと 100／アカウント）は表で再確認し変更なし（[[sources/docs/2026-11-07-routines]]）
 - 2026-10-22 出典の表記を整理（Lint）: 「（同）」「（同上）」2 件を直前の出典のリンクに展開、出典の無かった 15 行に出典を付与、「現状」の as of を 2026-10-18 に更新。内容の変更なし
 - 2026-10-17 — 2.1.302: 実行が始まらなかった理由のバナーを追加。失敗した実行の状態表示と、失敗後の再実行の問題を修正（[[sources/gh-changelog/2026-10-18-v2-1-302]]）
 - 2026-10-17 — 「承認のために止まらない」に、明示的な ask ルールは例外であることを追記（[[sources/docs/2026-10-10-permission-modes]]）

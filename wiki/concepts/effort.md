@@ -23,7 +23,7 @@ sources:
 
 タスクにどれだけ計算を使わせるかの目安。上げると、判断と検証を自分で進める度合いが増える（[[sources/claude-dev/2026-09-25-spending-your-effort]]）。
 
-## 現状（as of 2026-11-02）
+## 現状（as of 2026-11-07）
 
 - 段階: `low`、`medium`、`high`、`xhigh`、`max`（[[sources/claude-dev/2026-09-28-building-with-claude-sonnet-5-5]]）。
 - Claude Code での既定: Opus 5.5 は medium（[[sources/claude-dev/2026-09-25-what-a-task-costs-on-opus-5-5]]）、Sonnet 5.5 も medium（[[sources/anthropic-news/2026-09-28-introducing-claude-sonnet-5-5]]）。Claude API での Sonnet 5.5 の既定は high（[[sources/claude-dev/2026-09-28-building-with-claude-sonnet-5-5]]）。

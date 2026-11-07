@@ -31,7 +31,7 @@ sources:
 
 Claude 5.5 ファミリーには、サイバーと bio の安全策がある。リスクのある依頼は拒否されるか、古いモデルに回される（fallback）。審査を通った組織には、Cyber Verification Program（CVP）で制限を緩めたアクセスが提供される（[[sources/anthropic-news/2026-10-06-expanding-the-cyber-verification-program]]）。
 
-## 現状（as of 2026-10-21）
+## 現状（as of 2026-11-07）
 
 - Opus 5.5: サイバーの作業の多くは Opus 4.8 に回される（[[sources/anthropic-news/2026-09-22-introducing-claude-opus-5-5]]）。
 - Sonnet 5.5: リスクの高いサイバー作業は Sonnet 5 に回される。普段のバグ修正には影響しない（[[sources/anthropic-news/2026-09-28-introducing-claude-sonnet-5-5]]）。

@@ -387,3 +387,48 @@
 ## [2026-11-07] ingest | The Making of Claude Code
 - anthropic-news/2026-02-23-making-of-claude-code を作成（review: pending）。回想・談話中心で現行仕様との食い違いも無いため、概念ページは更新していない。
 - 公開日は一覧の表示で、記事ページには日付が無い。本文は埋め込みデータから抽出したため、リンクや画像の部分が欠け、固有名詞が空に見える箇所と文字化けがある。
+
+## [2026-11-07] lint | wiki 全体の点検
+- 壊れたリンク 0、孤立ページ 0、index の総数は実数と一致（要約 78・概念 34）。ページ内の指示文なし。review: pending は 19 件（14 日超は 10 件）。
+- 未解決 3 件は概念ページに残存: auto mode の無判定（docs は 11-07 の取得で「無判定は拒否」かつ組み込み分類器へのフォールバックを記載し、`CLAUDE_CODE_AUTO_MODE_SERVER=0` も載っていた。11-07 の ingest の「docs に記載が無い」は古い）、蒸留対策の対象日（platform-docs の 09-01 の項が 08-31 を裏付ける。要 raw 確認）、Fable 5.1 の thinking。
+- 取り込み漏れ（週次を 11-07 の check から外したため未検知）: platform-docs リリースノート 11-02〜11-05、engineering「The components of agent memory」（11-06）。
+- 矛盾・古い記述: fast mode の提供範囲（fast-mode と claude-on-google-cloud）、Projects と routines の提供プランと名称、as-of の遅れ 6 ページ以上、claude-fable-5-1 の frontmatter の出典数（本文は 6 件、記載は 2 件）、skills と mods の出典の無い行。
+- 台帳のリダイレクト（claude-blog、engineering）は未反映のまま。規則により PR で対応する。
+- lint 中の取得は WebFetch の要約で、生データでは未確認。ファイルの修正はまだ行っていない。提案として人間に返した。
+
+## [2026-11-07] check | 週次チェック 7〜11
+- 取り込み対象: platform-docs 11-02〜11-05、engineering「The components of agent memory」（11-06）、pricing（fingerprint sha256:5864b14c…）。Haiku 3.5 の行の消失と、fast mode の Google Cloud (Anthropic managed) の明記を検知した。
+- docs の changelog は 2.1.319、What's New は Week 37 のまま、llms.txt は 275 件。platform-docs の llms.txt は 886 件（数え方が 11-02 の 845 件と同じかは不明）。
+- 斥候の「engineering と research の curl は本文が空」は、メインで curl して再現しなかった（どちらも HTTP 200、本文あり）。台帳には書かない。
+
+## [2026-11-07] skip | Claude Code と関連の薄い記事（週次）
+- research: Progress on provable inference（11-02。Claude の機能に触れない研究プロトタイプ）、Teaching AI to build scientific models（11-06。外部寄稿）、AI for scientific discovery（11-05。利用事例、タイトルで判断）、Investigating vault particles with Claude（11-04。タイトルで判断）。
+
+## [2026-11-07] error | 取得時の User-Agent の指定
+- 週次の wiki-check が、curl の本文が空だと判断して、ブラウザ風の User-Agent で再取得を試み、自動判定で拒否された。以後は試していない。
+- メインも日次チェックの確認で、www.anthropic.com/news に `curl -A 'Mozilla/5.0'` を一度使った。`rules/fetching.md` の「迂回しない」の趣旨に反するので、以後は指定しない。
+
+## [2026-11-07] ingest | platform-docs リリースノート 11-02〜11-05
+- platform-docs/2026-11-05-release-notes-2026-11-02-to-11-05 を作成（review: pending）。更新: claude-on-google-cloud、context-engineering。
+- 未確認: message threads と prompt caching の関係や料金上の扱い、透かしの機能自体がベータか。リンク先のドキュメント本体は未取得。
+
+## [2026-11-07] ingest | The components of agent memory
+- engineering/2026-11-06-components-of-agent-memory を作成（review: pending）。concepts/agent-memory を新規作成し、context-engineering にリンクを追加。
+- 未確認: dreaming の提供段階と Claude Code での扱い。図の中の数値は読んでいない。
+
+## [2026-11-07] ingest | pricing（2026-11-07 版）と fast mode
+- pricing/2026-11-07-pricing と platform-docs/2026-11-07-fast-mode を作成（review: pending）。更新: fast-mode、claude-on-google-cloud。単価は 10-22 版から変更なし。Haiku 3.5 の行が消えた理由は原文に無い。
+- 解決: fast mode の Google Cloud (Anthropic managed) の食い違い。未確認: Claude Platform on AWS と Bedrock で使えるか（一覧に無いが、不可とは書かれていない）。Batch の表の全行と他の節は読み直していない。
+
+## [2026-11-07] ingest | docs の再取得と Lint の修正
+- docs/2026-11-07 の permission-modes、errors-auto-mode、claude-projects、routines、memory を作成（review: pending）。更新: auto-mode、projects、routines、agent-memory。
+- 解決: `CLAUDE_CODE_AUTO_MODE_SERVER=0` の docs 記載（11-07 の ingest の「記載が無い」は誤り）、third-party の開始モード、Projects と routines の Ultra、routines の名称（scheduled tasks、旧称 routines）、auto memory の 200 行／25 KB。
+- 未解決: 2.1.319 の「尋ねるか拒否、フォールバック廃止」と docs の「審査しないセッションはフォールバック、無判定は拒否」の関係（原文を突き合わせても条件の違いか docs の遅れか決められない。両論併記）。Projects の「1日200スレッド」は docs に見つからない。
+
+## [2026-11-07] ingest | Fable 5.1 の照合と Lint の整頓
+- platform-docs/2026-11-07-fable-5-1-thinking-and-launch-notes を作成（review: pending）。更新: claude-fable-5-1、distillation-defenses、skills、mods、long-running-agent-harness、unintended-model-actions、prompt-caching、cyber-safeguards、enterprise-frontier-safeguards、effort、context-engineering。
+- 解決: 蒸留対策の対象日は 2026-08-31 以降（リリースノート 09-01 の項）。「発表日以降」は公開時点の表現として残した。Fable 5.1 の thinking は docs が always on と記す（「切れない」は読み取りで、`disabled` の値は未確認）。
+- 未解決（新規）: Fable 5.1 の公開日。要約ページは一覧の表示で 2026-09-15、リリースノートは September 1 の項に載せる。
+
+## [2026-11-07] schema | 台帳の engineering の URL（PR #7）
+- 記事の URL が `/research/<slug>` に移ったことと、差分検知を slug で行うことを PR #7 で提案した（`sources.md` のみ。マージは人間）。claude-blog の URL と llms.txt の数え方は既存の PR #6 が扱っており、未マージ。

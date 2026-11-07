@@ -19,7 +19,7 @@ sources:
 
 Claude Code の動きと見た目を変える、小さな TypeScript／JavaScript の関数。プラグインに入れて配る（[[sources/claude-blog/2026-10-01-customize-claude-code-with-mods]]）。docs の定義では、mod は Claude Code のプロセス内で動くイベントハンドラ（hook）を持つプラグインで、ミドルウェアのような鎖として動く。設定ファイルの hook（[[concepts/hooks]]）とは別物で、docs は後者を「settings hook」と呼ぶ（[[sources/docs/2026-10-10-mods]]）。詳しいフィールドや API は docs の要約ページにある。
 
-## 現状（as of 2026-10-21）
+## 現状（as of 2026-11-02）
 
 - **対応版**: ターミナルは 2.1.287 以降、Desktop アプリは 2.1.286 以降で既定有効。CLI と Desktop の Code タブで動く。ベータ等の表記は docs に無い（[[sources/docs/2026-10-10-mods]]）。API は版ごとに変わりうるので、`.claude-plugin/types/` に書き出される型定義を正とする（[[sources/docs/2026-10-10-mods]]）。
 - **構成**: `.claude-plugin/plugin.json`、`hooks/hooks.json`（`"modules": ["./register.js"]`）、hooks モジュール（`export function register(on, options)`）の3つ。mods が plugin.json に足す必須フィールドは無い。mod 用の任意キーは `types`（`$.state` などの型宣言）と `userConfig`。plugin.json の全フィールドは要約ページの一覧を参照（[[sources/docs/2026-10-10-mods]]）。
@@ -44,7 +44,7 @@ Claude Code の動きと見た目を変える、小さな TypeScript／JavaScrip
 - 先に走るプラグインが mod のフックを飛ばしたとき、transcript にイベントとプラグイン名の行が出る。mod のリロード失敗で前の版のツールとコマンドが消える問題、同ラベルでキーなしのボタンのクリックが失われる問題を修正。VS Code のチャットパネルで、Bedrock、Vertex、Foundry、LLM ゲートウェイ配下、テレメトリ無効のセッションでも mod を描画（2.1.304）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
 - `Image` が iTerm2 3.5 以降の fullscreen rendering で画像を描く。ドック領域は端末幅の 45% 以内（2.1.305）（[[sources/gh-changelog/2026-10-21-v2-1-303-to-2-1-305]]）。
 - プラグインの標準レイアウトにある `skills/` の skill は、オープン標準 Agent Skills（2026-10-22 に AAIF へ寄贈）の形式。skill 自体の説明は [[concepts/skills]]。標準側の記事は mods や plugin.json には触れていない（[[sources/anthropic-news/2026-10-22-donating-agent-skills-to-the-agentic-ai-foundation]]）。
-- 作り方の手順を質問形式でまとめた分析ページ: [[analysis/mods-howto]]（as of 2026-10-11、docs は v2.1.290 時点）。
+- 作り方の手順を質問形式でまとめた分析ページ: [[analysis/mods-howto]]（as of 2026-10-11、docs は v2.1.290 時点。reference ページが「as of v2.1.290」と明記。[[sources/docs/2026-10-10-mods]]）。
 
 ## 変更履歴
 

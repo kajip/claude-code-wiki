@@ -17,5 +17,5 @@
 - CHANGELOG.md の先頭は 2.1.319（一致。取得日 2026-11-07）。
 - 欠番・不一致: 2.1.313 は npm にも CHANGELOG にも無い。2.1.315 は npm に公開されている（2026-10-31 06:05）が、CHANGELOG と GitHub Releases に無い。2.1.297 と 2.1.298 は npm に無い。
 - GitHub Releases の最新は v2.1.319（https://github.com/anthropics/claude-code/releases 、取得日 2026-11-07。WebFetch で取得）。
-- docs の changelog（https://code.claude.com/docs/en/changelog.md）の最新は 2.1.316（取得日 2026-11-02。週次の情報源のため今回は未確認）。
-- docs の What's New の最新は Week 37（2026-09-07〜11）。`2026-w38.md` は 404（取得日 2026-11-02。週次の情報源のため今回は未確認）。
+- docs の changelog（https://code.claude.com/docs/en/changelog.md）の最新は 2.1.319 で、CHANGELOG.md と一致（取得日 2026-11-07）。
+- docs の What's New の最新は Week 37（2026-09-07〜11）のまま（取得日 2026-11-07）。

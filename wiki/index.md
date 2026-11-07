@@ -1,6 +1,6 @@
 # Index
 
-最終更新: 2026-11-07（要約 78・概念 34）
+最終更新: 2026-11-07（要約 88・概念 35）
 
 ## 状態
 
@@ -65,6 +65,11 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 - [[sources/claude-dev/2026-07-24-new-rules-of-context-engineering-claude-5]] — Claude Code のシステムプロンプトを 80% 超削った経緯と、CLAUDE.md・skills の整え方（2026-07-24）
 
 ### docs
+- [[sources/docs/2026-11-07-permission-modes]] — Choose a permission mode の再取得。サーバー側審査の3通りの結果と `CLAUDE_CODE_AUTO_MODE_SERVER`／`_MODEL` の記載（2026-11-07 取得、公開日不明）
+- [[sources/docs/2026-11-07-errors-auto-mode]] — Error reference の auto mode 2節（判定不能とサーバー無判定）（2026-11-07 取得、公開日不明）
+- [[sources/docs/2026-11-07-claude-projects]] — Projects の提供範囲の再取得（Pro、Max、Ultra で public beta）（2026-11-07 取得、公開日不明）
+- [[sources/docs/2026-11-07-routines]] — scheduled tasks（旧称 routines）の名称・提供プランの再取得（2026-11-07 取得、公開日不明）
+- [[sources/docs/2026-11-07-memory]] — Memory の auto memory 読み込み上限（200行／25KB）の確認（2026-11-07 取得、公開日不明）
 - [[sources/docs/2026-10-22-managed-mcp]] — managed MCP の許可制御。`${VAR}` 展開を使う managed サーバーは allowlist で検査される（公開日不明、取得 2026-10-22）
 - [[sources/docs/2026-10-22-sandbox-allownestedusernamespaces]] — `sandbox.allowNestedUserNamespaces` の docs の記載。既定 false、隔離の境界を外す設定で、リポジトリの設定では有効にできない（公開日不明、取得 2026-10-22）
 - [[sources/docs/2026-10-16-code-review]] — Code Review の docs。概要と下位5ページ（setup、customize、PR での操作、費用、トラブルシューティング）（公開日不明。取得 2026-10-16）
@@ -77,6 +82,7 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 - [[sources/docs/2026-10-10-mods]] — Mods の公式 docs。plugin.json の全フィールド、hooks.json と register の例、`$` の API、`claude plugin test`、型定義、組み込み mod、管理者設定、公開申請の手順（公開日不明。取得 2026-10-10）
 
 ### engineering
+- [[sources/engineering/2026-11-06-components-of-agent-memory]] — エージェントのメモリの設計。dreaming（ログを後から見返してメモを直す・作る）、wiki、毎セッション注入する層を小さく保つ。auto memory は MEMORY.md の先頭 200 行／25 KB（2026-11-06）
 - [[sources/engineering/2026-10-13-redesigning-source-control]] — Anthropic 社内製 VCS「Scion」で monorepo を git から5か月で移行した事例。1日のマージ数が約2,500件から3万件超に増えた（2026-10-13、10-15更新）
 - [[sources/engineering/2026-05-25-how-we-contain-claude]] — 封じ込めの設計（claude.ai の gVisor、Claude Code の OS サンドボックス、Cowork の VM）と、見落とした4件のリスク（2026-05-25）
 - [[sources/engineering/2026-04-23-an-update-on-recent-claude-code-quality-reports]] — 2026年3〜4月の品質低下の原因3件（effort の既定、thinking を消すバグ、冗長さを抑えるプロンプト）と再発防止（2026-04-23）
@@ -96,6 +102,9 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 - [[sources/research/2026-09-29-glm-5-3-and-the-spread-of-advanced-cyber-capabilities]] — GLM-5.3 の分析。回避しやすい安全策と、Claude の API 側の対策、防御側へのアクセス方針（2026-09-29）
 
 ### platform-docs
+- [[sources/platform-docs/2026-11-07-fast-mode]] — fast mode の提供範囲（Opus 5.5 は Claude API、Google Cloud (Anthropic managed)、Foundry）、Opus 4.8 の 11-30 削除（日付なし、取得 2026-11-07）
+- [[sources/platform-docs/2026-11-07-fable-5-1-thinking-and-launch-notes]] — Fable 5.1 の always-on thinking と 2026-08-31 以降の preserved thinking 確認用の抜粋（公開日不明。Sep 1 の項ほか）
+- [[sources/platform-docs/2026-11-05-release-notes-2026-11-02-to-11-05]] — Platform リリースノート 11-02〜11-05。message threads（beta、message-threads-2026-08-12）、Mythos 5／Opus 4.7／Sonnet 4.6 のテキスト透かし、Console の IP allowlist（beta）、Admin API のメンバーのサインアウト（beta）（2026-11-05）
 - [[sources/platform-docs/2026-10-30-release-notes-2026-10-22-to-10-30]] — Platform リリースノート 10-22〜10-30。Claude Models on Google Cloud（Anthropic managed）、Claude Tag API（beta）、リクエスト上限 128MB、Usage and Cost Analytics API（beta、旧 API は legacy）、Opus 4.8 の fast mode 非推奨（11-30 削除）（2026-10-30）
 - [[sources/platform-docs/2026-10-22-inference-hooks]] — Inference hooks: Enterprise 向けのサーバー側 allow／deny フック。Claude Code の hooks とは別の仕組み（公開日不明、取得 2026-10-22）
 - [[sources/platform-docs/2026-10-21-release-notes-2026-10-21]] — Platform リリースノート 10-21: API バージョン 2026-10-21、SDK 新版（Apache 2.0）、user profiles の enforcement フィールド（2026-10-21）
@@ -104,6 +113,7 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 - [[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]] — Claude Platform のリリースノート（09-10〜10-09）。5.5 世代のモデル、Managed Agents、compaction on demand、Sonnet 4.5 の廃止予告（2026-10-09）
 
 ### pricing
+- [[sources/pricing/2026-11-07-pricing]] — Claude API の価格。Haiku 3.5 の行が消え、fast mode の提供先に Opus 5.5 の Claude Models on Google Cloud (Anthropic managed) が明記された。単価は変更なし（日付なし、取得 2026-11-07）
 - [[sources/pricing/2026-10-22-pricing]] — Claude API の価格（現行の全行）。Opus 5.5 の fast mode が研究プレビューから外れ、fast mode の料金は全コンテキストに掛かる（日付なし、取得 2026-10-22）
 - [[sources/pricing/2026-10-10-pricing]] — Claude API の価格表。キャッシュの倍率、fast mode、Batch（公開日不明。取得 2026-10-10）
 
@@ -112,35 +122,36 @@ ID ごとに新しい順。形式: `- [[sources/<id>/<日付>-<slug>]] — 1行�
 形式: `- [[concepts/<slug>]] — 1行要約（出典数）`
 
 - [[concepts/agent-evals]] — エージェントの評価（evals）（出典 6）
-- [[concepts/auto-mode]] — auto mode（権限の自動判定）（出典 15）
+- [[concepts/auto-mode]] — auto mode（権限の自動判定）（出典 17）
+- [[concepts/agent-memory]] — エージェントのメモリと dreaming（出典 3）
 - [[concepts/autonomous-replication]] — 自律的な複製（ARA）と AI ワーム（出典 2）
 - [[concepts/claude-api-skill]] — claude-api スキル（出典 9）
 - [[concepts/claude-apps-gateway]] — Claude apps gateway（出典 5）
 - [[concepts/claude-code-quality-incidents]] — Claude Code の品質低下の報告と原因（2026年3〜4月）（出典 1）
-- [[concepts/claude-fable-5-1]] — Fable 5.1 と Mythos 5.1（価格、effort の既定、安全策、アクセス）（出典 2）
+- [[concepts/claude-fable-5-1]] — Fable 5.1 と Mythos 5.1（価格、effort の既定、安全策、アクセス）（出典 7）
 - [[concepts/claude-haiku-5-5]] — Claude Haiku 5.5（出典 6）
-- [[concepts/claude-on-google-cloud]] — Claude on Google Cloud（Anthropic managed の提供と Claude Code のコスト管理）（出典 2）
+- [[concepts/claude-on-google-cloud]] — Claude on Google Cloud（Anthropic managed の提供と Claude Code のコスト管理）（出典 5）
 - [[concepts/claude-opus-5-5]] — Claude Opus 5.5（出典 17）
 - [[concepts/claude-sonnet-5-5]] — Claude Sonnet 5.5（出典 7）
 - [[concepts/claude-tag]] — Claude Tag（Claude in Slack）（出典 8）
 - [[concepts/cloud-sessions]] — cloud sessions（Claude Code in the cloud）（出典 10）
 - [[concepts/code-review]] — Code Review（GitHub App による PR の自動レビュー）（出典 6）
 - [[concepts/compliance-api]] — Compliance API の対象範囲と GA／ベータの状況（出典 3）
-- [[concepts/context-engineering]] — コンテキストエンジニアリング（Claude 5 世代）（出典 6）
+- [[concepts/context-engineering]] — コンテキストエンジニアリング（Claude 5 世代）（出典 8）
 - [[concepts/cyber-safeguards]] — サイバー・安全策と Cyber Verification Program（出典 20）
-- [[concepts/distillation-defenses]] — 蒸留攻撃への対策（preserved thinking、推論抽出の遮断）（出典 6）
+- [[concepts/distillation-defenses]] — 蒸留攻撃への対策（preserved thinking、推論抽出の遮断）（出典 7）
 - [[concepts/effort]] — effort（思考量の設定）（出典 12）
 - [[concepts/enterprise-frontier-safeguards]] — Enterprise Frontier Safeguards（EFS。顧客管理ストレージ、CMEK、自動レビューの opt-in。Claude Code も対応先）（出典 2）
-- [[concepts/fast-mode]] — fast mode（出典 13）
+- [[concepts/fast-mode]] — fast mode（出典 15）
 - [[concepts/hooks]] — hooks（設定のフック）（出典 8）
 - [[concepts/long-running-agent-harness]] — 長時間動くエージェントのハーネス（ループ、ロックによる並列化、テストの設計）（出典 4）
 - [[concepts/managed-agents]] — Claude Managed Agents（出典 7）
 - [[concepts/mcp]] — MCP（Model Context Protocol）（出典 8）
 - [[concepts/mods]] — mods（Claude Code mods）（出典 8）
 - [[concepts/oss-scanner]] — OSS Scanner（OSS 向けの無償・opt-in の脆弱性発見サービス）（出典 4）
-- [[concepts/projects]] — Projects（作り直された Projects）（出典 3）
+- [[concepts/projects]] — Projects（作り直された Projects）（出典 4）
 - [[concepts/prompt-caching]] — プロンプトキャッシュとセッションの費用（出典 13）
-- [[concepts/routines]] — routines（ルーティン）（出典 5）
+- [[concepts/routines]] — routines（ルーティン）（出典 6）
 - [[concepts/skills]] — Agent Skills（skills）（出典 7）
 - [[concepts/sandboxing]] — サンドボックスと隔離（封じ込め）の設計と教訓（出典 8）
 - [[concepts/subagents]] — サブエージェント（出典 13）

@@ -3,6 +3,8 @@ type: concept
 title: auto mode（権限の自動判定）
 updated: 2026-11-07
 sources:
+  - sources/docs/2026-11-07-permission-modes
+  - sources/docs/2026-11-07-errors-auto-mode
   - sources/claude-blog/2026-08-07-running-auto-mode-in-production
   - sources/claude-blog/2026-08-07-auto-mode-default-in-claude-code
   - sources/engineering/2026-03-25-claude-code-auto-mode
@@ -32,11 +34,11 @@ Claude Code の承認を、人ではなくモデルベースの分類器に任�
 
 **docs の Permission modes ページ（取得日 2026-10-10）**
 
-- 開始モード: Claude Code v2.1.283 以降、auto mode は対話的な terminal と VS Code セッションの組み込みの開始モード（全プラン・全プロバイダ）。それ以前は Pro、Max、Team のみ。HIPAA 構成の組織では `default` 開始（v2.1.285 以降）。cloud sessions は組織が許可しモデルが対応する場合のみ Auto を提供（[[sources/docs/2026-10-10-permission-modes]]）。
+- 開始モード: Claude Code v2.1.283 以降、auto mode は対話的な terminal と VS Code セッションの組み込みの開始モード（全プラン・全プロバイダ）。それ以前は Pro、Max、Team のみ（2026-11-07 の再取得では、旧版の対象に Ultra も列挙されている）。HIPAA 構成の組織では `default` 開始（v2.1.285 以降）。cloud sessions は組織が許可しモデルが対応する場合のみ Auto を提供（[[sources/docs/2026-10-10-permission-modes]]）。
 - 要件: プランは全プラン。Team／Enterprise は既定で利用可で、管理者は managed settings の `permissions.disableAutoMode: "disable"` で無効化できる。プロバイダは Anthropic API、Claude Platform on AWS、Bedrock、Google Cloud の Agent Platform、Foundry、サインイン済み Claude apps gateway。段階（プレビュー等）の記載は無い（[[sources/docs/2026-10-10-permission-modes]]）。
 - 対応モデル: Anthropic API と Claude Platform on AWS は Opus 4.6 以降、Sonnet 4.6 以降、Haiku 5.5、Fable。Bedrock、Agent Platform、Foundry、Claude apps gateway は Sonnet 5 以降、Opus 4.7 以降、Haiku 5.5、Fable のみ（Haiku 5.5 は v2.1.293 以降）。Sonnet 4.5、Opus 4.5、Haiku 4.5、claude-3 系は非対応（[[sources/docs/2026-10-10-permission-modes]]）。
 - 分類器のモデル: 既定で Sonnet 5（`/model` の選択ではない）。サーバー側で設定されたモデルがあればそちらが優先。セッションが Sonnet 4.6 か `availableModels` が Sonnet 5 を除外している場合はセッションのモデル、Fable セッションでは Opus。第三者プロバイダでの Opus の代替は `ANTHROPIC_DEFAULT_OPUS_MODEL`、未設定なら Opus 5（[[sources/docs/2026-10-10-permission-modes]]）。FPR などの性能数値の記載は無い。
-- 分類器が見るもの: ユーザーのメッセージ、読み取り専用以外のツール呼び出し、CLAUDE.md。ツール結果は除かれる。別にサーバー側 probe が入力のツール結果を走査。PostToolUse hook の `classifierContext` で注釈できる（v2.1.236 以降）。サーバー側審査（Anthropic API 直結は v2.1.271〜281 以降、段階的展開）があり、無判定は拒否（[[sources/docs/2026-10-10-permission-modes]]）。→ [[concepts/hooks]]
+- 分類器が見るもの: ユーザーのメッセージ、読み取り専用以外のツール呼び出し、CLAUDE.md。ツール結果は除かれる。別にサーバー側 probe が入力のツール結果を走査。PostToolUse hook の `classifierContext` で注釈できる（v2.1.236 以降）。サーバー側審査（Anthropic API 直結は v2.1.271〜281 以降、段階的展開）がある。2026-10-10 取得分の要約は「無判定は拒否」とだけ書いていたが、2026-11-07 の再取得では、サーバーが「セッションを審査しない」場合は自前の分類器へフォールバックし、「あるアクションに判定を返さない」場合のみ拒否、と 2 つに分かれていた（下の「docs 再取得（2026-11-07）」。2.1.319 との関係は未解決）（[[sources/docs/2026-10-10-permission-modes]]、[[sources/docs/2026-11-07-permission-modes]]）。→ [[concepts/hooks]]
 - 既定でブロック: `curl | bash`、機微データの外部送信、本番デプロイ、IAM 付与、force push、`git reset --hard` 等、`terraform destroy` 等、人間未承認 PR のマージ、CI 無効化、トンネル、IMDS からの認証情報取得（v2.1.257 以降）など約40項目。バージョン別の追加あり（v2.1.203、205、257、261）。全文は同ページの `#what-the-classifier-blocks-by-default` と `claude auto-mode defaults`。既定で許可: 作業ディレクトリ内の操作、lock ファイルの依存 install、作業中リポジトリの任意ブランチへの push 等（[[sources/docs/2026-10-10-permission-modes]]）。
 - critical paths: `rm`/`rmdir` の対象（ルート、ホーム、作業ディレクトリとその親など）は、allow ルールや hook の allow で承認されず、既定では分類器も通らない。auto では terminal で承認を求め（2分のカウントダウン、時間切れで拒否）、terminal 以外では即拒否（v2.1.281 以降）（[[sources/docs/2026-10-10-permission-modes]]）。
 - 拒否時: 通知と `/permissions` の Recently denied。3回連続か合計20回で一時停止してプロンプトに戻る（設定不可）。`-p` でプロンプト手段が無い場合はそのアクションを実行せず、Claude は作業を続け、実行は止まらない（[[sources/docs/2026-10-10-permission-modes]]）。
@@ -60,6 +62,14 @@ Claude Code の承認を、人ではなくモデルベースの分類器に任�
 - 既定ルールの全文はページに無く `claude auto-mode defaults` で確認する前提。ページ内で名前が出るのは soft_deny の `Git Destructive`、allow の `Test Artifacts`、拒否理由の `[Data Exfiltration]`、`[Production Deploy]`。`$defaults` なしで失う例は force push、`curl | bash`、本番デプロイ、auto-mode bypass（soft_deny）と組み込みのデータ流出ルール（hard_deny）（[[sources/docs/2026-10-10-auto-mode-config]]）。
 - 環境の文脈は context / trust / sensitivity の3種のスロット（Organization、Source control、Trusted cloud buckets、Host containment 等）。`/auto-mode-setup` が下書きを生成（Pro、Max、Team、v2.1.228 以降、cloud session では不可）。`/permissions` の Auto mode タブは v2.1.246 以降（[[sources/docs/2026-10-10-auto-mode-config]]）。
 
+**docs 再取得（2026-11-07）の auto mode 関連**
+
+- 分類器の既定モデルは引き続き Sonnet 5。`CLAUDE_CODE_AUTO_MODE_MODEL`（v2.1.302 以降、フルのモデル ID）が docs に記載された。`/status` の `Auto mode server` が `Enabled` なら、分類器リクエストはサーバー審査の対象外の呼び出しだけ（[[sources/docs/2026-11-07-permission-modes]]）。
+- サーバー側審査の結果は 3 通り。(a) サーバーが審査する、(b) サーバーがセッションを審査しない（結果なしで完了、または審査しないと回答。原因は審査を落とす gateway／proxy、未対応のプラットフォーム・リージョン・認証情報）。このとき Claude Code は自前の分類器リクエストへフォールバック、(c) サーバーが特定のアクションに判定を返さない。このとき実行せず拒否し、10 回連続でターンを止める（[[sources/docs/2026-11-07-permission-modes]]、[[sources/docs/2026-11-07-errors-auto-mode]]）。
+- `CLAUDE_CODE_AUTO_MODE_SERVER=0` はサーバーに聞かず常に自前の分類器を使う変数として記載あり（Anthropic API 直結は v2.1.281 以降）。`=1` は直結で審査をオンにする（`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1` 併用時を除く）。v2.1.282 以降は feature flag を取得しないセッションも既定でサーバーに聞く（[[sources/docs/2026-11-07-permission-modes]]）。
+- `claude -p` と Agent SDK は権限モード未指定なら v2.1.302 以降 Manual（`default`）で開始。対話の terminal／VS Code は v2.1.283 以降 `auto`。プランの列挙に Ultra を含む（Pro、Max、Ultra、Team）（[[sources/docs/2026-11-07-permission-modes]]）。
+- 2.1.319 の変更（フォールバック廃止、尋ねるか拒否、`claude -p` の exit 1）に当たる記述は、この取得分の docs には無い（[[sources/docs/2026-11-07-permission-modes]]、[[sources/docs/2026-11-07-errors-auto-mode]]）。
+
 **Claude ブログ（2026-08-07）の記述（公開時点・Anthropic 側の主張）**
 
 - 既定化と課金: 2026-08-14 から Pro、Max、Team の新規セッションが auto mode で開始。既定を固定していれば変更なし。分類器の上乗せトークンは Pro、Max、Team では課金しない。Enterprise、API、Claude Platform on AWS、Bedrock、Agent Platform、Foundry は当時 opt-in で、翌月中に既定化と課金停止を予定（[[sources/claude-blog/2026-08-07-auto-mode-default-in-claude-code]]）。
@@ -81,7 +91,7 @@ Claude Code の承認を、人ではなくモデルベースの分類器に任�
 - 判定は3層。安全ツールの許可リストとユーザー設定、プロジェクト内のファイル操作、分類器の順。入るとき、任意コード実行を許す広い許可ルールは外される（[[sources/engineering/2026-03-25-claude-code-auto-mode]]）。
 - 設定は3つの枠（environment、block rules、allow exceptions）。`claude auto-mode defaults` で既定を確認できる（[[sources/engineering/2026-03-25-claude-code-auto-mode]]）。
 - 公開時点の性能: 実トラフィックの FPR 0.4%、実 overeager の FNR 17%、合成 exfil の FNR 5.7%。著者は、慎重に手動承認している人にとっては退行になりうるとしている（[[sources/engineering/2026-03-25-claude-code-auto-mode]]）。
-- 公開時点の記述: 拒否後は別の手を探させ、連続3回または合計20回でエスカレーション。headless（`claude -p`）では終了する（[[sources/engineering/2026-03-25-claude-code-auto-mode]]）。3回／20回は docs と一致するが、headless の挙動は docs と異なる（未解決欄参照）。
+- 公開時点の記述: 拒否後は別の手を探させ、連続3回または合計20回でエスカレーション。headless（`claude -p`）では終了する（[[sources/engineering/2026-03-25-claude-code-auto-mode]]）。3回／20回は docs と一致するが、headless の挙動は docs と異なる（解決済み: docs を正とする。未解決・矛盾の節を参照）。
 - サブエージェントの委任時と返却時にも分類器が働く（[[sources/engineering/2026-03-25-claude-code-auto-mode]]）。→ [[concepts/subagents]]
 - cloud sessions の承認モードは Auto、Accept edits、Plan だけ（[[sources/claude-dev/2026-10-06-claude-code-in-the-cloud]]）。→ [[concepts/cloud-sessions]]
 - Managed Agents の権限ポリシー `auto` も、サーバーが各呼び出しを判定する。Claude Code の auto mode との実装上の関係は出典に記述が無い（[[sources/platform-docs/2026-10-09-release-notes-2026-09-10-to-10-09]]）。→ [[concepts/managed-agents]]
@@ -110,6 +120,7 @@ Claude Code の承認を、人ではなくモデルベースの分類器に任�
 **2.1.317〜2.1.319 の変更（changelog）**
 
 - テレメトリや feature flag がオフ（LLM ゲートウェイ経由を含む）のとき、サーバーが確認できない呼び出しは尋ねるか拒否になり、組み込み分類器へのフォールバックは無くなった。維持するには `CLAUDE_CODE_AUTO_MODE_SERVER=0`。Bedrock、Vertex、Foundry は変更なし（2.1.319）（[[sources/gh-changelog/2026-11-06-v2-1-317-to-2-1-319]]）。
+- docs（2026-11-07 取得）との照合: 上記のフォールバック廃止は、docs の「セッションを審査しない場合は自前の分類器へフォールバック」と食い違うか、条件が違うだけか、現時点では決められない（未解決・矛盾の末尾を参照）。
 - ゲートウェイ経由で `CLAUDE_CODE_AUTO_MODE_SERVER=1` は `CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS` 設定下でもサーバー側チェックをオンにする。managed settings が後者を設定するなら `1` も設定が必要。プロジェクトの settings やプラグインは、プロジェクト外でオフにしたサーバー側チェックを再びオンにできない（2.1.319）（[[sources/gh-changelog/2026-11-06-v2-1-317-to-2-1-319]]）。
 - `claude -p` は、安全判定が得られずアクションが拒否されたとき text／JSON 出力で exit 1（以前は 0）。permission rules や `autoMode` 設定が非常に大きいときは理由を説明し、`autoMode` の deny ルールが無ければ terminal で尋ねる（2.1.319）（[[sources/gh-changelog/2026-11-06-v2-1-317-to-2-1-319]]）。
 - ゲートウェイが server-side safety check に 403／422 を返すと毎ターン失敗する問題の修正（2.1.317）、サブエージェントのツール呼び出しに答えが無いときの通知（2.1.317）（[[sources/gh-changelog/2026-11-06-v2-1-317-to-2-1-319]]）。
@@ -117,6 +128,7 @@ Claude Code の承認を、人ではなくモデルベースの分類器に任�
 
 ## 変更履歴
 
+- 2026-11-07 — docs を再取得（Lint の指摘対応）。`CLAUDE_CODE_AUTO_MODE_SERVER` と `CLAUDE_CODE_AUTO_MODE_MODEL` の docs 記載を確認し、サーバー審査の 3 通りの結果（フォールバック／拒否）を追記。「無判定は拒否」の記述に注記を付けた。`CLAUDE_CODE_AUTO_MODE_MODEL` と third-party の開始モードの未解決を閉じ、2.1.319 との関係は未解決のまま残した（[[sources/docs/2026-11-07-permission-modes]]、[[sources/docs/2026-11-07-errors-auto-mode]]）
 - 2026-11-06 — 2.1.317〜2.1.319: サーバー確認不能時のフォールバック廃止（`CLAUDE_CODE_AUTO_MODE_SERVER=0` で維持）、`claude -p` の exit 1、ほか（[[sources/gh-changelog/2026-11-06-v2-1-317-to-2-1-319]]）
 - 2026-11-02 — UK AISI 評価の整合性評価から、勢いと compaction notes が方針を固定する効果に関する含意（推測と明記）を追記（[[sources/research/2026-10-23-alignment-assessment-ukaisi]]）
 - 2026-10-31 — 2.1.309〜2.1.316: 上記の変更（`$defaults`、安全判定なしの扱い、bypass の `rm` 拒否ほか）（[[sources/gh-changelog/2026-10-31-v2-1-306-to-2-1-316]]）
@@ -142,6 +154,9 @@ Claude Code の承認を、人ではなくモデルベースの分類器に任�
 - 未解決: ブログの課金停止（分類器オーバーヘッド）が現在も有効か。docs には記載が無く、pricing は未確認。
 - 未解決: 性能数値（FPR 0.4%、overeager の FNR 17%、合成 exfil の FNR 5.7%）が、分類器が Sonnet 5 になった現行でも当てはまるか。docs に性能数値の記載は無い。公開時点の値として残す（[[sources/engineering/2026-03-25-claude-code-auto-mode]]、[[sources/docs/2026-10-10-permission-modes]]）。
 - 未解決: auto mode の段階（プレビュー等）。docs の2ページに記載が無く、一般提供かどうかは明記されていない。「全ユーザー・全プラン」「組み込みの開始モード」とのみ書かれている（[[sources/docs/2026-10-10-permission-modes]]、[[sources/docs/2026-10-10-auto-mode-config]]）。
-- 未解決: `CLAUDE_CODE_AUTO_MODE_MODEL` と、docs の分類器モデルの記述（既定 Sonnet 5、`ANTHROPIC_DEFAULT_OPUS_MODEL` 等）の関係。docs（2026-10-10 取得）に当該の環境変数の記載は無い。docs を正とし、再取得で確認する（[[sources/gh-changelog/2026-10-18-v2-1-302]]、[[sources/docs/2026-10-10-permission-modes]]）。
-- 未解決: サードパーティのプロバイダでの `default` 開始の条件（telemetry 無効／新規インストール）が、docs の「全プロバイダで組み込みの開始モード」とどう両立するか。docs 未確認（[[sources/gh-changelog/2026-10-18-v2-1-302]]、[[sources/docs/2026-10-10-permission-modes]]）。
-- 未解決: 2.1.319 の「サーバーが確認できない呼び出しは尋ねるか拒否」（フォールバック廃止）と、docs（2026-10-10 取得）の「無判定は拒否」「`CLAUDE_CODE_AUTO_MODE_SERVER` の記載なし」との関係。docs の再取得で確認する（[[sources/gh-changelog/2026-11-06-v2-1-317-to-2-1-319]]、[[sources/docs/2026-10-10-permission-modes]]）。
+- 解決済み（2026-11-07）: `CLAUDE_CODE_AUTO_MODE_MODEL` と docs の分類器モデルの記述の関係。2026-10-10 取得分には記載が無かったが、再取得で docs に記載を確認した（v2.1.302 以降、フルのモデル ID、既定は Sonnet 5）。クライアント側分類器のモデルを選ぶ変数で、サーバー審査のモデルは変えない旨は CHANGELOG の記述（[[sources/gh-changelog/2026-10-18-v2-1-302]]、[[sources/docs/2026-11-07-permission-modes]]）。なお分類器モデルの選択表に `ANTHROPIC_DEFAULT_SONNET_MODEL` が現れる。2026-10-10 の要約にあった第三者プロバイダの `ANTHROPIC_DEFAULT_OPUS_MODEL` の記述は、今回の取得範囲では見ておらず、現行かは未確認。
+- 解決済み（2026-11-07）: サードパーティのプロバイダでの `default` 開始の条件。docs は、対話の terminal／VS Code は v2.1.283 以降 `auto`、`claude -p` と Agent SDK は権限モード未指定なら v2.1.302 以降 `default`（Manual）、と対象を分けて書く。2.1.302 の CHANGELOG の条件（telemetry 無効／新規インストール）より広く、`-p`／SDK では一律 `default` と読める。両立する（対象が対話か非対話かの違い）。仕様は docs を正とする（[[sources/gh-changelog/2026-10-18-v2-1-302]]、[[sources/docs/2026-11-07-permission-modes]]）。
+- 未解決: 2.1.319 の「サーバーが確認できない呼び出しは尋ねるか拒否」（フォールバック廃止）と、docs（2026-11-07 再取得）の記述の関係。原文の言葉で突き合わせた結果は次のとおり（[[sources/gh-changelog/2026-11-06-v2-1-317-to-2-1-319]]、[[sources/docs/2026-11-07-permission-modes]]、[[sources/docs/2026-11-07-errors-auto-mode]]）。
+  - CHANGELOG（2.1.319）: テレメトリや feature flag がオフ（LLM ゲートウェイ経由を含む）のとき、サーバーが確認できない呼び出しは尋ねるか拒否になり、組み込み分類器へのフォールバックは無い。維持するには `CLAUDE_CODE_AUTO_MODE_SERVER=0`。Bedrock、Vertex、Foundry は変更なし。
+  - docs（2026-11-07 取得）: サーバーが「セッションを審査しない」場合（結果なしの完了、または審査しないとの回答。gateway が審査を落とす場合を含む）は、自前の分類器リクエストへフォールバックする。サーバーが「アクションに判定を返さない」場合は実行せず拒否する。feature flag を取得しないセッションは v2.1.282 以降、既定でサーバーに聞く。`CLAUDE_CODE_AUTO_MODE_SERVER=0` は常に自前の分類器を使う変数。「尋ねる」という挙動の記述は、読んだ範囲に無い。
+  - 判断: 条件は部分的に重なる（gateway 経由、サーバーが審査しない場面）が、docs の「審査しない→フォールバック」と CHANGELOG の「確認できない→フォールバックなし」が同じ場面を指すのかは、原文からは決められない。docs が 2.1.319 の変更を反映していない可能性（docs の更新遅れ）も、条件の違いである可能性も残る（どちらも推測）。docs は 2.1.319 に言及しておらず、同版のバージョン注記も見つからなかった。docs 側に更新が入ったときに再確認する。それまで現状の節は、CHANGELOG 2.1.319 と docs の両方を併記する。
